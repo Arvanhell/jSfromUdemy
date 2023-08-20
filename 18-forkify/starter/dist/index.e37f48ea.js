@@ -580,206 +580,7 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
 
 },{}],"aenu9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-var _webImmediateJs = require("core-js/modules/web.immediate.js"); //*  ------------------------------------------------------
- //*                     285.Section intro
- //*  ------------------------------------------------------
- //*  ------------------------------------------------------
- //*                   286. Section roadmap
- //*  ------------------------------------------------------
- //*  ------------------------------------------------------
- //*             287. Project Overview and Planning (I)
- //*  ------------------------------------------------------
- //*  ------------------------------------------------------
- //*           288. Latest Code Updates (Parcel v2 and more)
- //*  ------------------------------------------------------
- // npm init
- // npm i parcel@2 -D
- // npm start
- // npm instal sass
- //*  ------------------------------------------------------
- //*                 289. Loading Recipe from API
- //*  ------------------------------------------------------
- /*
-const showRecipe = async function () {
-  try {
-    const res = await fetch(
-      'https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bcc40'
-      );
-    const data = await res.json()
-    
-    if(!res.ok) throw new Error(`${data.message} (${res.status}`);
-
-    console.log(res, data);
-    let {recipe} = data.data;
-    recipe = {
-      id: recipe.id,
-      title: recipe.title,
-      publisher: recipe.publisher,
-      sourceUrl: recipe.source_url,
-      image:recipe.image_url,
-      servings: recipe.servings,
-      cookingTime: recipe.cooking_time,
-      ingredients: recipe.ingredients
-    };
-    console.log(recipe);
-    } catch (err) {
-    alert (err);
-  }
-};
-showRecipe()
-*/  //*  ------------------------------------------------------
- //*          290. Rendering the Recipe.
- //*  ------------------------------------------------------
- // Importing icons 
- /*
-// import icons from '../img/icons.svg'; // Parcel 1
-import icons from 'url:../img/icons.svg'; // Parcel 2
-*/  /*
-const markup = `
- <figure class="recipe__fig">
-            <img src="${recipe.image}" alt="${recipe.title}" class="recipe__img" />
-            <h1 class="recipe__title">
-              <span>${recipe.title}</span>
-            </h1>
-          </figure>
-
-          <div class="recipe__details">
-            <div class="recipe__info">
-              <svg class="recipe__info-icon">
-                <use href="src/img/icons.svg#icon-clock"></use>
-              </svg>
-              <span class="recipe__info-data recipe__info-data--minutes">${recipe.cookingTime}</span>
-              <span class="recipe__info-text">minutes</span>
-            </div>
-            <div class="recipe__info">
-              <svg class="recipe__info-icon">
-                <use href="src/img/icons.svg#icon-users"></use>
-              </svg>
-              <span class="recipe__info-data recipe__info-data--people">${recipe.servings}</span>
-              <span class="recipe__info-text">servings</span>
-
-              <div class="recipe__info-buttons">
-                <button class="btn--tiny btn--increase-servings">
-                  <svg>
-                    <use href="src/img/icons.svg#icon-minus-circle"></use>
-                  </svg>
-                </button>
-                <button class="btn--tiny btn--increase-servings">
-                  <svg>
-                    <use href="src/img/icons.svg#icon-plus-circle"></use>
-                  </svg>
-                </button>
-              </div>
-            </div>
-
-            <div class="recipe__user-generated">
-              <svg>
-                <use href="src/img/icons.svg#icon-user"></use>
-              </svg>
-            </div>
-            <button class="btn--round">
-              <svg class="">
-                <use href="src/img/icons.svg#icon-bookmark-fill"></use>
-              </svg>
-            </button>
-          </div>
-
-          <div class="recipe__ingredients">
-            <h2 class="heading--2">Recipe ingredients</h2>
-            <ul class="recipe__ingredient-list">
-              <li class="recipe__ingredient">
-                <svg class="recipe__icon">
-                  <use href="src/img/icons.svg#icon-check"></use>
-                </svg>
-                <div class="recipe__quantity">1000</div>
-                <div class="recipe__description">
-                  <span class="recipe__unit">g</span>
-                  pasta
-                </div>
-              </li>
-
-              <li class="recipe__ingredient">
-                <svg class="recipe__icon">
-                  <use href="src/img/icons.svg#icon-check"></use>
-                </svg>
-                <div class="recipe__quantity">0.5</div>
-                <div class="recipe__description">
-                  <span class="recipe__unit">cup</span>
-                  ricotta cheese
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <div class="recipe__directions">
-            <h2 class="heading--2">How to cook it</h2>
-            <p class="recipe__directions-text">
-              This recipe was carefully designed and tested by
-              <span class="recipe__publisher">${recipe.publisher}</span>. Please check out
-              directions at their website.
-            </p>
-            <a
-              class="btn--small recipe__btn"
-              href="${recipe.sourceUrl}"
-              target="_blank"
-            >
-              <span>Directions</span>
-              <svg class="search__icon">
-                <use href="src/img/icons.svg#icon-arrow-right"></use>
-              </svg>
-            </a>
-          </div>
-        `
-        recipeContainer.innerHTML = ''; // cleaning if none 
-      recipeContainer.insertAdjacentHTML('afterbegin', markup)
-*/  //*  ------------------------------------------------------
- //*         291. Listening For load and hashchange Events
- //*  ------------------------------------------------------
- /*
-const id = window.location.hash.slice(1);
-
-    //1 Loading recipe
-    renderSpiner(recipeContainer); // rendering spinner
-    const res = await fetch(
-      `https://forkify-api.herokuapp.com/api/v2/recipes/${id}`
-      );
-      ```...     ...```
-
-      ['hashchange', load].forEach(ev => window.addEventListener(ev, showRecipe))
-//       window.addEventListener('hashchange', showRecipe);
-//       window.addEventListener('load', showRecipe);
-// */  //*  ------------------------------------------------------
- //*               292. The MVC Architecture
- //*  ------------------------------------------------------
- //*  ------------------------------------------------------
- //*               293. Refactoring for MVC
- //*  ------------------------------------------------------
- // refactoring to the Model Controller View within files 
- // model.js - controller.js - recipeView.js
- //*  ------------------------------------------------------
- //*            294. Helpers and Configuration Files  
- //*  ------------------------------------------------------
- //*  ---------------------------------------------------------
- //*   295.Event handler  in MVC: Publisher-Subscriber Pattern
- //*  ---------------------------------------------------------
- //*  ---------------------------------------------------------
- //*       296. Implementing Error and Success Messages
- //*  ---------------------------------------------------------
- //*  ---------------------------------------------------------
- //*           297. Implementing Search Results - Part 1
- //*  ---------------------------------------------------------
- //*  ---------------------------------------------------------
- //*           298. Implementing Search Results - Part 2
- //*  ---------------------------------------------------------
- //*  ---------------------------------------------------------
- //*           299. Implementing Pagination - Part 1
- //*  ---------------------------------------------------------
- //*  ---------------------------------------------------------
- //*           300. Implementing Pagination - Part 2
- //*  ---------------------------------------------------------
- //*  ---------------------------------------------------------
- //*                   301. Project Planning II
- //*  ---------------------------------------------------------
+var _webImmediateJs = require("core-js/modules/web.immediate.js");
 var _modelJs = require("./model.js");
 var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
@@ -787,6 +588,8 @@ var _searchViewJs = require("./views/searchView.js");
 var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 var _resultViewJs = require("./views/resultView.js");
 var _resultViewJsDefault = parcelHelpers.interopDefault(_resultViewJs);
+var _paginationViewJs = require("./views/paginationView.js");
+var _paginationViewJsDefault = parcelHelpers.interopDefault(_paginationViewJs);
 var _runtime = require("regenerator-runtime/runtime");
 if (module.hot) module.hot.accept();
 const controlRecipes = async function() {
@@ -811,21 +614,29 @@ const controlSearchResults = async function() {
         // 2) Load search results
         await _modelJs.loadSearchResults(query);
         // 3) Render result
-        // resultsView.render(model.state.search.results);  
-        // all results
+        // resultsView.render(model.state.search.results);  // all results
         (0, _resultViewJsDefault.default).render(_modelJs.getSearchResultsPage());
-    // result only set per page within config.js for pagination features
+        // result only set per page within config.js for pagination features
+        // 4) Render initial pagination button
+        (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
     } catch (err) {
         console.log(err);
     }
 };
+const controlPagination = function(goToPage) {
+    // 1) Render new result
+    (0, _resultViewJsDefault.default).render(_modelJs.getSearchResultsPage(goToPage));
+    // 2) Render NEW pagination buttons
+    (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
+};
 const init = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
+    (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
 };
 init();
 
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultView.js":"f70O5"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","core-js/modules/web.immediate.js":"49tUX","regenerator-runtime/runtime":"dXNgZ","./model.js":"Y4A21","./views/recipeView.js":"l60JC","./views/searchView.js":"9OQAM","./views/resultView.js":"f70O5","./views/paginationView.js":"6z7bi"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -3294,6 +3105,70 @@ class ResultsView extends (0, _viewJsDefault.default) {
 }
 exports.default = new ResultsView();
 
-},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../../img/icons.svg":"loVOp"}]},["f0HGD","aenu9"], "aenu9", "parcelRequire3a11")
+},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../../img/icons.svg":"loVOp"}],"6z7bi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+var _viewJs = require("./View.js");
+var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
+var _iconsSvg = require("url:../../img/icons.svg"); // Parcel 2
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
+class PaginationView extends (0, _viewJsDefault.default) {
+    _parentElement = document.querySelector(".pagination");
+    addHandlerClick(handler) {
+        // event delegation method (searching for the closest button elements itself)
+        this._parentElement.addEventListener("click", function(e) {
+            const btn = e.target.closest(".btn--inline");
+            if (!btn) return;
+            const goToPage = +btn.dataset.goto; // converted into number (+)
+            handler(goToPage);
+        });
+    }
+    _generateMarkup() {
+        const curPage = this._data.page;
+        const numPages = Math.ceil(this._data.results.length / this._data.resultsPerPage);
+        //  rounded the resulting number of elements per page if more than set per page = number received pages
+        console.log(numPages);
+        // variables for pages are set in model.js //js.59
+        //* last to do custom data atribute =>  add data atributes for searching within each button lead us to elements contain some data as requested in example( data-goto="${curPage + 1}")
+        // Page 1, and there are other pages
+        if (curPage === 1 && numPages > 1) return `
+                <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
+                <span>Page  ${curPage + 1}</span>
+                    <svg class="search__icon">
+                    <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
+                    </svg>
+                </button>`;
+        // Last page
+        if (curPage === numPages && numPages > 1) return `
+                <button data-goto="${curPage - 1}" class="btn--inline pagination__btn--prev">
+                    <svg class="search__icon">
+                        <use href="${0, _iconsSvgDefault.default}#icon-arrow-left"></use>
+                    </svg>
+                    <span>Page ${curPage - 1}</span>
+                </button>
+          `;
+        // Other page
+        if (curPage < numPages) return `
+                <button data-goto="${curPage - 1}" class="btn--inline pagination__btn--prev">
+                    <svg class="search__icon">
+                        <use href="${0, _iconsSvgDefault.default}#icon-arrow-left"></use>
+                    </svg>
+                    <span>Page ${curPage - 1}</span>
+                </button>
+                <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
+                    <span>Page ${curPage + 1}</span>
+                <svg class="search__icon">
+                    <use href="${0, _iconsSvgDefault.default}#icon-arrow-right"></use>
+                </svg>
+               
+            </button>
+          `;
+        // Page 1, there NO other pages
+        return "";
+    }
+}
+exports.default = new PaginationView();
+
+},{"./View.js":"5cUXS","url:../../img/icons.svg":"loVOp","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["f0HGD","aenu9"], "aenu9", "parcelRequire3a11")
 
 //# sourceMappingURL=index.e37f48ea.js.map

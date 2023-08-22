@@ -63,3 +63,14 @@ export const getSearchResultsPage = function(page = state.search.page) {
 
     return state.search.results.slice(start, end); 
 };
+
+////////////////////////////////////////////fl flowchart part 2
+export const updateSerrvings = function(newServings) {
+    state.recipe.ingredients.forEach(ing => {
+        ing.quantity = ing.quantity * newServings / state.recipe.servings
+        // newQt = oldQt * newServings / oldServings // 2 * 8 / 4 = 4
+    });
+
+    state.recipe.servings = newServings;
+}
+////////////////////////////////////////////fl flowchart part 2

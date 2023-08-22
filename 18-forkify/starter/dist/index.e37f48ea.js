@@ -629,8 +629,17 @@ const controlPagination = function(goToPage) {
     // 2) Render NEW pagination buttons
     (0, _paginationViewJsDefault.default).render(_modelJs.state.search);
 };
+////////////////////////////////////////////fl flowchart part 2
+const controlServings = function(newServings) {
+    // Update the recipe servings (in state)
+    _modelJs.updateSerrvings(newServings);
+    // Update the recipe view
+    (0, _recipeViewJsDefault.default).render(_modelJs.state.recipe);
+};
+////////////////////////////////////////////fl flowchart part 2
 const init = function() {
     (0, _recipeViewJsDefault.default).addHandlerRender(controlRecipes);
+    (0, _recipeViewJsDefault.default).addHandlerUpdateServings(controlServings); // flowchart part 2
     (0, _searchViewJsDefault.default).addHandlerSearch(controlSearchResults);
     (0, _paginationViewJsDefault.default).addHandlerClick(controlPagination);
 };
@@ -2489,6 +2498,7 @@ parcelHelpers.export(exports, "state", ()=>state);
 parcelHelpers.export(exports, "loadRecipe", ()=>loadRecipe);
 parcelHelpers.export(exports, "loadSearchResults", ()=>loadSearchResults);
 parcelHelpers.export(exports, "getSearchResultsPage", ()=>getSearchResultsPage);
+parcelHelpers.export(exports, "updateSerrvings", ()=>updateSerrvings);
 var _regeneratorRuntime = require("regenerator-runtime");
 var _configJs = require("./config.js");
 var _helpersJs = require("./helpers.js");
@@ -2545,6 +2555,14 @@ const getSearchResultsPage = function(page = state.search.page) {
     const end = page * state.search.resultsPerPage; //9;
     return state.search.results.slice(start, end);
 };
+const updateSerrvings = function(newServings) {
+    state.recipe.ingredients.forEach((ing)=>{
+        ing.quantity = ing.quantity * newServings / state.recipe.servings;
+    // newQt = oldQt * newServings / oldServings // 2 * 8 / 4 = 4
+    });
+    state.recipe.servings = newServings;
+} ////////////////////////////////////////////fl flowchart part 2
+;
 
 },{"regenerator-runtime":"dXNgZ","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./config.js":"k5Hzs","./helpers.js":"hGI1E"}],"k5Hzs":[function(require,module,exports) {
 // I am adding into config.js file some variables which should be constant and should be reused through the project.
@@ -2555,7 +2573,7 @@ parcelHelpers.export(exports, "TIMEOUT_SEC", ()=>TIMEOUT_SEC);
 parcelHelpers.export(exports, "RES_PER_PAGE", ()=>RES_PER_PAGE);
 const API_URL = "https://forkify-api.herokuapp.com/api/v2/recipes";
 const TIMEOUT_SEC = 10;
-const RES_PER_PAGE = 10; // result per page
+const RES_PER_PAGE = 10; // result per page to render if any
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"hGI1E":[function(require,module,exports) {
 // this file will contain some function which we will reuse over and over in our project.
@@ -2606,6 +2624,18 @@ class RecipeView extends (0, _viewJsDefault.default) {
             "load"
         ].forEach((ev)=>window.addEventListener(ev, handler));
     }
+    ////////////////////////////////////////////fl flowchart part 2
+    addHandlerUpdateServings(handler) {
+        this._parentElement.addEventListener("click", function(e) {
+            // event delegation for closest area of buttons
+            const btn = e.target.closest(".btn--update-servings");
+            if (!btn) return;
+            const { updateTo } = btn.dataset // convert to number (+)
+            ;
+            if (+updateTo > 0) handler(+updateTo);
+        });
+    }
+    ////////////////////////////////////////////fl flowchart part 2
     _generateMarkup() {
         return `
       <figure class="recipe__fig">
@@ -2631,12 +2661,12 @@ class RecipeView extends (0, _viewJsDefault.default) {
               <span class="recipe__info-text">servings</span>
 
               <div class="recipe__info-buttons">
-                <button class="btn--tiny btn--increase-servings">
+                <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings - 1}">
                   <svg>
                     <use href="${0, _iconsSvgDefault.default}#icon-minus-circle"></use>
                   </svg>
                 </button>
-                <button class="btn--tiny btn--increase-servings">
+                <button class="btn--tiny btn--update-servings" data-update-to="${this._data.servings + 1}">
                   <svg>
                     <use href="${0, _iconsSvgDefault.default}#icon-plus-circle"></use>
                   </svg>

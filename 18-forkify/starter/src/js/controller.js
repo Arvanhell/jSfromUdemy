@@ -62,9 +62,18 @@ const controlPagination = function (goToPage) {
     paginationView.render(model.state.search);
 };
 
+////////////////////////////////////////////fl flowchart part 2
+const controlServings = function(newServings){
+  // Update the recipe servings (in state)
+  model.updateSerrvings(newServings);
+  // Update the recipe view
+  recipeView.render(model.state.recipe);
+}
+////////////////////////////////////////////fl flowchart part 2
 
 const init = function (){
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings); // flowchart part 2
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 }

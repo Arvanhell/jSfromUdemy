@@ -154,10 +154,10 @@ GOOD LUCK � */
 //  const markHeight = 1.88
 //  const johnHeight = 1.76
 //  let bmiMark = markMass/markHeight ** 2
-// 26.87867813490267
+//      26.87867813490267
 //  console.log(bmiMark);
 //  let bmiJohn = johnMass/johnHeight ** 2
-//27.44059917355372
+//      27.44059917355372
 //  console.log(bmiJohn)
 //  const markHigherBMI = bmiJohn > bmiMark
 //  console.log(markHigherBMI) //true
@@ -187,6 +187,32 @@ GOOD LUCK � */
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 
+const markHeight = 1.69; "cm";
+const massMark = 78; "kg";
+const johnHeight = 1.95; "cm";
+const massJohn = 92; "kg";
+///////////////////////////////////
+//const markHeight = 1.99; "cm"; //
+//const massMark = 78; "kg";	   //
+//const johnHeight = 1.99; "cm"; //
+//const massJohn = 92; "kg";	   //
+///////////////////////////////////
+
+const bmiMark = massMark / (markHeight * markHeight);
+const BMIMark = (Math.floor(bmiMark))
+const bmiJohn = massJohn / (johnHeight * johnHeight);
+const BMIJohn = (Math.floor(bmiJohn))
+
+///////////////////////////////////////////////////////
+//const bmiTest = (bmiMark > bmiJohn) ? true : false //
+///////////////////////////////////////////////////////
+
+if (BMIJohn > BMIMark){
+    console.log(`Mark BMI ${BMIMark} is lower than John ${BMIJohn}`)
+}else{ 
+    (bmiMark > bmiJohn)
+        console.log(`John BMI ${BMIJohn} is lower than Mark ${BMIMark}`)
+    }
 
 
    

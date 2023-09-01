@@ -1,11 +1,95 @@
-// let js = 'amazing';
-//       if (js === 'amazing') alert ('JavaScript is Fun');
+/*
+let js = "amazing";
+console.log(40 + 8 + 23 - 10)
 
-//       // 40 + 8 + 23 - 18;
-//      console.log(40 + 8 + 23 - 18);
+console.log('Cezary');
+console.log(23);
 
+let firstName = 'Jolanta';
 
-     /*
+console.log(firstName);
+console.log(firstName);
+console.log(firstName);
+
+let cezar_jola = 'cj';
+let $function = 27;
+let PI = 3.1415;
+
+let myFirstJob = 'butcher';
+let myCurentJob = 'security';
+ // keep in mind about naming variables
+console.log(myFirstJob);
+let country = "Poland";
+let continent = 'Europe';
+let population = 37.776000 ;
+let language = 'polish'
+ 
+console.log(`I am from ${country} in ${continent} where live ${population} people, native language is ${language} `)
+
+const isIsland = "false"
+language = 'english'
+console.log('isIsland', 'population', 'country','language')
+
+console.log(population);
+
+let decsription = 'Portugal is in Europe, and its 11 milion people speak portuguease'
+
+let javascriptIsFun = true;
+console.log(javascriptIsFun);
+console.log(typeof true);
+
+javascriptIsFun = 'Yes!';
+
+year = 1223;
+console.log(year);
+console.log(null);
+*/
+
+// let age = 30;
+// age = 41;
+// console.log(age);
+// const birthYear = 1991;
+// birthYear = 1990;
+// const job;
+
+//remember use always const ... unleas not needed change const const const
+
+// console.log(ageJonas,ageSarah,ageCezar);
+
+// console.log(ageJonas * 2, ageJonas / 2, 3 ** 2);
+
+// const firstName = 'Cezary'
+// const lastName = 'Waszkuc'
+// console.log(firstName + ' ' + lastName);
+
+//Asigment operator
+// let x = 10 + 5; // 15
+// x += 10; // x = x + 10
+// x *= 25 // x = x * 25
+// x++ // x = x + 1
+// x--// x = x - 1
+// console.log(x)
+
+// //Comparison operator
+// console.log(ageJonas > ageCezar); // false
+// // <, >, <=, >=
+// console.log(ageSarah >= 18);// false
+
+// const isFullAge = ageSarah >= 18;
+
+// console.log(isFullAge);// false
+// console.log( now - 1991 > now - 2018);
+
+// const now = 2023;
+// const ageJonas = now - 1991;
+// const ageSarah = now - 2019;
+// const ageCezar = now - 1976;
+// console.log(now - 1991 > now - 2018);
+// let x, y;
+// x = y = 25 - 10 - 5; // x = y = 10 then  y = 10 so x = y both have same value 10 and 10
+// console.log(x,y);
+
+/*
 Coding Challenge #1
 Mark and John are trying to compare their BMI (Body Mass Index), which is 
 calculated using the formula:
@@ -34,11 +118,11 @@ GOOD LUCK � */
 //      const johnHeight = 1.88
 //
 //      let bmiMark = markMass/markHeight ** 2
-//      //27.3
+//      //27.309968138370506
 //      console.log(bmiMark);
 //
 //      let bmiJohn = johnMass/johnHeight ** 2
-//      //26.0
+//      //26.02987777274785
 //      console.log(bmiJohn)
 //      const markHigherBMI = bmiJohn > bmiMark
 //      console.log(markHigherBMI); //false
@@ -53,11 +137,11 @@ GOOD LUCK � */
 //      const johnHeight = 1.76
 //
 //      let bmiMark = markMass/markHeight ** 2
-//      //26.8
+//      //26.87867813490267
 //      console.log(bmiMark);
 //
 //      let bmiJohn = johnMass/johnHeight ** 2
-//      //27.4
+//      //27.44059917355372
 //      console.log(bmiJohn)
 //      const markHigherBMI = bmiJohn > bmiMark
 //      console.log(markHigherBMI) //true
@@ -65,45 +149,20 @@ GOOD LUCK � */
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-
-
-
-//             Coding Challenge # 2 
-
-//             Coding Challenge #2
-// Use the BMI example from Challenge #1, and the code you already wrote, and 
-// improve it.
-// Your tasks:
-// 1. Print a nice output to the console, saying who has the higher BMI. The message 
-// is either "Mark's BMI is higher than John's!" or "John's BMI is higher than Mark's!"
-// 2. Use a template literal to include the BMI values in the outputs. Example: "Mark's
-// BMI (28.3) is higher than John's (23.9)!"
-// Hint: Use an if/else statement �
-// GOOD LUCK �
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-//
-//
-      //    const markMass = 95 
-      //    const johnMass = 85
-      //    const markHeight = 1.88
-      //    const johnHeight = 1.76
-      //    let bmiMark = markMass/markHeight ** 2
-      //    //26.8
-      //    console.log(bmiMark);
-      //    let bmiJohn = johnMass/johnHeight ** 2
-         //27.4
-//       console.log(bmiJohn)
-//          const markHigherBMI = bmiJohn > bmiMark
-//          console.log(markHigherBMI) //true
-//          console.log( `Mark's BMI is ${bmiMark} and is lower than John's ${bmiJohn}!`);
-
-//    Mark's BMI is 26.87867813490267 and is lower than John's 27.44059917355372!
-//     John's BMI is higher than Mark's!
-//
-//
+//  const markMass = 95 
+//  const johnMass = 85
+//  const markHeight = 1.88
+//  const johnHeight = 1.76
+//  let bmiMark = markMass/markHeight ** 2
+// 26.87867813490267
+//  console.log(bmiMark);
+//  let bmiJohn = johnMass/johnHeight ** 2
+//27.44059917355372
+//  console.log(bmiJohn)
+//  const markHigherBMI = bmiJohn > bmiMark
+//  console.log(markHigherBMI) //true
+//  console.log( `Mark's BMI is ${bmiMark} and is higher than John's ${bmiJohn}!`);
+// 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
@@ -115,14 +174,16 @@ GOOD LUCK � */
 
 
 //                      ver 2
+/*
 
-
-//             if (bmiJohn < bmiMark) {
-//                   console.log("Mark's BMI is higher than John's!")
-//             }else {
-//                   console.log( "John's BMI is higher than Mark's!")
-//             }
-//
+            if (bmiJohn < bmiMark) {
+                  console.log(`Mark's BMI ${bmiMark} is higher than John's ${bmiJohn}!`)
+            }else {
+                  console.log( `John's BMI ${bmiJohn}} is higher than Mark's ${bmiMark}!`)
+   
+                           }
+                         */
+// 
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 

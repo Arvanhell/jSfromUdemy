@@ -148,3 +148,17 @@ GOOD LUCK � */
 //
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
+
+const markMass = 95 
+ const johnMass = 85
+ const markHeight = 1.88
+ const johnHeight = 1.76
+ let bmiMark = markMass/markHeight ** 2
+ //26.87867813490267
+ console.log(bmiMark);
+ let bmiJohn = johnMass/johnHeight ** 2
+ //27.44059917355372
+ console.log(bmiJohn)
+ const markHigherBMI = bmiJohn > bmiMark
+ console.log(markHigherBMI) //true
+ console.log( `Mark's BMI is ${bmiMark} and is higher than John's ${bmiJohn}!`);

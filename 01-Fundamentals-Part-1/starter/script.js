@@ -1,68 +1,75 @@
-/*
-let js = "amazing";
-console.log(40 + 8 + 23 - 10)
-
-console.log('Cezary');
-console.log(23);
-
-let firstName = 'Jolanta';
-
-console.log(firstName);
-console.log(firstName);
-console.log(firstName);
-
-let cezar_jola = 'cj';
-let $function = 27;
-let PI = 3.1415;
-
-let myFirstJob = 'butcher';
-let myCurentJob = 'security';
- // keep in mind about naming variables
-console.log(myFirstJob);
-let country = "Poland";
-let continent = 'Europe';
-let population = 37.776000 ;
-let language = 'polish'
- 
-console.log(`I am from ${country} in ${continent} where live ${population} people, native language is ${language} `)
-
-const isIsland = "false"
-language = 'english'
-console.log('isIsland', 'population', 'country','language')
-
-console.log(population);
-
-let decsription = 'Portugal is in Europe, and its 11 milion people speak portuguease'
-
-let javascriptIsFun = true;
-console.log(javascriptIsFun);
-console.log(typeof true);
-
-javascriptIsFun = 'Yes!';
-
-year = 1223;
-console.log(year);
-console.log(null);
-*/
-
+////////////////////////////////////////////////////////////
+//                       SECTION                          //
+//              JAVASCRIPT FUNDAMENTALS - PART 1          //  
+////////////////////////////////////////////////////////////
+//
+//
+//
+//
+// let js = "amazing";
+// console.log(40 + 8 + 23 - 10)
+//
+// console.log('Cezary');
+// console.log(23);
+//
+// let firstName = 'Jolanta';
+//
+// console.log(firstName);
+// console.log(firstName);
+// console.log(firstName);
+//
+// let cezar_jola = 'cj';
+// let $function = 27;
+// let PI = 3.1415;
+//
+// let myFirstJob = 'butcher';
+// let myCurentJob = 'security';
+//  // keep in mind about naming variables
+// console.log(myFirstJob);
+// let country = "Poland";
+// let continent = 'Europe';
+// let population = 37.776000 ;
+// let language = 'polish'
+// 
+// console.log(`I am from ${country} in ${continent} where live ${population} people, native language is ${language} `)
+//
+// const isIsland = "false"
+// language = 'english'
+// console.log('isIsland', 'population', 'country','language')
+//
+// console.log(population);
+//
+// let decsription = 'Portugal is in Europe, and its 11 milion people speak portuguease'
+//
+// let javascriptIsFun = true;
+// console.log(javascriptIsFun);
+// console.log(typeof true);
+//
+// javascriptIsFun = 'Yes!';
+//
+// year = 1223;
+// console.log(year);
+// console.log(null);
+//
+//
 // let age = 30;
 // age = 41;
 // console.log(age);
 // const birthYear = 1991;
 // birthYear = 1990;
 // const job;
-
-//remember use always const ... unleas not needed change const const const
-
+//
+//remember use always const ... unleas not needed change const 
+//
 // console.log(ageJonas,ageSarah,ageCezar);
-
+//
 // console.log(ageJonas * 2, ageJonas / 2, 3 ** 2);
-
+//
 // const firstName = 'Cezary'
 // const lastName = 'Waszkuc'
 // console.log(firstName + ' ' + lastName);
-
-//Asigment operator
+//
+//                  Asigment operator
 // let x = 10 + 5; // 15
 // x += 10; // x = x + 10
 // x *= 25 // x = x * 25
@@ -148,7 +155,7 @@ GOOD LUCK � */
 //
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
-
+//
 //  const markMass = 95 
 //  const johnMass = 85
 //  const markHeight = 1.88
@@ -165,14 +172,14 @@ GOOD LUCK � */
 // 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
-
+//
 //                      ver 1
-
-
+//
+//
 // const whoBmisHigher =  (bmiJohn < bmiMark) ?  "Mark's BMI is higher than John's!" : "John's BMI is higher than Mark's!"
 // console.log(whoBmisHigher);
-
-
+//
+//
 //                      ver 2
 /*
 
@@ -183,37 +190,113 @@ GOOD LUCK � */
    
                            }
                          */
-// 
+                        
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
-
-const markHeight = 1.69; "cm";
-const massMark = 78; "kg";
-const johnHeight = 1.95; "cm";
-const massJohn = 92; "kg";
-///////////////////////////////////
-//const markHeight = 1.99; "cm"; //
-//const massMark = 78; "kg";	   //
-//const johnHeight = 1.99; "cm"; //
-//const massJohn = 92; "kg";	   //
-///////////////////////////////////
-
-const bmiMark = massMark / (markHeight * markHeight);
-const BMIMark = (Math.floor(bmiMark))
-const bmiJohn = massJohn / (johnHeight * johnHeight);
-const BMIJohn = (Math.floor(bmiJohn))
-
-///////////////////////////////////////////////////////
-//const bmiTest = (bmiMark > bmiJohn) ? true : false //
-///////////////////////////////////////////////////////
-
-if (BMIJohn > BMIMark){
-    console.log(`Mark BMI ${BMIMark} is lower than John ${BMIJohn}`)
-}else{ 
-    (bmiMark > bmiJohn)
-        console.log(`John BMI ${BMIJohn} is lower than Mark ${BMIMark}`)
-    }
-
-
-   
+//
+// const markHeight = 1.69; "cm";
+// const massMark = 78; "kg";
+// const johnHeight = 1.95; "cm";
+// const massJohn = 92; "kg";
+// ///////////////////////////////////
+// //const markHeight = 1.99; "cm"; //
+// //const massMark = 78; "kg";	   //
+// //const johnHeight = 1.99; "cm"; //
+// //const massJohn = 92; "kg";	   //
+// ///////////////////////////////////
+//
+// const bmiMark = massMark / (markHeight * markHeight);
+// const BMIMark = (Math.floor(bmiMark))
+// const bmiJohn = massJohn / (johnHeight * johnHeight);
+// const BMIJohn = (Math.floor(bmiJohn))
+//
+// ///////////////////////////////////////////////////////
+// //const bmiTest = (bmiMark > bmiJohn) ? true : false //
+// ///////////////////////////////////////////////////////
+//
+// if (BMIJohn > BMIMark){
+//     console.log(`Mark BMI ${BMIMark} is lower than John ${BMIJohn}`)
+// }else{ 
+//     (bmiMark > bmiJohn)
+//         console.log(`John BMI ${BMIJohn} is lower than Mark ${BMIMark}`)
+//     }
+/////////////////////////////////////////////////
+//
+//              17. Strings and template Literals.
+//
+/////////////////////////////////////////////////
+//
+// const firstName = 'Cezary';
+// const job = 'security';
+// const birthYear = 1976;
+// const year = 2023;
+//
+// const cezar = "Hi " + "I'm " + firstName + ', a ' + (year - birthYear) + ' years old. ' + "I am " + job + '.';
+// console.log(cezar);
+//
+//  const cezarNew = `I'm ${firstName}, a ${year - birthYear} year old ${job} !`;
+//  console.log(cezarNew)
+//  
+// console.log(`Just a regular string...`);
+//
+// console.log('string with \n\
+// multiple \n\
+// lines')
+// console.log(`string 
+// with multiple
+// lines
+// within 
+// backstick`)
+///////////////////////////////////////////////////
+//      18. Taking decisions: if / else : statemant
+///////////////////////////////////////////////////
+//
+// const age = 15;
+//
+// if (age >= 18) {
+//     console.log('Sara can start driving license 🚘');
+// } else {
+//     const yearsLeft = 18 - age;
+//     console.log(`Sara is to young. Wait another ${yearsLeft} years 🥹`);
+// };
+//
+// const birthYear = 1991; 
+//
+// let century;
+// if (birthYear <= 200 ){ // condition 
+//      century = 20;
+// } else {
+//      century = 21;
+// };
+// console.log(century);
+//
+///////////////////////////////////////////////////
+///////////////////////////////////////////////////
+//
+///////////////////////////////////////////////////
+// 19. Challenge 2#
+///////////////////////////////////////////////////
+//
+// const massMark = 78;
+// const heightMark = 1.69;
+// const massJohn = 92;
+// const heightJohn = 1.95;
+//
+// const BMIMark = massMark / (heightMark * heightMark);
+// const BMIJohn = massJohn / (heightJohn * heightJohn);
+// console.log(BMIMark, BMIJohn);
+//
+// /* Write your code below. Good luck! 🙂 */
+//
+// if ( BMIMark > BMIJohn ){
+//     console.log(`Mark's BMI (${BMIMark}) is higher than John's (${BMIJohn})!`)
+// } else {
+//     console.log(`John's BMI (${BMIJohn}) is higher than Mark's (${BMIMark})!`)
+// }
+//
+///////////////////////////////////////////////////
+// 20. Type Conversion and Coercion
+///////////////////////////////////////////////////
+//
+//
 

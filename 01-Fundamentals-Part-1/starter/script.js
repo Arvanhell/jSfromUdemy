@@ -384,4 +384,66 @@ GOOD LUCK � */
 //       }
 //
 //              opt height is also undefined 
+//                 because 0 is also falsy value
 /////////////////////////////////////
+//
+/////////////////////////////////////////////////////
+//      22. Equality opertors == vs. === .
+///////////////////////////////////////////////////
+//
+//   const age = 18; // asigment =
+//   if (age === 18) console.log ('You just became an adult ;)'); 
+//   comparison === //strict equality operator
+//
+//
+//   const age = '18'
+//   if (age == 18) console.log ('You just became an adult ;)')
+//
+// !!!!!!!!! always use === equality comparison operator ......
+//
+////////////////////////////////////////////////////////
+//
+//       const favourite = prompt('what is your favourite number?')
+//        console.log(favourite); 
+//        console.log(typeof favourite); // Opt is string 
+//
+//       if (favourite == 23) {  //'23' == 23
+//            console.log('Cool! 23 is an amazing number !!')
+//        } 
+//
+///////////////
+//
+//                if (favourite === 23) {  //
+//                   console.log('Cool! 23 is an amazing number !!')
+//                     } 
+//                     // Opt we get nothing 
+//
+////////////////
+//
+//              We must use Number function for this 
+//
+//            const favourite = Number(prompt('what is your favourite number?'));
+//
+//            if ( favourite === 23 ) 
+//                console.log('Cool! 23 is an amazing number !!')
+//                           console.log(favourite);  // opt 23 as a number !
+//
+//////////////
+//
+
+const favourite = Number(prompt('what is your favourite number?'));
+
+            if ( favourite === 23 ) {
+            console.log('Cool! 23 is an amazing number !!')
+             } else if (favourite === 7) {
+                console.log('7 is also a cool number');
+             }else if ( favourite === 9) {
+                console.log('9 is also a cool number')
+             } else {
+                console.log( ' You typed wrong number')
+             }
+                      
+                      console.log(favourite); 
+
+
+    if(favourite !== 23) console.log('why not 23?')

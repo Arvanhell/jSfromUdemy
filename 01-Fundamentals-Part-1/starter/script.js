@@ -295,8 +295,93 @@ GOOD LUCK � */
 // }
 //
 ///////////////////////////////////////////////////
-// 20. Type Conversion and Coercion
+//         20. Type Conversion and Coercion
+//
 ///////////////////////////////////////////////////
 //
+// type conversion is when we manualy converting 
+// value from one type to another
 //
-
+//  type coercion is automated converted by 
+//  jScript doing automaticly 
+//
+/////////////////////////////////////////////////
+//
+//        const inputYear = '1991';
+//        console.log(inputYear + 18);
+//        output will be equall to "199118"
+//        
+//        const inputYear = '1991';
+//        console.log(Number(inputYear)); // 1991
+//        console.log(inputYear + 18); // 199118
+//
+///////////////////
+//
+//         const inputYear = '1991';
+//         console.log(Number(inputYear), inputYear); //opt is number  1991 ,string  "1991" 
+//         console.log(Number(inputYear) + 18); // opt is number 2009
+//          
+//         console.log(Number('cezar')); // opt NaN
+//         console.log(typeof NaN); // opt <==== number lol invalid number :)
+//         console.log(String(23), 23); // function String give us a string "23" and next is number 
+//         opt is "23", 23
+//
+/////////////////////
+//
+//                  type coercion
+//
+/////////////////////
+//
+//        console.log('I am ' + 23 + "years old"); // + concatinate 
+//        console.log('23' - "10" - 3); //opt numbers 10 // (-) making normal extraction 
+//        console.log("23" + "10" + 3); //opt string 23103 // (+) concatinate string and numbers 
+//        console.log("23" * '2');
+//        console.log('23' / "2");
+//
+//                        let n = '1' + 1; // opt '11'
+//                        n = n - 1 ;      // opt is '11' - 1
+//                        console.log(n);  // opt final is 10 
+//                         
+//                2 + 2 + 4 + "5" = "85" 
+//           '10' - '4' - '3' - 2 + '5' = '15' 
+//
+///////////////////////////////////////////////////
+//      21. Truthy and Falsy value 
+///////////////////////////////////////////////////
+//
+//   5 falsy values : 0 , '', undefined, null , NaN
+//
+//   console.log(Boolean(0));        //false
+//   console.log(Boolean(undefined));//false
+//   console.log(Boolean('Cezar'));  //true
+//   console.log(Boolean({}));       //true
+//   console.log(Boolean(''));      //false
+//
+//       const   money = 0;  // false boolean
+//         const    money = 100; // truth boolean 
+//       if (money) {
+//          console.log("Don't spend it all :)");
+//       } else {
+//          console.log('You should get a job');
+//       }
+//
+///////////////////////////////////
+//
+//        let height;
+//        if (height) {
+//            console.log('Yay! Height is defined')
+//        } else {
+//            console.log('Height is UNDEFINED')
+//        }
+//              opt is Height is Undefined
+///////////////////////////////////
+//                let height = 0;
+//                
+//        if (height) {
+//            console.log('Yay! Height is defined')
+//        } else {
+//            console.log('Height is UNDEFINED')
+//       }
+//
+//              opt height is also undefined 
+/////////////////////////////////////

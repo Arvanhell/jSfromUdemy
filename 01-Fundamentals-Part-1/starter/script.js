@@ -156,19 +156,19 @@ GOOD LUCK � */
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 //
-//  const markMass = 95 
-//  const johnMass = 85
-//  const markHeight = 1.88
-//  const johnHeight = 1.76
-//  let bmiMark = markMass/markHeight ** 2
-//      26.87867813490267
-//  console.log(bmiMark);
-//  let bmiJohn = johnMass/johnHeight ** 2
-//      27.44059917355372
-//  console.log(bmiJohn)
-//  const markHigherBMI = bmiJohn > bmiMark
-//  console.log(markHigherBMI) //true
-//  console.log( `Mark's BMI is ${bmiMark} and is higher than John's ${bmiJohn}!`);
+//      const markMass = 95 
+//      const johnMass = 85
+//      const markHeight = 1.88
+//      const johnHeight = 1.76
+//      let bmiMark = markMass/markHeight ** 2
+//          26.87867813490267
+//      console.log(bmiMark);
+//      let bmiJohn = johnMass/johnHeight ** 2
+//          27.44059917355372
+//      console.log(bmiJohn)
+//      const markHigherBMI = bmiJohn > bmiMark
+//      console.log(markHigherBMI) //true
+//      console.log( `Mark's BMI is ${bmiMark} and is higher than John's ${bmiJohn}!`);
 // 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -176,8 +176,8 @@ GOOD LUCK � */
 //                      ver 1
 //
 //
-// const whoBmisHigher =  (bmiJohn < bmiMark) ?  "Mark's BMI is higher than John's!" : "John's BMI is higher than Mark's!"
-// console.log(whoBmisHigher);
+//         const whoBmisHigher =  (bmiJohn < bmiMark) ?  "Mark's BMI is higher than John's!" : "John's BMI is higher than Mark's!"
+//          console.log(whoBmisHigher);
 //
 //
 //                      ver 2
@@ -194,33 +194,33 @@ GOOD LUCK � */
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 //
-// const markHeight = 1.69; "cm";
-// const massMark = 78; "kg";
-// const johnHeight = 1.95; "cm";
-// const massJohn = 92; "kg";
-// ///////////////////////////////////
-// //const markHeight = 1.99; "cm"; //
-// //const massMark = 78; "kg";	   //
-// //const johnHeight = 1.99; "cm"; //
-// //const massJohn = 92; "kg";	   //
-// ///////////////////////////////////
-//
-// const bmiMark = massMark / (markHeight * markHeight);
-// const BMIMark = (Math.floor(bmiMark))
-// const bmiJohn = massJohn / (johnHeight * johnHeight);
-// const BMIJohn = (Math.floor(bmiJohn))
-//
-// ///////////////////////////////////////////////////////
-// //const bmiTest = (bmiMark > bmiJohn) ? true : false //
-// ///////////////////////////////////////////////////////
-//
-// if (BMIJohn > BMIMark){
-//     console.log(`Mark BMI ${BMIMark} is lower than John ${BMIJohn}`)
-// }else{ 
-//     (bmiMark > bmiJohn)
-//         console.log(`John BMI ${BMIJohn} is lower than Mark ${BMIMark}`)
-//     }
-/////////////////////////////////////////////////
+//  const markHeight = 1.69; "cm";
+//  const massMark = 78; "kg";
+//  const johnHeight = 1.95; "cm";
+//  const massJohn = 92; "kg";
+///////////////////////////////////////
+//  //const markHeight = 1.99; "cm";   
+//  //const massMark = 78; "kg";	  
+//  //const johnHeight = 1.99; "cm"; 
+//  //const massJohn = 92; "kg";	   
+/////////////////////////////////////
+//  
+//  const bmiMark = massMark / (markHeight * markHeight);
+//  const BMIMark = (Math.floor(bmiMark))
+//  const bmiJohn = massJohn / (johnHeight * johnHeight);
+//  const BMIJohn = (Math.floor(bmiJohn))
+//  
+//  ///////////////////////////////////////////////////////
+//  //const bmiTest = (bmiMark > bmiJohn) ? true : false //
+//  ///////////////////////////////////////////////////////
+//  
+//  if (BMIJohn > BMIMark){
+//      console.log(`Mark BMI ${BMIMark} is lower than John ${BMIJohn}`)
+//  }else{ 
+//      (bmiMark > bmiJohn)
+//          console.log(`John BMI ${BMIJohn} is lower than Mark ${BMIMark}`)
+//      }
+/// //////////////////////////////////////////////
 //
 //              17. Strings and template Literals.
 //
@@ -430,20 +430,154 @@ GOOD LUCK � */
 //
 //////////////
 //
+//
+// const favourite = Number(prompt('what is your favourite number?'));
+//
+//             if ( favourite === 23 ) {
+//             console.log('Cool! 23 is an amazing number !!')
+//              } else if (favourite === 7) {
+//                 console.log('7 is also a cool number');
+//              }else if ( favourite === 9) {
+//                 console.log('9 is also a cool number')
+//              } else {
+//                 console.log( ' You typed wrong number')
+//              }
+//                      
+//                       console.log(favourite); 
+//
+//
+//     if(favourite !== 23) console.log('why not 23?');
+//
+/////////////////////////////////////////////////////////
+//      23. Bolean logic
+//////////////////////////////////////////////////////////
+// age = 16
+// Boolean Variables 
+// A: Age is greater or equall 20  // false
+// B: Age is less than 30 // true
+//
+// Operators! 
+// !A   <------ // true
+// A(false) and B(true) // false  ---> &&
+// A (false) or B ( true) // true ---->||
+// !A && B // true
+// A || !B // false      
+//
+///////////////////////////////////////////////////////////     
+//                  24. Logical Operators
+/////////////////////////////////////////////////////////
+//
+//        const hasDriverLicense = true; // A
+//        const hasGoodVision = true     // B
+//        console.log(hasDriverLicense && hasGoodVision); // true
+//
+///////////////
+//
+//        const hasDriverLicense = true; // A
+//        const hasGoodVision = false     // B
+//        console.log(hasDriverLicense || hasGoodVision); // true 
+//
+///////////////
+//
+//        const hasDriverLicense = true; // A
+//        const hasGoodVision = true     // B
+//        console.log(!hasDriverLicense); // false
+//
+///////////////
+//
+//        const hasDriverLicense = true; // A
+//        const hasGoodVision = true     // B
+//        const isTired = true // C
+//        
+//        const shouldDrive = hasDriverLicense && hasGoodVision;
+//        
+//       if(shouldDrive){
+//           console.log('Sara is able to drive!');
+//       } else{
+//           console.log('Someone else should drive')
+//       };
+//
+//    if (hasDriverLicense && hasGoodVision && !isTired) { // !isTired false 
+//    because we set isTired as true boolean but ! is change it to false
+//    console.log('sarah drive');
+//    }else {
+//    console.log('stop the car')
+//     }
+//
+/////////////////////////////////////////////////////////////     
+//                       Challenge #3
+/////////////////////////////////////////////////////////////
+/*
+CHALLENGE #3
+There are two gymnastics teams: Dolphins and Koalas. They compete against each other 3 times. The winner with the highest average score wins a trophy!
 
-const favourite = Number(prompt('what is your favourite number?'));
+Your tasks:
 
-            if ( favourite === 23 ) {
-            console.log('Cool! 23 is an amazing number !!')
-             } else if (favourite === 7) {
-                console.log('7 is also a cool number');
-             }else if ( favourite === 9) {
-                console.log('9 is also a cool number')
-             } else {
-                console.log( ' You typed wrong number')
-             }
-                      
-                      console.log(favourite); 
+1. Calculate the average score for each team, using the test data included below. The average score for Dolphins should be assigned to the scoreDolphins variable, and the average score of Koalas should be assigned to the scoreKoalas variable.
+
+2. Compare the team's average scores to determine the winner of the competition, and print to the console:
+
+"Dolphins win the trophy" if Dolphins win, or
+
+"Koalas win the trophy" if Koalas win, or
+
+"Both win the trophy" if their average scores are equal.
+
+TEST DATA: Dolphins scored 96, 108, and 89. Koalas scored 88, 91, and 110.
+*/
+
+/////////
+//        
+//            const scoreDolphins = (96 + 108 + 89) / 3;
+//            const scoreKoalas = (88 + 91 + 110) / 3;
+//                    
+//            if (scoreKoalas === scoreDolphins){
+//                console.log('Both win the trophy 🏆')
+//            } else if (scoreKoalas < scoreDolphins) {
+//                console.log ("Dolphins win the trophy 🏆")
+//            } else if (scoreDolphins < scoreKoalas){
+//                console.log ("Koalas win the trophy 🏆")
+//            }
+//            
+////////
+//
+//                          Bonus 1
+//                    Equall Win for both Team
+                        
+            // const scoreDolphins = (97 + 112 + 101) / 3;
+            // const scoreKoalas = (109 + 95 + 106) / 3;
+
+            // if (scoreDolphins > scoreKoalas && scoreDolphins >= 100){
+            //     console.log('Dolphins win the trophy 🏆');
+            // } else if (scoreKoalas > scoreDolphins && scoreKoalas >=100){
+            //     console.log('Kolas win the trophy 🏆');
+            // } else if ( scoreKoalas === scoreDolphins && scoreDolphins >= 100 && scoreKoalas >= 100 ){
+            //     console.log('Both win 🏆')
+            // } else {
+            //     console.log ('There is no Winner 👎')
+            // }
 
 
-    if(favourite !== 23) console.log('why not 23?')
+
+            //                 Bonus 2 
+            //            there is No winner    
+
+            // const scoreDolphins = (97 + 112 + 80) / 3;
+            // const scoreKoalas = (109 + 95 + 50) / 3;
+
+            // if (scoreDolphins > scoreKoalas && scoreDolphins >= 100){
+            //     console.log('Dolphins win the trophy 🏆');
+            // } else if (scoreKoalas > scoreDolphins && scoreKoalas >=100){
+            //     console.log('Kolas win the trophy 🏆');
+            // } else if ( scoreKoalas === scoreDolphins && scoreDolphins >= 100 && scoreKoalas >= 100 ){
+            //     console.log('Both win 🏆')
+            // } else {
+            //     console.log ('There is no Winner 👎')
+            // }
+
+
+
+/////////////////////////////////////////////////////////////     
+//                       The Switch Statement
+/////////////////////////////////////////////////////////////
+//

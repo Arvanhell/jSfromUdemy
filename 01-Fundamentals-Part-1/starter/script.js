@@ -524,7 +524,7 @@ Your tasks:
 "Both win the trophy" if their average scores are equal.
 
 TEST DATA: Dolphins scored 96, 108, and 89. Koalas scored 88, 91, and 110.
-*/
+
 
 /////////
 //        
@@ -579,5 +579,4 @@ TEST DATA: Dolphins scored 96, 108, and 89. Koalas scored 88, 91, and 110.
 
 /////////////////////////////////////////////////////////////     
 //                       The Switch Statement
-/////////////////////////////////////////////////////////////
-//
+////////////////////////////////////////////////////

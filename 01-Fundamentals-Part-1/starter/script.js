@@ -222,7 +222,7 @@ GOOD LUCK � */
 //      }
 /// //////////////////////////////////////////////
 //
-//              17. Strings and template Literals.
+//                       17. Strings and template Literals.
 //
 /////////////////////////////////////////////////
 //
@@ -248,7 +248,7 @@ GOOD LUCK � */
 // within 
 // backstick`)
 ///////////////////////////////////////////////////
-//      18. Taking decisions: if / else : statemant
+//                18. Taking decisions: if / else : statemant
 ///////////////////////////////////////////////////
 //
 // const age = 15;
@@ -274,7 +274,7 @@ GOOD LUCK � */
 ///////////////////////////////////////////////////
 //
 ///////////////////////////////////////////////////
-// 19. Challenge 2#
+//                      19. Challenge 2#
 ///////////////////////////////////////////////////
 //
 // const massMark = 78;
@@ -346,7 +346,7 @@ GOOD LUCK � */
 //           '10' - '4' - '3' - 2 + '5' = '15' 
 //
 ///////////////////////////////////////////////////
-//      21. Truthy and Falsy value 
+//                 21. Truthy and Falsy value 
 ///////////////////////////////////////////////////
 //
 //   5 falsy values : 0 , '', undefined, null , NaN
@@ -387,9 +387,9 @@ GOOD LUCK � */
 //                 because 0 is also falsy value
 /////////////////////////////////////
 //
-/////////////////////////////////////////////////////
-//      22. Equality opertors == vs. === .
-///////////////////////////////////////////////////
+//////////////////////////////////////////////////////
+//                22. Equality opertors == vs. === .
+//////////////////////////////////////////////////////
 //
 //   const age = 18; // asigment =
 //   if (age === 18) console.log ('You just became an adult ;)'); 
@@ -448,8 +448,8 @@ GOOD LUCK � */
 //
 //     if(favourite !== 23) console.log('why not 23?');
 //
-/////////////////////////////////////////////////////////
-//      23. Bolean logic
+//////////////////////////////////////////////////////////
+//                      23. Bolean logic
 //////////////////////////////////////////////////////////
 // age = 16
 // Boolean Variables 
@@ -465,7 +465,7 @@ GOOD LUCK � */
 //
 ///////////////////////////////////////////////////////////     
 //                  24. Logical Operators
-/////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////
 //
 //        const hasDriverLicense = true; // A
 //        const hasGoodVision = true     // B
@@ -505,7 +505,7 @@ GOOD LUCK � */
 //     }
 //
 /////////////////////////////////////////////////////////////     
-//                       Challenge #3
+//                       25. Challenge #3
 /////////////////////////////////////////////////////////////
 /*
 CHALLENGE #3
@@ -569,7 +569,7 @@ TEST DATA: Dolphins scored 96, 108, and 89. Koalas scored 88, 91, and 110.
 //     console.log ('There is no Winner 👎')
 // 
 /////////////////////////////////////////////////////////////     
-//                       The Switch Statement
+//                       26. The Switch Statement
 /////////////////////////////////////////////////////////////
 //
 // */
@@ -620,6 +620,56 @@ TEST DATA: Dolphins scored 96, 108, and 89. Koalas scored 88, 91, and 110.
 //       console.log('if previous value not match this will be executed');
 //       }
 //
-/////////////////////////////////////////////////////////////     
-//                      26. Statements and expresion
-/////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////     
+//                      27. Statements and expresion
+///////////////////////////////////////////////////////////////
+//
+///////////////////////////////////////////////////////////////     
+//                      28. The conditional (ternary) operator.
+///////////////////////////////////////////////////////////////
+//
+//      const age = 15
+//      age >= 18 ?                         // condition
+//      console.log ('I like to drink 🍷')  //if part 
+//      : 
+//      console.log ('I like to water💧')   //else part
+//      const age = 22
+//          const drink = age >= 18 ? 'drink 🍷'  : 'water💧'
+//            console.log(drink);
+//
+///////////////////////////////
+//
+//    let drink2; 
+//    if(age>=18) {
+//    drink2 = "wine";
+//    } else {
+//    drink2 = "water"
+//      }
+//    console.log(drink2)
+//
+///////////////////////////////
+//
+//          const age = 22
+//     console.log(`I like to drink ${age >= 18 ? 'drink 🍷' : 'water💧'}`)
+//          output will be 'I like to drink drink 🍷'
+//
+///////////////////////////////
+///////////////////////////////////////////////////////////////     
+//                      29. Challenge 4#
+///////////////////////////////////////////////////////////////
+//
+//     Steven needs a very simple tip calculator for whenever he goes to eat in a restaurant.
+//     In his country, it's usual to tip 15% if the bill value is between 50 //and 300. 
+//     If the value is different, the tip is 20%.
+//
+//    const bill = 275; //
+//
+//    const tip = bill >= 50  &&  bill <= 300 ? bill * 0.15 : bill * 0.2 ;
+//
+//    console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${bill + tip}`);
+//
+//    Test with different bill values: 275, 40, and 430
+//
+/////////////////////////////////////////////////////////////////////
+//                30. JavaScript releases : ES5, ES6 and ESNext
+/////////////////////////////////////////////////////////////////////

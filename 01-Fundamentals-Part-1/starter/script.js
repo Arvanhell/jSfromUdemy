@@ -544,39 +544,82 @@ TEST DATA: Dolphins scored 96, 108, and 89. Koalas scored 88, 91, and 110.
 //                          Bonus 1
 //                    Equall Win for both Team
                         
-            // const scoreDolphins = (97 + 112 + 101) / 3;
-            // const scoreKoalas = (109 + 95 + 106) / 3;
-
-            // if (scoreDolphins > scoreKoalas && scoreDolphins >= 100){
-            //     console.log('Dolphins win the trophy 🏆');
-            // } else if (scoreKoalas > scoreDolphins && scoreKoalas >=100){
-            //     console.log('Kolas win the trophy 🏆');
-            // } else if ( scoreKoalas === scoreDolphins && scoreDolphins >= 100 && scoreKoalas >= 100 ){
-            //     console.log('Both win 🏆')
-            // } else {
-            //     console.log ('There is no Winner 👎')
-            // }
-
-
-
-            //                 Bonus 2 
-            //            there is No winner    
-
-            // const scoreDolphins = (97 + 112 + 80) / 3;
-            // const scoreKoalas = (109 + 95 + 50) / 3;
-
-            // if (scoreDolphins > scoreKoalas && scoreDolphins >= 100){
-            //     console.log('Dolphins win the trophy 🏆');
-            // } else if (scoreKoalas > scoreDolphins && scoreKoalas >=100){
-            //     console.log('Kolas win the trophy 🏆');
-            // } else if ( scoreKoalas === scoreDolphins && scoreDolphins >= 100 && scoreKoalas >= 100 ){
-            //     console.log('Both win 🏆')
-            // } else {
-            //     console.log ('There is no Winner 👎')
-            // }
-
-
-
+// const scoreDolphins = (97 + 112 + 101) / 3;
+// const scoreKoalas = (109 + 95 + 106) / 3
+// if (scoreDolphins > scoreKoalas && scoreDolphins >= 100){
+//     console.log('Dolphins win the trophy 🏆');
+// } else if (scoreKoalas > scoreDolphins && scoreKoalas >=100){
+//     console.log('Kolas win the trophy 🏆');
+// } else if ( scoreKoalas === scoreDolphins && scoreDolphins >= 100 && scoreKoalas >= 100 ){
+//     console.log('Both win 🏆')
+// } else {
+//     console.log ('There is no Winner 👎')
+// }
+//                 Bonus 2 
+//            there is No winner   
+// const scoreDolphins = (97 + 112 + 80) / 3;
+// const scoreKoalas = (109 + 95 + 50) / 3
+// if (scoreDolphins > scoreKoalas && scoreDolphins >= 100){
+//     console.log('Dolphins win the trophy 🏆');
+// } else if (scoreKoalas > scoreDolphins && scoreKoalas >=100){
+//     console.log('Kolas win the trophy 🏆');
+// } else if ( scoreKoalas === scoreDolphins && scoreDolphins >= 100 && scoreKoalas >= 100 ){
+//     console.log('Both win 🏆')
+// } else {
+//     console.log ('There is no Winner 👎')
+// 
 /////////////////////////////////////////////////////////////     
 //                       The Switch Statement
-////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////
+//
+// */
+//    const day = 'tueasday';
+//
+//    switch (day) {  // day === 'monday or another value'      straight comparison....
+//    
+//    case 'monday': // 
+//       console.log('wo wo wo work day off');
+//    break;
+//    case 'tueasday':
+//       console.log('starting work at 7:00 till 12:00');
+//    break;
+//    case 'wednesday':
+//       console.log('Started early, going to GYM after work');
+//    break;
+//    case 'thursday':
+//       case 'friday':
+//             case 'saturday':
+//                   console.log('booooring')
+//    break;
+//     default:
+//       console.log('not a vvalid day')
+//     
+//    }
+//          // if we dont apply break after each block of action  automaticly will run next block of code 
+//
+//    if (day === 'monday'){
+//       console.log('wo wo wo work day off');
+//     } else if (day === 'tueasday'){
+//       console.log('starting work at 7:00 till 12:00');
+//     } else if (day === 'wednesday'){
+//       console.log('Started early, going to GYM after work');
+//     } else if (day === 'thursday' || day === 'friday' || day === 'saturday'){
+//       console.log('booooring');
+//     }else{
+//       console.log('not a vvalid day');
+//     };
+//
+// ////////
+//
+//    const atributS = 'vaLue'
+//    switch (atributS) {
+//       case 'value':
+//       console.log('if value is right this will be executed');
+//       break; // this should break continuation of code if is compared as true othervise going to next code block
+//       default:
+//       console.log('if previous value not match this will be executed');
+//       }
+//
+/////////////////////////////////////////////////////////////     
+//                      26. Statements and expresion
+/////////////////////////////////////////////////////////////

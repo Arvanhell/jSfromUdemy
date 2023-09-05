@@ -167,16 +167,23 @@
 //
 //              // when we have more line within arrow function
 //              // we need keyword return
-
-        const calcAge3 = birthYear => 2023 - birthYear;                  
-               const age3 = calcAge3(1979) 
-
-        const yearsUntillRetirement = (birthYear, firstName)=> {
-            const age = 2023 - birthYear;
-            const retirement = 65 - age;
-            // return retirement;
-            return `${firstName} retired in ${retirement} years`
-        }
-
-        console.log(yearsUntillRetirement(1976, "Cezary"));
-        console.log(yearsUntillRetirement(1979, "John"));
+//
+//          const calcAge3 = birthYear => 2023 - birthYear;                  
+//          const age3 = calcAge3(1979) 
+//  
+//      const yearsUntillRetirement = (birthYear, firstName)=> {
+//      const age = 2023 - birthYear;
+//      const retirement = 65 - age;
+//                                                             
+//               return `${firstName} retired in ${retirement} years`
+//      }
+//  
+//          console.log(yearsUntillRetirement(1976, "Cezary"));  // Cezary retired in 18 years
+//          console.log(yearsUntillRetirement(1979, "John"));    // John retired in 21 years
+//
+//
+//////////////////////////////////////////////////////////////////
+//                  36. Function calling other function.
+////////////////////////////////////////////////////////////////// 
+//
+//  

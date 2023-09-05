@@ -94,5 +94,89 @@
 ///////////////////////////////////////////////////////////////
 //                  35. Function Declaration Vs Expressions
 ///////////////////////////////////////////////////////////////
-   
-    
+//
+//
+//            Generic Function  Function declaration 
+    //
+    //
+    //    const age1 = calcAge1(1976); // call before defined code 
+    //
+    //    function calcAge1(birthYear){
+    //   
+    //     return 2023 - birthYear;
+    //    }
+    //    
+    //    console.log(`my age is ${age1}`) //  my age is 47
+//
+/////////////////////////////////
+//
+//              Function Expression 
+//                  produce value 
+//              anonymous function 
+//
+//         const calcAge2 = function (birthYear) {
+//            return 2023 - birthYear
+//            }      
+//            const age2 = calcAge2(1979);
+//
+//            console.log ( age2); // opt 44
+//
+/////////////////////////////////
+//
+//     Any function is creating value so is next step to:
+//                  - stored in variables.
+//
+//     !!!! You can call function declaration before 
+//          - define a code !!!!
+//
+//
+//      //////////////////////////
+//
+//
+//      !!!! you can't call function expression 
+//              before define a code !!!!
+//                  " because of the process called hoisting "
+//
+//////////////////////////////////////////////////////////////////
+//                  35.  Arrow Functions
+//////////////////////////////////////////////////////////////////
+//
+//            Function expression shorter and faster to write 
+//
+//          // Function expression  
+//
+//        const calcAge2 = function (birthYear) {
+//            return 2023 - birthYear
+//            } 
+//  
+//////////////////////////////////////////////
+//
+//          //  Arrow function  
+//            
+//         const calcAge3 = birthYear => 2023 - birthYear;
+//                  
+//                const age3 = calcAge3(1979) 
+//                console.log(age3); //  opt 44
+//
+//
+//              // one liner finction not need keyword return
+//                   it is return as arrow
+//            
+//////////////////////////////////////////////
+//
+//
+//              // when we have more line within arrow function
+//              // we need keyword return
+
+        const calcAge3 = birthYear => 2023 - birthYear;                  
+               const age3 = calcAge3(1979) 
+
+        const yearsUntillRetirement = (birthYear, firstName)=> {
+            const age = 2023 - birthYear;
+            const retirement = 65 - age;
+            // return retirement;
+            return `${firstName} retired in ${retirement} years`
+        }
+
+        console.log(yearsUntillRetirement(1976, "Cezary"));
+        console.log(yearsUntillRetirement(1979, "John"));

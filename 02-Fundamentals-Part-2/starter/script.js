@@ -4,7 +4,7 @@
 //////////////////////////////////////////////////////////////
 //              32. Activating Strict Mode
 //////////////////////////////////////////////////////////////
-//     FOR A CTIVATION USE 
+//     FOR ACTIVATION USE 
 //
 //      'use strict':
 //
@@ -51,7 +51,13 @@
 //      (at script.js:53:7)
 //gi
 //////////////////////////////////////////////////////////////
-//              32. Activating Strict Mode
+//              33. Function
 ///////////////////////////////////////////////////////////////
 //
-//..
+ function logger () {
+    console.log('My name is Cezary');
+ } 
+ // calling / running / invoking / function
+logger();
+logger();
+logger();

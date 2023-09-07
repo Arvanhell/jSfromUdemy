@@ -152,6 +152,11 @@
 //////////////////////////////////////////////
 //
 //          //  Arrow function  
+//
+//  
+//      
+//          Arrow functions are anonymous functions. 
+//      Therefore, you cannot call them before initialization.
 //            
 //         const calcAge3 = birthYear => 2023 - birthYear;
 //                  
@@ -161,7 +166,21 @@
 //
 //              // one liner finction not need keyword return
 //                   it is return as arrow
+//
+//              const greeting = () => 'Hello world!';
+////////////////////////////////////////////////////////////////////
+//                  function append(a, b) {
+//                        result = a + b;
+//                        return result;
+//                        }
+// 
+/////////////////////////////////////////////                     
+//      let append = (a, b) => a + b; // short syntax
+//
+//      let append = (a, b) => { return a + b; }; // block syntax
 //            
+//      let sum = a => a + 2;
+//        sum(1);  // 3
 //////////////////////////////////////////////
 //
 //
@@ -180,6 +199,38 @@
 //  
 //          console.log(yearsUntillRetirement(1976, "Cezary"));  // Cezary retired in 18 years
 //          console.log(yearsUntillRetirement(1979, "John"));    // John retired in 21 years
+//
+/////////////////////////////
+//
+//  Comparison
+//
+//  Let's create some functions using traditional syntax, 
+//  block arrow function syntax and short arrow function syntax, 
+//  and compare them:
+//
+//  function mult1(a, b) {
+//    return a * b;
+//  }
+///////
+//  let mult2 = (a, b) => { return a * b; };
+//////
+//  let mult3 = (a, b) => a * b;
+//////
+//
+//  console.log(mult1(3, 2)) // 6
+//  console.log(mult2(3, 2)) // 6
+//  console.log(mult3(3, 2)) // 6
+//
+//  As you can see, the results of all these functions are identical, 
+//  but the shorter syntax of the arrow function makes
+// it more convenient to write.
+//
+//  It's important to use a tool appropriate for the particular problem.
+//   If you have code where all functions are written in a traditional way,
+//   don’t use Arrow functions. Always think in terms of the 
+//   existing code structure.
+//
+//
 //
 //
 //////////////////////////////////////////////////////////////////
@@ -204,7 +255,28 @@
 //          37. Reviewing Function
 ///////////////////////////////////////
 //
+  
+const calcAge = function(birthYear){
+    return 2037 - birthYear 
+}
+const yearsUntillRetirement = (birthYear, firstName) => {
+    const age = calcAge(birthYear)
+    const retirement = 65 - age
 
+    if(retirement > 0 ){
+        return retirement; // is imidiately executed and stoppping 
+    } else {
+        return -1 ;
+    }
+    console.log(`${firstName} has already retired 😎 `)
+    };
 
-      
-      
+console.log(yearsUntillRetirement (1976, 'Cezary'));
+console.log(yearsUntillRetirement(1950, 'Mike'));
+    // (() => {
+    //     console.log('Hello!');
+    //     })();
+
+    // (function () {
+    //     console.log('Hello!');
+    // })()c

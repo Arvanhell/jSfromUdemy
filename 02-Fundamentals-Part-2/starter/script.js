@@ -381,3 +381,46 @@
 //                       39. Introduction to arrays
 ///////////////////////////////////////////////////////////
 //
+// const friend1 = 'Michal';
+// const friend2 = 'Piotr';
+// const friend3 = 'Greg';
+
+// const friend = ['Michal','Piotr', 'Greg']; // literal syntax
+// console.log(friend);
+
+// //const years = new Array[1991, 1994, 2008, 2020]; 
+
+// console.log(friend[0]);
+// console.log(friend[2]);
+
+// console.log(friend.length);
+// console.log(friend[friend.length -1]); //in brackets jS expect expression not a statement
+// //mutating is allowed for arrays ( even they are constructed as const variables)
+// friend[2] = 'Jay';
+// console.log(friend);
+// // we cannot do replace whole arrays. 
+// // friend = ['bob','bob'] // 
+// //
+// const firstName = 'Cezar';
+// const cezar = [firstName, 'Waszkuc',2023 - 1976,  friend ];
+// console.log(cezar);
+
+// //Exercise
+// const calcAge = function(birthYear){
+//     return 2023 - birthYear
+// }
+// const years = [1990, 1967, 2002, 2010, 2018];
+
+// // we can calculate for element of array but not whole array it will be shown NaN 
+// const age1 = calcAge(years[0]);
+// const age2 = calcAge(years[1]);
+// const age3 = calcAge(years[years.concatlength -1]);
+// console.log(age1, age2, age3);
+
+// const ages = [calcAge(years[0]),calcAge(years[1]),calcAge(years[years.length -1])];
+// console.log(ages);
+//
+/////////////////////////////////////////////////////////
+//                  40.Basic Array operation (method)
+/////////////////////////////////////////////////////////
+//

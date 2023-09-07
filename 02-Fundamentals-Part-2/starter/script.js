@@ -98,7 +98,7 @@
 //
 //            Generic Function  Function declaration 
     //
-    //
+    //     Function declaration that can be used before is declared
     //    const age1 = calcAge1(1976); // call before defined code 
     //
     //    function calcAge1(birthYear){
@@ -113,7 +113,7 @@
 //              Function Expression 
 //                  produce value 
 //              anonymous function 
-//
+//      Essentialy a function value stored in a varible
 //         const calcAge2 = function (birthYear) {
 //            return 2023 - birthYear
 //            }      
@@ -256,24 +256,24 @@
 ///////////////////////////////////////
 //
   
-const calcAge = function(birthYear){
-    return 2023 - birthYear 
-}
-const yearsUntillRetirement = (birthYear, firstName) => {
-    const age = calcAge(birthYear);
-    const retirement = 65 - age;
+// const calcAge = function(birthYear){
+//     return 2023 - birthYear 
+// }
+// const yearsUntillRetirement = (birthYear, firstName) => {
+//     const age = calcAge(birthYear);
+//     const retirement = 65 - age;
 
-    if (retirement > 0 ) {
-        console.log(`${firstName} retires in ${retirement} years`);
-        return retirement; 
-    } else {
-        console.log(`${firstName} has already retired 😎`);
-        return -1;
-    }
-}
+//     if (retirement > 0 ) {
+//         console.log(`${firstName} retires in ${retirement} years`);
+//         return retirement; 
+//     } else {
+//         console.log(`${firstName} has already retired 😎`);
+//         return -1;
+//     }
+// }
 
-console.log(yearsUntillRetirement (1976, 'Cezary'));
-console.log(yearsUntillRetirement(1950, 'Mike'));
+// console.log(yearsUntillRetirement (1976, 'Cezary'));
+// console.log(yearsUntillRetirement(1950, 'Mike'));
     // (() => {
     //     console.log('Hello!');
     //     })();
@@ -281,3 +281,103 @@ console.log(yearsUntillRetirement(1950, 'Mike'));
     // (function () {
     //     console.log('Hello!');
     // })()c
+//
+//   Three different way of writing functions but 
+//   they all work in a similiar way:
+//      receive INPUT data,
+//      TRANSFORM data,
+//      OUTPUT data
+//
+////////////////////////////////////////////////////////
+//
+//    function fUNCTION_NAME(param1, param2) {
+//        const varIata = value - param1 // example
+//        console.log(`${param2} is ${varIata} to something`)// example
+//        return varIata
+//    }
+//        const variaTa = FUNCTION_NAME(value of param1, value of param2)
+//    
+//
+//    Parameters param1, param2 are placeholders 
+//    //////
+//    fUNCTION_NAME is name of our function
+//    //////
+//    return is statement to opt a value from the function and terminate execution
+    /////
+//    everything within { ... block of code that we want to requestAnimationFrame. 
+    /////
+//        Processes the function input data ...  }
+    ///////
+//    Calling, invoking or runing the function using () 
+    //////
+//    Inside we have ARGUMENT`s actual values of function parameters,
+//    to input data // placing them into placeholder param1 , param2
+    //////
+//   const varaiaTa are variable to save returned value ( function output),
+//   we can reuse if we have to 
+//
+//
+///////////////////////////    ////// /////// ///// //////
+//
+//                    38.  Challenge #
+//
+///////////////////////////
+//
+//
+// Back to the two gymnastics teams, the Dolphins and the Koalas! There is a new gymnastics discipline, which works differently.
+
+// Each team competes 3 times, and then the average of the 3 scores is calculated (so one average score per team).
+
+// A team only wins if it has at least double the average score of the other team. Otherwise, no team wins!
+
+
+
+// Your tasks:
+
+// Create an arrow function calcAverage to calculate the average of 3 scores. This function should have three parameters and return a single number (the average score).
+
+// Create two new variables — scoreDolphins and scoreKoalas, and assign the value returned from the calcAverage function to them (you will need to call this function, and pass scores as arguments).
+
+// Create a function checkWinner that takes the average score of each team as parameters (avgDolphins and avgKoalas), and then logs the winner to the console, together with the victory points, according to the rule above. Example: Koalas win (30 vs. 13) (use avgDolphins and avgKoalas instead of hard-coded values).
+
+// Use the checkWinner function to determine the winner for both DATA 1 and DATA 2.
+
+// Ignore draws this time. Instead, log No team wins... to the console if there is no winner.
+
+
+
+// TEST DATA 1: Dolphins scored 44, 23, and 71. Koalas scored 65, 54, and 49.
+
+// TEST DATA 2: Dolphins scored 85, 54, and 41. Koalas scored 23, 34, and 27.
+
+
+// const calcAverage = (param1, param2, param3) => {
+//     return (param1 + param2 + param3) / 3 ;
+//     };
+//     console.log(calcAverage)
+//     let scoreDolphins = calcAverage(44, 23, 71);
+//     let scoreKoalas = calcAverage(65, 54, 49);
+//     console.log(scoreDolphins, scoreKoalas);
+    
+//      const checkWinner = function(avgDolphins, avgKoalas) {
+//         if (avgDolphins >= 2 * avgKoalas) {
+//             console.log(`Dolphin wins ${avgDolphins} Vs ${avgKoalas}`);
+//             } else  if (avgKoalas >= 2 * avgDolphins){
+//             console.log(`Koala wins ${avgKoalas} Vs ${avgDolphins}`);
+//             } else {
+//             console.log(`No team wins...`);
+//         }
+//     };
+    
+//      checkWinner(scoreKoalas, scoreDolphins);
+//
+//                    //  Test 2 
+//    scoreDolphins = calcAverage(85, 54, 41)
+//    scoreDolphins = calcAverage(23, 34, 27)
+//    console.log(scoreDolphins, scoreKoalas);
+//    checkWinner(scoreDolphins, scoreKoalas);
+//
+///////////////////////////////////////////////////////////        
+//                       39. Introduction to arrays
+///////////////////////////////////////////////////////////
+//

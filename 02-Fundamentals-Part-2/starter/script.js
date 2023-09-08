@@ -135,11 +135,22 @@
 //
 //
 //
-//           function collectThings(x, ...y) // 
+//           function collectThings(x, ...y) {
+//              console.log(x)
+//              console.log(y)
+//             }
+//           we call the function collectThings(1,2,3,4,5,6,7,8,9);
+//              we got x parameter with output  1
+//              and we got y parameter with output as rest ... 
+//              an array eight elements (8)[2,3,4,5,6,7,8,9]
 // § function definition can only :
 //     - have one rest parameter
 //     - must be placed as the last parameter 
 //     - is marked by three dots ...paramater//
+//
+//              
+//
+//
 //
 ////////////////////////////////////////
 //
@@ -449,5 +460,46 @@
 
 // Array.isArray(marksOne); // false
 
-//////////////
-
+/////////////////////////////////////////////////////
+//
+//                      The fill() method
+//
+// /////////////////////////////////////////////////
+//
+//
+//      fill()  is used to return a modified version of an array 
+//  — it changes the array's elements to a static value. 
+//  This method takes up to three arguments:
+//
+//       fill(value, start, end)
+//
+//       value: the value the array will be filled with.
+//
+//       start: the index where the filling should begin. 
+//      This argument is optional, and its default value is 0.
+//
+//       end: the index where the filling should finish(not including the end).
+//       This argument is also optional, and its default is the array's length.
+//
+//       You can see some examples in the following code snippet:
+//
+//       const myNumbers = [1, 4, 7, 10, 15];
+//
+//       // fill with 0 from position 1 until position 3
+//          console.log(myNumbers.fill(0, 1, 3)); // [1, 0, 0, 10, 15]
+//
+//           console.log(myNumbers.fill(13)); // [13, 13, 13, 13, 13]
+//
+//           // fill with 5 from position 2
+//          console.log(myNumbers.fill(5, 2)); // [13, 13, 5, 5, 5]
+//              Now, let's create an array by using the new keyword 
+//              and the fill() method together:
+//
+//       let numberArray = new Array(6).fill(2); // [2, 2, 2, 2, 2, 2]
+//          The above code will create an array with 6 slots 
+//          and fill each one with the number 2.
+//
+//       Make sure you declare and initialize the array 
+//          before using the fill() method.
+//
+/////////////////////

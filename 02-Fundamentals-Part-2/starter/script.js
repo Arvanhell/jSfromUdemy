@@ -133,6 +133,16 @@
 //      //////////////////////////
 //
 //
+//
+//
+//           function collectThings(x, ...y) // 
+// § function definition can only :
+//     - have one rest parameter
+//     - must be placed as the last parameter 
+//     - is marked by three dots ...paramater//
+//
+////////////////////////////////////////
+//
 //      !!!! you can't call function expression 
 //              before define a code !!!!
 //                  " because of the process called hoisting "
@@ -424,3 +434,20 @@
 //                  40.Basic Array operation (method)
 /////////////////////////////////////////////////////////
 //
+
+// The isArray() method returns true if an object is an Array, otherwise false.
+
+// The full syntax is Array.isArray(obj) .
+
+// The below examples show how to use this method:
+
+// let marks = [45, 50, 44, 30, 29];
+
+// Array.isArray(marks); // true
+
+// let marksOne = "45";
+
+// Array.isArray(marksOne); // false
+
+//////////////
+

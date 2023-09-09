@@ -652,19 +652,53 @@
 //
 /* Write your code below. Good luck! 🙂 */
 //
+
+    //              arrow function
+    //      
+    //      consta calcTip = bill => bill >= 50 && bill <= 300 ? 
+    //              bill * 0.15 : bill * 0.2
 /*
 
             const calcTip = function(bill) {
                 return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
             }
 
-            const bills = [125, 555, 44] ;
+            const bills = [125, 555, 44] ; // created array 
+
+
             const tips = [calcTip(bills[0]), calcTip(bills[1]), calcTip(bills[2])];
+     // created array tips  and functioncall calcTip with arrays on inex position
+     // you can also create an array with tip1 = calcTip(bill[0]) and tip2 and tip3 uo to you
+            
 
-            const totals = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
-
+     const totals = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
+    // created array with sum of the bill and tips 
+                
             console.log(bills, tips, totals);
 */
 //      opt [ 125, 555, 44 ] [ 18.75, 111, 8.8 ] [ 143.75, 666, 52.8 ]
 //
 //////////////////////////////////////////
+//
+///////////////////////////////////////////////////////////
+//                  42. Introduction to Objects
+///////////////////////////////////////////////////////////
+//
+//             Object Literal syntax ... ... ... 
+/*
+             
+const cezar = {
+    firstName: 'Cezary',
+    lastName: 'Waszkuc',
+    age: 2023 - 1976,
+    job: 'security officer',
+    friends: ['Skibek', 'Mumin', 'Olo']
+};
+
+*/
+//
+/////////////////////////////////////////////////////////
+//                  42. Dot vs. Bracket Notation
+/////////////////////////////////////////////////////////
+//
+//

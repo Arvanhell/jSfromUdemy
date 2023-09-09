@@ -502,4 +502,131 @@
 //       Make sure you declare and initialize the array 
 //          before using the fill() method.
 //
-/////////////////////
+////////////////////////////////
+//
+//              The from() method
+//        
+////////////////////////////////
+//
+//
+//      The Array.from() method creates a new Array instance 
+//      from an array-like or iterable object (such as a Map). 
+//      The syntax of the from() method is as follows:
+//
+//          Array.from(object, mapFunction, thisValue)
+//
+//      object: the object to convert to an array. This is a required field.
+//
+//          mapFunction: the map function to call on each element of the array.
+//           This is an optional field.
+//
+//      thisValue: a value to use as this when executing the mapFunction 
+//      — also an optional field. 
+//      (The this keyword will be explained in a later topic.)
+//
+//      Let's look at some examples that demonstrate how to create an array 
+//                  with Array.from().
+//
+//                  Using a string:
+//
+//          Array.from('Hello'); // ['H', 'e', 'l', 'l', 'o']
+//                  
+//                  Using function arguments:
+//
+//              function createArray(...arguments) {
+//                return Array.from(arguments);
+//              }
+//
+//          createArray(2, 4, 6); // [2, 4, 6]
+//          Passing an arrow function to the mapFunction parameter:
+//
+//          Array.from([3, 5, 7], x => x * x); // [9, 25, 49]
+//
+///////////////////////////////
+//
+//                  The of() method
+//
+///////////////////////////////
+//
+//          Array.of() was introduced in Javascript version ES6. 
+//      It creates a new Array instance containing the given arguments,
+//      regardless of their type or number. The syntax of the of() method 
+//      is Array.of(element_1, element_2, ..., element_n).
+//
+//    You can see some examples of how to create an array 
+//          using Array.of() below:
+//
+//      Array.of(15); // [15]
+//
+//      Array.of(101, 202, 303); // [101, 202, 303]
+//
+//      Array.of(undefined); // [undefined]
+//      The difference between Array.of() and the Array constructor 
+//      lies in the handling of integer arguments: Array.of(10) 
+//      creates an array with a single element, 10, whereas Array(10) 
+//      creates an array of ten undefined values.
+//
+////////////////////////////////////////
+//          Basic Arry Operation Methods vol.2 
+/////////////////////////////////////////
+//
+//                  Add Element
+//
+//    const friends = ['Michele', 'Tony', 'Linda'];
+//   
+//    const newLength1 = friends.push('Jay');
+//    // push is a method function that adding new element array to end existing array.
+//    To make new variable and keep old ones we constuct new variable and we receive
+//                //opt ['Michele', 'Tony', 'Linda','Jay']
+//
+//    const newLength2 = newLength1.unshift('John');
+//    // unshift is a method function that adding new element array on the front existing array. 
+//     To make new varible and keep old ones we construct new one and we receive
+//                 //opt ['John', 'Michele', 'Tony', 'Linda', 'Jay']
+//
+/////////////////////////////////
+//                Remove Element
+//
+//   friends.pop()// taking out of array last elements of array
+//   const popped = friends.pop()
+//    //opt 'Linda'
+//   
+//    friends.unshift()// first element taking off the array
+//
+/////////////////////////////////
+//
+//                    Method indexOf 
+//
+//          console.log(friend.indexOf('0'))
+//                        //opt Michele
+///////////////
+//
+//                    Method includes
+//                 use a strict equality 
+//
+//        console.log(friends.includes('Michele')) // opt true
+//
+//        console.log(friends.includes('Michal')) //opt false
+//
+//        if we add number example 
+//                    friend.push(36) and we tested this includes
+//                        console.log(friends.includes('36');
+//                           // we got output false because is not a string
+//        if we add number and test as a number 
+//                     friend.push(36) 
+//                  console.log(friends.includes(36);
+//                          // we got output true equall comparison                   
+//   
+//                if (friends.includes('Michele')) {
+//                    console.log('You have a friend called Michele')
+//
+//
+//                }
+///////////////////////////////////////////////////////////////////////////
+//
+/////////////////////////////////////////////////////////
+//                  41. Coding Exercise 6 Challenge#2
+/////////////////////////////////////////////////////////
+//
+
+

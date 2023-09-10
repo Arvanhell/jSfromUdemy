@@ -702,3 +702,66 @@ const cezar = {
 /////////////////////////////////////////////////////////
 //
 //
+
+/*
+const cezar = {
+    firstName: 'Cezary',
+    lastName: 'Waszkuc',
+    age: 2023 - 1976,
+    job: 'security officer',
+    friends: ['Skibek', 'Mumin', 'Olo']
+};
+
+console.log(cezar.lastName);  // dot as operator opt Waszkuc
+
+/////////////////////////////////////
+/////////////////////////////////////
+/////////////////////////////////////
+
+console.log(cezar['lastName']); // bracket notation opt Waszkuc
+
+const. nameKey = 'Name';
+console.log(cezar[ 'first'+ nameKey]);
+console.log(cezar['last' + nameKey]);
+
+const interestedIn = prompt('What do you want to know about Cezar? Choose beetwen firstName, lastName, age, job and friends');
+console.log(cezar[interestedIn]);
+
+if user try get property that doest exist we can use 
+    
+        if(cezar[interestedIn]) {
+            console.log (cezar[interestedIn]);
+        }else{
+            console.log ('Wrong request! Choose between firstName, lastName, age , job , and friends');
+        }
+ 
+        
+
+        we can add any expression we want 
+        cezar.location = 'Ireland';
+      
+        
+        //challenge 
+        console.log(`${cezar.firstName} has ${cezar.friends.length}, and his best friend is called ${cezar.friends[0]}`);
+
+*/
+//
+//
+//
+/////////////////////////////////////////////////////////
+//                  43. Object Methods
+/////////////////////////////////////////////////////////
+
+
+const cezar = {
+    firstName: 'Cezary',
+    lastName: 'Waszkuc',
+    birthYear : 1976,
+    job: 'security officer',
+    hasDriverLicences: true,
+    friends: ['Skibek', 'Mumin', 'Olo'],
+
+    calcAge: function(birthYear) {
+        return  2023 - birthYear;
+    }
+};

@@ -765,3 +765,7 @@ const cezar = {
         return  2023 - birthYear;
     }
 };
+
+console.log(cezar.calcAge(1976));
+
+console.log(cezar[calcAge](1976));

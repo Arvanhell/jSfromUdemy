@@ -879,14 +879,14 @@ for (let rep = 1; rep <= 10; rep++) {
 /////////////////////////////////////////////////////////////////
 
 
-const jonas = [
-    'Jonas',
-    'Schmedtmann',
-    2037 - 1991,
-    'teacher',
-    ['Michel', 'Peter', 'Steven'],
-    true
-];
+// const jonas = [
+//     'Jonas',
+//     'Schmedtmann',
+//     2037 - 1991,
+//     'teacher',
+//     ['Michel', 'Peter', 'Steven'],
+//     true
+// ];
 
 // we want to get  console.log(jonas[0])
 //   console.log(jonas[1])
@@ -918,8 +918,12 @@ console.log(types);
 //   teacher string
 //   (3) ['Michel', 'Peter', 'Steven'] 'object'
 //   true 'boolean'
-//////
-
+///////
+//
+////////////////////////////////////////////////
+//
+//
+/*
 const years = [1991, 2005, 1969, 2020];
 const ages = [];
 // i want to add value to empty array
@@ -931,24 +935,126 @@ console.log(ages);
 // with this example we can calculate one by one exactly amount of year 
 // by looping trough the array
 
-// continue and break
-console.log( '-----ONLLY STRING----')
-for ( let i = 0; i < jonas.length; i++) {
-    if(typeof jonas[i] !== 'string') continue;
+*/
+////////////////////////////////////////////////
 
-    console.log(jonas[i], typeof jonas[i]);
-};
+// continue and break
+/*
+
+        console.log( '-----ONLLY STRING----')
+        for ( let i = 0; i < jonas.length; i++) {
+            if(typeof jonas[i] !== 'string') continue;
+
+             console.log(jonas[i], typeof jonas[i]);
+        };
 
 //opt           -----ONLLY STRING----
 //          script.js:939 Jonas string
 //          script.js:939 Schmedtmann string
 //          script.js:939 teacher string
 
+
+*/
+
+
+////////////////////////////////////////////////////////////
+
 // break method
 
+/*
 console.log( '-----Break with number----')
 for ( let i = 0; i < jonas.length; i++) {
     if(typeof jonas[i] === 'number') break;
 
     console.log(jonas[i], typeof jonas[i]);
 };
+
+//opt       -----Break with number----
+//          Jonas string
+//          script.js:953 Schmedtmann string
+//          and stop because next is number
+
+*/
+
+////////////////////////////////////////////////////////////////////////
+//          48.Looping backwards and looping in loops
+////////////////////////////////////////////////////////////////////////
+
+/*
+const jonas = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michel', 'Peter', 'Steven'],
+    true
+];
+*/
+
+// 0,1, .... ,4
+// loop backward
+// 4, 3, .....,1
+
+/*
+for (let i= jonas.length -1; i >= 0; i-- ) {
+    console.log(i, jonas[i]);
+}
+
+//opt        ?   
+        i    |    jonas[i]
+-----------------------------
+        5    |    true
+        4    |    (3) ['Michel', 'Peter', 'Steven']
+        3    |    'teacher'
+        2    |     46
+        1    |    'Schmedtmann'
+        0    |    'Jonas'
+*/
+
+// Loop in the Loop
+
+   /////////////////////////////////////////
+
+   /*
+
+for ( let exercise = 1; exercise < 4; exercise++) {
+        console.log(`-------> Starting exercise ${exercise}`);
+
+
+        for ( let rep = 1; rep < 6; rep++) {
+            console.log(`Exercise ${exercise}: Lifting weight repetition ${rep}`)
+        }
+    };
+
+    //opt
+
+
+                        -------> Starting exercise 1
+
+     Exercise 1: Lifting weight repetition 1
+     Exercise 1: Lifting weight repetition 2
+     Exercise 1: Lifting weight repetition 3
+     Exercise 1: Lifting weight repetition 4
+     Exercise 1: Lifting weight repetition 5
+
+                         -------> Starting exercise 2
+
+     Exercise 2: Lifting weight repetition 1
+     Exercise 2: Lifting weight repetition 2
+     Exercise 2: Lifting weight repetition 3
+     Exercise 2: Lifting weight repetition 4
+     Exercise 2: Lifting weight repetition 5
+
+                         -------> Starting exercise 3
+
+     Exercise 3: Lifting weight repetition 1
+     Exercise 3: Lifting weight repetition 2
+     Exercise 3: Lifting weight repetition 3
+     Exercise 3: Lifting weight repetition 4
+     Exercise 3: Lifting weight repetition 5
+
+     */
+
+     //////////////////////////////////////////////////////////
+     //                  49. While Loop
+     //////////////////////////////////////////////////////////

@@ -853,4 +853,102 @@ if (mark.bmi > john.bmi) {
 //                  46. Iteration The For Loop
 /////////////////////////////////////////////////////////
 
+// console.log('Liftin weight repetition 1 🏎️ ');
+// console.log('Liftin weight repetition 2 🏎️ ');
+// console.log('Liftin weight repetition 3 🏎️ ');
+// console.log('Liftin weight repetition 4 🏎️ ');
+// console.log('Liftin weight repetition 5 🏎️ ');
+// console.log('Liftin weight repetition 6 🏎️ ');
+// console.log('Liftin weight repetition 7 🏎️ ');
+// console.log('Liftin weight repetition 8 🏎️ ');
+// console.log('Liftin weight repetition 9 🏎️ ');
+// console.log('Liftin weight repetition 10 🏎️ ');
 
+/////////////////
+
+// for loop keep running while condition is still TRUE
+
+/*
+for (let rep = 1; rep <= 10; rep++) {
+    console.log(`Liftin weight repetition ${rep}🏎️ `);
+}
+*/
+
+////////////////////////////////////////////////////////////////
+//              46. Looping Arrays, breaking and continuing
+/////////////////////////////////////////////////////////////////
+
+
+const jonas = [
+    'Jonas',
+    'Schmedtmann',
+    2037 - 1991,
+    'teacher',
+    ['Michel', 'Peter', 'Steven'],
+    true
+];
+
+// we want to get  console.log(jonas[0])
+//   console.log(jonas[1])
+//   console.log(jonas[2])
+//   console.log(jonas[3])
+//...
+//   console.log(jonas[4])
+// jonas[5] does not exist
+// going trough loop to achieve goal
+/*
+const types = [];
+
+for ( let i = 0;i < jonas.length ; i++){
+    console.log(jonas[i], typeof jonas [i]);
+    // types[i] = typeof jonas[i]; 
+    // types.push(typeof jonas[i]);
+};
+console.log(types);
+
+*/
+
+//educational exercises --->
+//
+
+/////  opt
+//   Jonas string
+//   Schmedtmann string
+//   46 'number'
+//   teacher string
+//   (3) ['Michel', 'Peter', 'Steven'] 'object'
+//   true 'boolean'
+//////
+
+const years = [1991, 2005, 1969, 2020];
+const ages = [];
+// i want to add value to empty array
+for ( let i = 0; i < years.length; i++){
+    ages.push(2023 - years[i]);
+}
+console.log(ages);
+
+// with this example we can calculate one by one exactly amount of year 
+// by looping trough the array
+
+// continue and break
+console.log( '-----ONLLY STRING----')
+for ( let i = 0; i < jonas.length; i++) {
+    if(typeof jonas[i] !== 'string') continue;
+
+    console.log(jonas[i], typeof jonas[i]);
+};
+
+//opt           -----ONLLY STRING----
+//          script.js:939 Jonas string
+//          script.js:939 Schmedtmann string
+//          script.js:939 teacher string
+
+// break method
+
+console.log( '-----Break with number----')
+for ( let i = 0; i < jonas.length; i++) {
+    if(typeof jonas[i] === 'number') break;
+
+    console.log(jonas[i], typeof jonas[i]);
+};

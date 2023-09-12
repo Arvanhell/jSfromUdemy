@@ -753,19 +753,19 @@ if user try get property that doest exist we can use
 /////////////////////////////////////////////////////////
 
 
-const cezar = {
-    firstName: 'Cezary',
-    lastName: 'Waszkuc',
-    birthYear : 1976,
-    job: 'security officer',
-    hasDriverLicences: true,
-    friends: ['Skibek', 'Mumin', 'Olo'],
+// const cezar = {
+//     firstName: 'Cezary',
+//     lastName: 'Waszkuc',
+//     birthYear : 1976,
+//     job: 'security officer',
+//     hasDriverLicences: true,
+//     friends: ['Skibek', 'Mumin', 'Olo'],
 
-    calcAge: function(birthYear) {
-        return  2023 - birthYear;
-    }
-};
+//     calcAge: function(birthYear) {
+//         return  2023 - birthYear;
+//     }
+// };
 
-console.log(cezar.calcAge(1976));
+// console.log(cezar.calcAge(1976));
 
-console.log(cezar[calcAge](1976));
+// console.log(cezar[calcAge](1976));

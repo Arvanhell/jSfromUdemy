@@ -110,3 +110,30 @@ const amplitudeNew = calcTempAmplitudeNew([3, 5, 1], [14, 5, 8]);
 ///////////////////////////////////////////////////
 //          60. Debuging (Fixing errors)
 ///////////////////////////////////////////////////
+/*
+Software bug: Defect a problem in a computer program. Basicly, any unexpected or unintended behavior of a computer program is a software bug.
+
+Bugs are completly normal in software development!
+
+Identify
+become that there is a bug
+during development
+testing software
+user reports durong production
+context browser, user etc.
+
+Find
+Developer console (simple code)
+Debugger (complex code)
+
+FiX
+replace wrong solution with new correct solution
+
+Prevent
+Searching fpr the same bug in similar code
+Writing test using testing software
+*/
+
+///////////////////////////////////////////////////
+//     60. Debuging with the console and breakpoints
+///////////////////////////////////////////////////

@@ -1058,3 +1058,123 @@ for ( let exercise = 1; exercise < 4; exercise++) {
      //////////////////////////////////////////////////////////
      //                  49. While Loop
      //////////////////////////////////////////////////////////
+
+// for (et rep = 1; rep <= 10; rep++) {
+//     console.log(`Pulling Up repetition ${rep} `);
+// };
+
+let rep = 1;
+while (rep <= 10) {
+    console.log(`WHILE : Pulling Up repetition ${rep} `);
+rep++;
+}
+/*
+//opt 
+ WHILE : Pulling Up repetition 1 
+ WHILE : Pulling Up repetition 2 
+ WHILE : Pulling Up repetition 3 
+ WHILE : Pulling Up repetition 4 
+ WHILE : Pulling Up repetition 5 
+ WHILE : Pulling Up repetition 6 
+ WHILE : Pulling Up repetition 7 
+ WHILE : Pulling Up repetition 8 
+ WHILE : Pulling Up repetition 9 
+ WHILE : Pulling Up repetition 10 
+//
+*/
+let dice = Math.trunc(Math.random() * 6) + 1;
+// console.log(dice)
+ //opt are random 
+
+ while(dice !== 6) {
+    console.log(`You rolled a ${dice}`);
+    dice = Math.trunc(Math.random() * 6) + 1;
+    if(dice === 6) console.log('Loop is about to end.... 🎲 you got 6')
+ };
+
+ //opt random 
+  /*
+              You rolled a 1
+    Loop is about to end.... 🎲 you got 6
+    */
+ // dice was rolled untill there were hit the number 6 then stop... it happen with second roll 
+
+    //////////////////////////////////////////////////////////
+     //                  50. Challenge #4
+     //////////////////////////////////////////////////////////
+
+     /*
+     Let's improve Steven's tip calculator even more, this time using loops!
+
+    Your tasks:
+
+    Create an array called bills containing all 10 test bill values.
+
+    Create empty arrays for the tips and the totals (tips and totals)
+
+    Use the calcTip function we wrote before (included in the starter code) to calculate tips and total values (bill + tip) for every bill value in the bills array. Use a for loop to perform the 10 calculations!
+
+
+
+TEST DATA: 22, 295, 176, 440, 37, 105, 10, 1100, 86, and 52.
+*/
+
+const calcTip = function (bill) {
+  return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+}
+
+
+
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+
+const tips = [];
+
+const totals = [];
+
+
+
+                for ( let i = 0; i < bills.length; i++){
+                    const tip =calcTip(bills[i]);
+                    tips.push(tip);
+                    totals.push(tip + bills[i]);
+                }
+                
+                console.log(bills, tips, totals);
+
+
+
+
+
+//                With Bonus:
+
+                const calcTip = function (bill) {
+                  return bill >= 50 && bill <= 300 ? bill * 0.15 : bill * 0.2;
+                }
+                 
+                 
+                const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+                const tips = [];
+                const totals = [];
+                 
+                for (let i = 0; i < bills.length; i++) {
+                  const tip = calcTip(bills[i]);
+                  tips.push(tip);
+                  totals.push(tip + bills[i]);
+                }
+                 
+                console.log(bills, tips, totals);
+                 
+                const calcAverage = function (arr) {
+                  let sum = 0;
+                  for (let i = 0; i < arr.length; i++) {
+                    // sum = sum + arr[i];
+                    sum += arr[i];
+                  }
+                  return sum / arr.length;
+                }
+                 
+                console.log(calcAverage([2, 3, 7]));
+                console.log(calcAverage(totals));
+                console.log(calcAverage(tips));
+            
+// finall JavaScript fundamental vol2 

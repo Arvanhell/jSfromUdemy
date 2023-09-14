@@ -37,10 +37,10 @@ this is pseudo code...
 
 // Problem
 // We work for company building a sart home thermometer. Our mosts recent task is this: 'Given an array  of temperatures of one day, calculate the temperature amplitude. Keep in mind that sometimes there might be a sensor error.'
-*/
+
 
 const temperatures = [3, -2, -6, -1, 'error', 9, 13, 17, 15, 14, 9, 5];
-
+*/
 //1) understanding the problem
 
 /*
@@ -56,7 +56,7 @@ Answer : difference between highest and the lowest temp
 -Find min value in temp array
 - substract min frm max ( amplitude) and return it
 */
-
+/*
 const calcTempAmplitude = function (temps) {
   let max = temps[0];
   let min = temps[0];
@@ -106,7 +106,7 @@ const calcTempAmplitudeNew = function (t1, t2) {
   return max - min;
 };
 const amplitudeNew = calcTempAmplitudeNew([3, 5, 1], [14, 5, 8]);
-
+*/
 ///////////////////////////////////////////////////
 //          60. Debuging (Fixing errors)
 ///////////////////////////////////////////////////

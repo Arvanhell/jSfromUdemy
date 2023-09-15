@@ -3,11 +3,12 @@
 
 // sudo npm install live-server -g
 // live-server
-
+//
+//
 //const calcAge = birthYear => 2023 - birthYear;
 //console.log(calcAge(1976));
-
-//RULES
+//
+//                  RULES
 /*
 1
 Make sure you undestand the problem. Ask the right questions to get a clear picture of the problem.

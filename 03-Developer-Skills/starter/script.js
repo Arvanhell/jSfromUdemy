@@ -138,3 +138,72 @@ Writing test using testing software
 ///////////////////////////////////////////////////
 //     60. Debuging with the console and breakpoints
 ///////////////////////////////////////////////////
+/*
+
+const measureKelvin = function () {
+  const measurment = {
+    type: 'temp',
+    unut: 'celsius',
+    value: 10
+  
+};
+console.log(measurment);
+
+//console.log(measurment.value);
+//console.warn(measurment.value);
+//console.error(measurment.value);
+
+const kelvin = measurment.value + 273
+return kelvin;
+};
+A// identify
+
+console.log();
+
+//BREAKPOINT we setting by marking red dot in google chrome within code line we want to set. When we debugging then code is executed until the breakpoint.Then we can push futher our code by clicking arrow with dot in Inpection tool Sourcesand ou code is executed one line in tiem. We will be able to find the problem and fixit.
+
+*/
+
+/*
+// Using a debugger
+const calcTempAmplitudeBug = function (t1, t2) {
+  const temps = t1.concat(t2);
+  console.log(temps);
+
+  let max = 0;
+  let min = 0;
+
+  for (let i = 0; i < temps.length; i++) {
+    const curTemp = temps[i];
+    if (typeof curTemp !== 'number') continue;
+    debugger; // <------- code for auto start debbuger
+    if (curTemp > max) max = curTemp;
+    if (curTemp < min) min = curTemp;
+  }
+  console.log(max, min);
+  return max - min;
+};
+const amplitudeBug = calcTempAmplitudeBug([3, 5, 1], [9, 4, 5]);
+//A) Identify
+console.log(amplitudeBug);
+
+// to execute debugging we using comand code debbuger: in code line and autmaticaly we hae started live serwer ( if open ebuger tool);
+*/
+
+///////////////////////////////////////////////////
+//                    62. Coding Challenge #1
+///////////////////////////////////////////////////
+
+/*
+Given an array of forecasted maximum temperatures, the termometer displays a string with these temperatures.
+
+Example: [17, 21, 23] will print 
+"... 17degree C in 1 days ... 21degree C in 2 days ... 23degree C in 4 days ... "
+
+Create a function 'PrintForecast' which takes in an array 'arr' and logs a string like the above to the console.
+
+Use the problem- solving framework: Understand the problem and break it up into sub-problems!
+
+test data 1: [17, 21, 23]
+test data 2: [12, 5, -5, 0, 4]
+*/

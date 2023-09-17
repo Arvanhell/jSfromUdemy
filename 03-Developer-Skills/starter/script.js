@@ -205,5 +205,6 @@ Create a function 'PrintForecast' which takes in an array 'arr' and logs a strin
 Use the problem- solving framework: Understand the problem and break it up into sub-problems!
 
 test data 1: [17, 21, 23]
+//
 test data 2: [12, 5, -5, 0, 4]
 */

@@ -215,4 +215,21 @@ test data 2: [12, 5, -5, 0, 4]
 //2) Breaking up into sub problems
 //- transform array into string
 //- transoform each element to string with Celsius
-//
+//- strings needs tp cpntain day ( index + 1 )
+//- add ... between element and start and end of string
+
+const data1 = [17, 21, 23];
+const data2 = [12, 5, -5, 0, 4];
+
+// console.log(
+//   `... ${data1[0]} celsius ... ${data1[1]}celsius ... ${data1[2]}celsius ...`
+// );
+
+const printForecast = function (arr) {
+  let str = '';
+  for (let i = 0; i < arr.length; i++) {
+    str += `${arr[i]}℃ in ${i + 1} days ... `;
+  }
+  console.log('... ' + str);
+};
+printForecast(data1);

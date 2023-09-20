@@ -20,16 +20,20 @@ document.querySelector(".number").textContent = secretNumber;
 
 document.querySelector(".check").addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
-  //console.log(guess);
+
   if (!guess) {
     //if there number is not given we will get message in DOM NO NUMER because field is empty.
     document.querySelector(".message").textContent = "👎 No Number!";
   } else if (guess === secretNumber) {
     document.querySelector(".message").textContent = "🫵 Correct Number!";
   } else if (guess > secretNumber) {
-    document.querySelector(".message").textContent = " 👆 To high !";
-    score--;
-    document.querySelector(".score").textContent = score;
+    if (score > 0) {
+      document.querySelector(".message").textContent = " 👆 To high !";
+      score--;
+      document.querySelector(".score").textContent = score;
+    } else {
+      document.querySelector(".message").textContent = "You lost the game!";
+    }
   } else if (guess < secretNumber) {
     document.querySelector(".message").textContent = " 👇 To low !";
     score--; //decreasing by decrementation by 1
@@ -39,4 +43,4 @@ document.querySelector(".check").addEventListener("click", function () {
 //console.log(document.querySelector(".check"));
 //create event handler
 
-//  the score to decrease when wrong number each time wrong guess...
+//  the score to decrease when wrong number each time ..

@@ -45,7 +45,7 @@ document.querySelector(".check").addEventListener("click", function () {
     document.querySelector('.score').textContent = 0; 
   }
 }
-});
+}); 
 //console.log(document.querySelector(".check"));
 //create event handler
 

@@ -19,18 +19,22 @@ let score = 20;
 
 let highscore = 0;
 
+const displayMessage = function(message) { //creating function 
+  document.querySelector(".message").textContent = message;
+}
+// now I can replace repeating code and call this function 
 document.querySelector(".check").addEventListener("click", function () {
   const guess = Number(document.querySelector(".guess").value);
 
   if (!guess) {
     //if there number is not given we will get message in DOM NO NUMER because field is empty.
 // when there is no input
-    document.querySelector(".message").textContent = "👎 No Number!";
-
+    //document.querySelector(".message").textContent = "👎 No Number!";
+      displayMessage(" ⛔️ No Number!")
 // when player wins
   } else if (guess === secretNumber) {
-    document.querySelector(".message").textContent = "🫵 Correct Number!";
-
+    //document.querySelector(".message").textContent = "🫵 Correct Number!";
+      displayMessage("🫵 Correct Number!");
    document.querySelector(".number").textContent = secretNumber;
 
   document.querySelector('body').style.backgroundColor = '#60b347';
@@ -41,7 +45,22 @@ document.querySelector(".check").addEventListener("click", function () {
     highscore = score;
     document.querySelector('.highscore').textContent = highscore;
   }
-
+  //when gues is wrong
+} else if(guess !== secretNumber) { // <-------- if gues is not correct !
+  if (score > 0) {
+   // document.querySelector(".message").textContent = guess > secretNumber " 👆 To high !" : "👇 To low !" // <----- ternary operator
+  displayMessage() = guess > secretNumber " 👆 To high !" : "👇 To low !"
+    score = score - 2;
+    document.querySelector(".score").textContent = score;
+  } else {
+    //document.querySelector(".message").textContent = " 🫵 You lost the game! 🫵";
+    displayMessage(" 🫵 You lost the game! 🫵");
+    document.querySelector('.score').textContent = 0;
+    document.querySelector('body').style.backgroundColor = '#FF0000';
+    document.querySelector('.again').style.backgroundColor = '#ff2';
+  }
+}
+/*
 //when guess is to high
   } else if (guess > secretNumber) {
     if (score > 0) {
@@ -67,13 +86,16 @@ document.querySelector(".check").addEventListener("click", function () {
       document.querySelector('.again').style.backgroundColor = '#ff2';
     }
   }
+    */
+  
 }); 
 
 document.querySelector('.again').addEventListener('click', function(){
   score = 20;
   secretNumber = Math.trunc(Math.random() * 20) + 1;
 
-  document.querySelector('.message').textContent = 'Start guessing...';
+  //document.querySelector('.message').textContent = 'Start guessing...';
+  displayMessage('Start guessing...');
   document.querySelector('.score').textContent = score;
   document.querySelector('.number').textContent = '?';
   document.querySelector('.guess').value = '';

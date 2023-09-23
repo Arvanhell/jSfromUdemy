@@ -48,5 +48,5 @@ document.querySelector(".check").addEventListener("click", function () {
 }); 
 //console.log(document.querySelector(".check"));
 //create event handler
-
-//  the score to decrease when wrong number each time ..
+//  the score to decrease when wrong number each time ...
+// 

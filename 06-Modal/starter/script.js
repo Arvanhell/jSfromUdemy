@@ -7,5 +7,5 @@ const btnsOpenModal = document.querySelectorAll('.show-modal'); // Node list - c
 //console.log(btnsOpenModal);
 
 for(let i = 0; i < btnsOpenModal.length; i++)
-console.log(btnsOpenModal[i].textContent); // displaying text content on the buttons ( practise)...
+console.log(btnsOpenModal[i].textContent); // displaying text content on the buttons ( practise)..
 

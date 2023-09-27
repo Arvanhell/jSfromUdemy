@@ -37,3 +37,5 @@ document.addEventListener('keydown', function(goblin) { // e to moj goblin :)
 // this entire code includes opening and closing pop-up windows after clicking on X esc or the area around the buttons modals
 
 // w calym tym kodzie jest zapisane otwieranie i zamykanie wyskaujacych okien po klknieciu w X esc czy obszar wokol przyciskow
+
+//=================================// LOVE IT

@@ -1,6 +1,6 @@
 'use strict';
 
-const modal = document.querySelector('.modal');
+const modal = document.querySelector('.modal');     
 const overlay = document.querySelector('.overlay');
 const btnCloseModal = document.querySelector('.close-modal');
 const btnsOpenModal = document.querySelectorAll('.show-modal'); // Node list - created with querySelectorAll 
@@ -24,3 +24,16 @@ btnsOpenModal[i].addEventListener('click', openModal) // function called  define
 btnCloseModal.addEventListener('click', closeModal);
 overlay.addEventListener('click', closeModal);
 
+document.addEventListener('keydown', function(goblin) { // e to moj goblin :)
+    //console.log(goblin.key); // event handler function
+         if ( goblin.key === 'Escape' && !modal.classList.contains('hidden')){
+            // console.log('escape was pressed'); // tested working
+                // two statement tested && if true then 
+
+                closeModal();  // <-- we call function within this block to close modal if modal doesn't contain modal  class 'hidden' block is executed
+            }
+    });
+
+// this entire code includes opening and closing pop-up windows after clicking on X esc or the area around the buttons modals
+
+// w calym tym kodzie jest zapisane otwieranie i zamykanie wyskaujacych okien po klknieciu w X esc czy obszar wokol przyciskow

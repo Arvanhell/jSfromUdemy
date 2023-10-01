@@ -1,5 +1,9 @@
 'use strict';
 // Selecting elements
+const player0El = document.querySelector('.player--0');
+const player1El = document.querySelector('.player--1');
+
+
 const score0El = document.querySelector('#score--0');   // DOM element
 const score1El = document.getElementById('score--1');   // DOM element
 const current0El = document.getElementById('current--0'); // DOM
@@ -35,11 +39,16 @@ btnRoll.addEventListener('click', function() {
 
          // changed as displayed bellow to next 
          //current0El.textContent = currentScore // CHANGE LATER 
-        document.getElementById(`current--${activePlayer}`).textContent = currentScore;
+          document.getElementById(`current--${activePlayer}`).textContent = currentScore;
        // changed in to displayed above
     }else{
         // Switch to next player
-          activePlayer = activePlayer === 0 ? 1 : 0; // working after one player get number 1 is swapping to next player
-          // reasigning the active player
+          document.getElementById(`current--${activePlayer}`).textContent = 0;
+          currentScore = 0;
+          activePlayer = activePlayer === 0 ? 1 : 0; // working after one player get number 1 is swapping to next player -reasigning the active player
+          // 
+          player0El.classList.toggle('player--active'); // switch on/ off 
+          player1El.classList.toggle('player--active'); // switch on/ off
+          //
     }
-})
+});

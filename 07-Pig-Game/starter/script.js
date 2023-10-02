@@ -22,7 +22,6 @@ const scores = [0, 0];
 let currentScore = 0;
 let activePlayer = 0; // 
 //
-
 // First Roll Dice & Rolling dice functionality
 btnRoll.addEventListener('click', function() {
   //1. Generating a random dice roll

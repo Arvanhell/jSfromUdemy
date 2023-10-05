@@ -49,5 +49,6 @@ btnRoll.addEventListener('click', function() {
           player0El.classList.toggle('player--active'); // switch on/ off 
           player1El.classList.toggle('player--active'); // switch on/ off
           //
+          //
     }
 });

@@ -35,7 +35,7 @@ const init = function () {
 };
 init();
 
-
+// switing players
 
 const switchPlayer = function () {
   document.getElementById(`current--${activePlayer}`).textContent = 0;
@@ -45,7 +45,7 @@ const switchPlayer = function () {
           player0El.classList.toggle('player--active'); // switch on/ off 
           player1El.classList.toggle('player--active'); // switch on/ off
 } 
-//
+
 // First Roll Dice & Rolling dice functionality
 btnRoll.addEventListener('click', function() {
   if(playing){

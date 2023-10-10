@@ -37,5 +37,48 @@ Execution of function and waitijng for callbacks
 
 
 
+What's INside executiojn context?
+1. variable environment
+    let, const and var declarations
+    functions  
+    argument object
 
+2. scope chain
+
+3. this keyword
+
+Remember that this keyword and arguments object will not working in arrow function...!!!!!
+
+call stack i looks like this on the top to bottom
+executon context - execution context - execution cotext ...
+'place' where execution context get stacked on top of each other, to leep track of where we are in the execution ..
+
+*/
+
+const name = ' Jonas';
+
+const first = () => {
+    let a = 1; 
+    const b = secpnd (7, 9);
+    a = a + b;
+    return a;
+};
+
+function second (x, y) {
+    var c = 2; 
+    return c;
+}
+
+const x = first()
+/*
+stack in order 
+GLOBAL checking variable in global scope then 
+const x is executing function first()
+inside the function first 
+we have executed function second()
+but instead function is returned and is living somewhere in memory 
+abstarcja kurwa
+all fucntion are poped off call stack and global as lastly staying in there  until also is poped out of callstack 
+
+*/
 

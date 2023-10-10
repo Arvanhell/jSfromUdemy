@@ -167,4 +167,21 @@ console.log(d + c + b + a);     /       a = 'Jonas'
 
                     
 
-                        
+   👉SCoping asks the questions : Where do vaiable live? or wher can we access a certain variable and where not?'   
+
+   👉  There a 3 types of scope in JavaScript the global scope, scopes defined by functions and scopes defined by blocks;
+   
+   👉 only let and const variables are block scoped Variables declared with var end up on the closest function scope
+
+   👉 In js we have lexical scoping so the rules of where we can access varibles are based on exactly where the code functions and blocks writen;
+
+   👉 Every scope always has access to all the variables from all its outer scopes. This is the scope chain !
+
+   👉 When a variable is not in the current scope, the engine looks up in the scope chain until it find the variable ot's looking for. This is called variable lookup.
+
+   👉 the scope chain is a one way street a scope will never ever have access to the variable an inner scope
+
+   👉 the scope chain in a certain scope is equal to adding together  all the variable environments of the all parent scopes
+
+   👉 the scope chain has nothing to do with the order in which function were called it does not affect the scope chain at all!!
+

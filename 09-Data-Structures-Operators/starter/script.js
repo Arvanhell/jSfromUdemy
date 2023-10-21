@@ -440,7 +440,7 @@ console.log(x);
 /*
 
 ////////////////////////////////////////////*
-//* Coding Challenge #1
+//*                             Coding Challenge #1
 
 1. Create one player array for each team (variables 'players1' and 'players2')
 2. The first player in any player array is the goalkeeper and the othes are field players.
@@ -533,7 +533,7 @@ team1 > team2 && console.log('Team 2 is mote likely to win');
 
 */
 ////////////////////////////////////////////*
-//* Coding Challenge #2
+//*                     Coding Challenge #2
 
 /*
 Let's continue with our football betting app!
@@ -560,24 +560,24 @@ along with the goal number ( example: 'Goal 1: 'Lewandowski')
 
 for (const [i, player] of game.scored.entries())
 console.log(`Goal ${i + 1}: ${player}`);
-// opt Goal 1: Lewandowski
-// opt Goal 2: Gnarby
-// opt Goal 3: Lewandowski
-// opt Goal 4: Hummels
+//* opt Goal 1: Lewandowski
+//* opt Goal 2: Gnarby
+//* opt Goal 3: Lewandowski
+//* opt Goal 4: Hummels
 
 //* 2.
 
-//calc average
+//* calc average
 const odds = Object.values(game.odds);
 let average = 0;
 for (const odd of odds) average += odd;
 average /= odds.length;
 console.log(average); 
-//  opt 3.6933333333333334
+//* opt 3.6933333333333334
 
 //* 3. 
 
-//print
+
 for ( const [team, odd] of Object.entries(game.odds)){
   const teamStr = team === 'x' ? 'draw' : `victory ${game[team]}`;
  console.log(`Odd of ${teamStr} ${odd}`);   //team, odd
@@ -586,4 +586,325 @@ for ( const [team, odd] of Object.entries(game.odds)){
 //*opt Odd of draw 3.25
 //*opt Odd of victory Borussia Dortmund 6.5
 */
+//* /////////////////////////////////////////////////////////
 
+//*  116.          Sets
+
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pasta',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza',
+]);
+console.log(ordersSet);  // array
+//* opt Set(3) {'Pasta', 'Pizza', 'Risotto'} duplicate are gone 
+
+console.log( new Set('Kloss'));  // string 
+//* opt Set(4) {'K', 'l', 'o', 's'}
+
+console.log(new Set()); // also can be empty
+//* opt Set(0) {size: 0}
+
+console.log(ordersSet.size);   // as you can see is size not length 
+//* opt 3
+
+console.log(ordersSet.has('Pizza'));
+//* opt true
+console.log(ordersSet.has('Bread'));
+//* opt false
+ordersSet.add('Garlic Bread');
+ordersSet.add('Garlic Bread');
+console.log(ordersSet);
+//* opt Set(4) {'Pasta', 'Pizza', 'Risotto', 'Garlic Bread'}
+ordersSet.delete('Risotto');
+console.log(ordersSet);
+//* opt Set(3) {'Pasta', 'Pizza', 'Garlic Bread'}
+
+for (const order of ordersSet) console.log(order);
+//* opt Pasta
+//* opt Pizza
+//* opt Garlic Bread
+
+//* /////// example
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUique = [...new Set(staff)];
+console.log(staffUique);
+console.log(
+  new Set(['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter']).size
+);
+//* opt   3
+console.log(new Set('gasgfasgsdgasdgahadjadg').size);
+//* opt   7 
+console.log(...new Set('gasgfasgsdgasdgahadjadg'))
+//* opt   g a s f d h j
+
+//*/                117. Maps: Fundamentals
+
+const rest = new Map();
+rest.set('name', 'Classico Italiano');
+rest.set(1, 'Firenze, Italy')
+console.log(rest.set(2, 'Lisbon, Portugal'));
+//* opt Map(3) {'name' => 'Classico Italiano', 1 => 'Firenze, Italy', 2 => 'Lisbon, Portugal'}
+
+rest
+.set('categories', ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'])
+.set('open',11)
+.set('close',23)
+.set(true, 'We are open')
+.set(false, 'We are closed');
+
+//* rest.get('key')
+console.log(rest.get('name'));  //* opt Classico Italiano
+console.log(rest.get(true));    //* opt We are open
+console.log(rest.get(1));       //* Firenze, Italy
+
+// let time = 21;
+//* console.log(rest.get(time > rest.get('open') && time < rest.get('close'))); 
+//* opt    We are open 
+// rest.clear();   //<------- deleting everything and we get 
+//* Map(0) {size: 0}        //no oobject 
+//* 0                       //no size 
+console.log(rest.has('categories'));  //* has is a method 
+//* opt   true
+rest.delete(2);  //* we deleting whole this  (2, 'Lisbon, Portugal')
+console.log(rest);
+//* opt Map(7) {'name' => 'Classico Italiano', 1 => 'Firenze, Italy', 'categories' => Array(4), 'open' => 11, 'close' => 23, …}
+console.log(rest.size); 
+//* 7
+const arr = [1, 2];
+rest.set(arr, 'Test');
+rest.set(document.querySelector('h1'), 'Heading');
+console.log(rest);
+/*
+0: {"name" => "Classico Italiano"}
+1: {1 => "Firenze, Italy"}
+2: {"categories" => Array(4)}
+3: {"open" => 11}
+4: {"close" => 23}
+5: {true => "We are open"}
+6: {false => "We are closed"}
+7: {Array(2) => "Test"}
+8: {h1 => "Heading"}
+key: h1
+value: "Heading"
+*/
+console.log(rest.size);
+console.log(rest.get([1, 2])); //*  undefined 
+console.log(rest.get(arr)); //* Test
+
+//* //////////////////////////////////////////////////////
+
+//*               118. Maps: Iteration
+
+
+const question = new Map([
+  ['question', 'What is the best programming language in the world?'],
+  [1, 'C'],
+  [2, 'Java'],
+  [3, 'JavaScript'],
+  ['correct', 3],
+  [true, 'Correct'],
+  [false, 'Try again!'],
+]);
+console.log(question); 
+//* Map(7) {'question' => 'What is the best programming language in the world?', 1 => 'C', 2 => 'Java', 3 => 'JavaScript', 'correct' => 3, …}
+
+
+// converting object to map
+//* console.log(Object.entries(openingHours)); 
+// const hoursMap = new Map(Object.entries(openingHours))
+//* console.log(hoursMap);
+
+//* iteration of the map
+
+console.log(question.get('question'));
+for (const [key, value] of question) {
+    if(typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+//* ====>       const answer = Number(prompt('Your answer'));  
+const answer = 3
+console.log(answer);
+
+console.log(question.get(question.get('correct') === answer)); 
+
+//* convert map to array
+console.log();([...question]);
+
+
+//* console.log(question.entries());
+console.log(...question.keys());
+console.log(...question.values());
+
+//* //////////////////////////////////////////////////////
+
+//*             119. Summary: Which Data Structure to Use?
+
+//* ///////////////////////////////////////
+//* Sources Of Data:
+
+//* 1   From the program itself: Data directly in source code (e.g status messages)
+//* 2   From the UI / user interface : Data inpuyt from the user or data written in DOM (e.g tasks in todo app)
+//* 3   From exteranal sources: Data fetched for example from web API (e.g recipe objects) // JSON
+//*                                        ⬇️
+//*                               Collection of data
+//*                                        ⬇️
+//*                                  Data structure
+//*                       ⬇️                                  ⬇️
+//*   simple List?                                                    key/value pairs?
+
+//*               Arrays of Sets                          Object or Maps    
+
+//*                                                             Keys allow us to describe value     
+
+/*
+Other BUILT-IN:
+👉 WeakMap 
+👉 WeakSet
+
+NOT-BUILT IN:
+👉 Stacks
+👉 Queues
+👉 Linked lists
+👉 Trees
+👉 Hash tables
+*/
+
+
+
+/*
+//*                     When to use 
+
+                            Arrays ⚠️    
+
+ //*  tasks = ['Code','Eat', 'Code'];
+
+
+                  //*['Code','Eat', 'Code']
+👉 Use when you need ORDERED list of values ( might contain duplicates)
+👉 Use when you need to MANIPULATE data
+
+                              Vs.
+
+                           Sets ⚠️    
+
+  //*  tasks = new Set(['Code','Eat', 'Code'])
+
+
+                      //*['Code','Eat']
+👉 Use when you need to work with UNIQUE values
+👉 Use when HIGH-PERFORMANCE is really important
+👉 Use to REMOVE DUPLICATES from arrays
+
+*/
+//* and OBJEST vs MAP
+/*
+
+ //*                      OBJECTS ⚠️
+                        task = {
+                        task: 'Code',
+                        date: 'today'
+                        repeat: true
+                        };
+👉 More 'traditional' key/ value store ('abused' objects)
+👉 Easier to write and acces values with . and []
+
+✅ Use when you need to include function ( method)
+✅ Use when working with JSON (can convert to map)
+
+ //*                        MAPS ⚠️
+                         task = new Map({
+                        [task: 'Code'],
+                        [date: 'today'],
+                        [false, 'Start coding!']
+                        });
+
+👉 Better performance
+👉 Keys can have data type
+👉 Easy to iterate
+👉 Easy to compute size                      
+
+✅ Use when you simply need to map key to values
+✅ Use when you need keys that are not strings
+*/
+
+//* //////////////////////////////////////////////////////
+//*  120.      Coding challenge #3
+/*
+Let's continue with pur football betting app! This time, we have a map with a log of the events
+that happened during the game. The values are the events
+themselves, and the keys are the minutes in which eeach event happened ( a football game 
+  has 90 minutes plus some extra time).
+
+1. Create an array 'events' of the different game events that happened (no duplicates)
+2. After the game is finished,  it was found that the yellow card from minute 64 was unfair, 
+so remove this event from the game events log.
+3. Print the following string to the console: 
+'An event happened, on average, every 9 minutes' ( keep in mind that a game has 90 minutes)
+4. Loop over the events and log them to the console, marking wheter it's in the first half 
+or second half (after 45 min) of the game like this:
+[FIRST HALF] 17 : ⚽️ GOAL
+*/
+/*
+const gameEvents = new Map([
+    [17, '⚽️ GOAL'],
+    [36, '🔄 Substitution'],
+    [47, '⚽️ GOAL'],
+    [61, '🔄 Substitution'],
+    [64, '🟨 Yellow card'],
+    [69, '🟥 Red card'],
+    [70, '🔄 Substitution'],
+    [72, '🔄 Substitution'],
+    [76, '⚽️ GOAL'],
+    [80, '⚽️ GOAL'],
+    [92, '🟨 Yellow card',]
+]);
+
+//* 1
+
+const events = [...new Set(gameEvents.values())];
+console.log(events);
+
+//* 2
+gameEvents.delete(64);
+
+//* 3
+
+console.log(`An event happened, on average, every ${90 / gameEvents.size} minutes`);
+const time = [...gameEvents.keys()].pop();  // taking out last element
+console.log(time);
+console.log(
+  `An event happened, on average, every ${time/ gameEvents.size} minutes`
+);
+
+//* 4
+
+for (const [min, event ] of gameEvents) { // [key, value]
+  const half = min <= 45 ? 'FIRST' : 'SECOND';
+  console.log(`[HALF] ${min}: ${event}`);
+}
+*/
+
+/*
+(4) ['⚽️ GOAL', '🔄 Substitution', '🟨 Yellow card', '🟥 Red card']
+An event happened, on average, every 9 minutes
+92
+An event happened, on average, every 9.2 minutes
+[HALF] 17: ⚽️ GOAL
+[HALF] 36: 🔄 Substitution
+[HALF] 47: ⚽️ GOAL
+[HALF] 61: 🔄 Substitution
+[HALF] 69: 🟥 Red card
+[HALF] 70: 🔄 Substitution
+[HALF] 72: 🔄 Substitution
+[HALF] 76: ⚽️ GOAL
+[HALF] 80: ⚽️ GOAL
+[HALF] 92: 🟨 Yellow card
+
+*/
+
+
+//* //////////////////////////////////////////////////////
+//*                   121. Working With Strings - Part 1

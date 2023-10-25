@@ -908,10 +908,187 @@ An event happened, on average, every 9.2 minutes
 
 //* //////////////////////////////////////////////////////
 //*                   121. Working With Strings - Part 1
+/*
+const airline = 'TAP AIR Portugal';
+const plane = 'A320';
+console.log(plane[0]); // A
+console.log(plane[1]); // 3
+console.log(plane[2]); // 2
+console.log('8737'[0]); // B
 
+console.log(airline.length); // 16
+console.log('8737'.length); // 4
 
+console.log(airline.indexOf('r')); // 6
+console.log(airline.lastIndexOf('r')); // 10
+console.log(airline.indexOf('portugal')); // -1
 
+console.log(airline.slice(4)); // Air Portugal <--- substring
+console.log(airline.slice(4, 7)); // Air
 
+console.log(airline.slice(0, airline.indexOf(' '))); // TAP
+console.log(airline.slice(airline.lastIndexOf(' ') + 1)); // Portugal
+
+console.log(airline.slice(-2)); // al
+console.log(airline.slice(1, -1)); // AP Air Portuga
+
+const checkMiddlSeat = function(seat) {
+  //* B and E are middle seats
+  const s = seat.slice(-1) // <======m string object is called  then turned into primitive string
+  if(s === 'B' || s === 'E') console.log('You got the midle seat ');
+  else console.log('You got lucky');
+}
+  checkMiddlSeat('11B'); //You got the midle seat 
+  checkMiddlSeat('23C'); //You got lucky
+  checkMiddlSeat('3E') //'You got the midle seat 
+
+console.log(new String('gigigi')); //String {'gigigi'}  <=== object
+
+*/
 
 //* //////////////////////////////////////////////////////
 //*                   122. Working With Strings - Part 2
+
+const airline = 'TAP AIR Portugal';
+console.log(airline.toLowerCase);
+console.log(airline.toUpperCase);
+
+//* fix capitalization in name
+
+const passanger = 'ceZary'; 
+const passangerLower = passanger.toLowerCase();
+const passangerCorrect = passangerLower[0].toUpperCase() + passangerLower.slice(1);
+console.log(passangerCorrect); //*  opt Cezary
+
+//* comparing email
+
+const email = 'hello@cezar.io'
+const loginEmail = ' heLLo@cezaR.io \n'
+
+//* const lowerEmail = loginEmail.toLocaleLowerCase();
+//* const trimedEamil = lowerEmail.trim(); //* usuwamy white space
+//*console.log(trimedEamil);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail); 
+
+//* replacing
+
+const priceGB = '288,87£'; //* podmiana dolar z funtem oraz przecnek kropka
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+
+const annoucment = 'All passengers come to boarding door 23. Boarding door 23!'
+//* console.log(annoucment.replace('door', 'gate')); //* replacing only one occurance 
+//*All passengers come to boarding gate 23. Boarding door 23!
+//* wwe can obey occurance using regular expression 
+console.log(annoucment.replace(/door/g ,'gate'))
+//* in meantime the replaceAll is working now as regulary basis ;)
+console.log(annoucment.replaceAll('door', 'gate'));
+//* All passengers come to boarding gate 23. Boarding gate 23!
+
+//* Booleans 
+
+const plane = 'A320neo';
+console.log(plane.includes('A320')); //*true
+console.log(plane.includes('Boeing')); //*false
+console.log(plane.startsWith('Air'))  //* false
+const plane2 = 'Airbus A320neo';
+console.log(plane2.startsWith('Air')) //* true ('Air..) is in the string
+console.log(plane2.startsWith('Aib')) //* false the string have no word starting Aib
+
+if(plane2.startsWith('Airbus') && plane2.endsWith('neo')){
+  console.log('Part of the New Airbus family');
+}
+//* Part of the New Airbus family 
+
+//* Practise exercise
+
+const checkBaggage = function(items){
+  const baggage = items.toLowerCase(); //* that we can compared in one standard
+    if(baggage.includes('knife') || baggage.includes('gun')) {
+      console.log('You not allowed on board');
+    }else {
+      console.log('Wellcome aboard!');
+    }
+}
+
+checkBaggage('Socks and camera')
+checkBaggage('I have a laptop, some foof and pocket knife');
+checkBaggage('Got some snack and a gun for protection')
+//* Wellcome aboard!
+//* You not allowed on board
+//* You not allowed on board
+
+
+//* //////////////////////////////////////////////////////
+//*                   123. Working With Strings - Part 3
+
+//* SPLIT and JOIN
+
+console.log('a+very+nice+string'.split('+'));
+//* (4) ['a', 'very', 'nice', 'string']
+console.log('Cezary Waszkuc'.split(' '));
+//* ['Cezary', 'Waszkuc']
+
+const [firstName, lastName] = 'Cezary Waszkuc'.split(' ');
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ')
+console.log(newName); //* Mr. Cezary WASZKUC
+
+const capitalizeName = function(name){
+  const names = name.split(' ') //* split by space then loop over array
+  const namesUppers = [];
+  for (const n of names){
+    namesUppers.push(n[0].toUpperCase() + n.slice(1));
+  }
+  //*  namesUpper.push(n.replace(n[0], n[0].toUpperCase)) another version to use previously learned :P
+  console.log(namesUppers.join(' '));
+}
+
+capitalizeName('jessica ann smith davis') //* Jessica Ann Smith Davis
+capitalizeName('cezary waszkuc') //* Cezary Waszkuc
+
+//* Padding
+const message = 'Go to gate 23!'
+console.log(message.padStart(25, '+')); 
+//* +++++++++++Go to gate 23! 
+console.log('Cezar'.padStart(25, '*')); 
+//*opt      ********************Cezar 
+console.log(message.padStart(25, '+').padEnd(35, '*'));
+//* opt    +++++++++++Go to gate 23!**********
+
+//* FuNCTION  mask of credit card
+
+const maskCreditCard = function(number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  
+  return last.padStart(str.length, '*');
+}
+
+console.log(maskCreditCard(2423121234));
+//* opt  ******1234
+console.log(maskCreditCard(342524634123512461));
+//* opt  **************2450
+console.log(maskCreditCard('24352363415161435136236'));
+//* opt  *******************6236
+
+//* REPEAT 
+const message2 = 'Bad weather... All departures Delayed...';
+console.log(message2.repeat(5));
+
+//* Bad weather... All departures Delayed...Bad weather... All departures Delayed...Bad weather... All departures Delayed...Bad weather... All departures Delayed...Bad weather... All departures Delayed...
+
+const pllanesInLine = function(n){
+  console.log(`There are ${n} in line ${'🛩️ '.repeat(n)}`);
+}
+pllanesInLine(5)
+//* There are 5 in line 🛩️ 🛩️ 🛩️ 🛩️ 🛩️ 
+pllanesInLine(12)
+//* There are 12 in line 🛩️ 🛩️ 🛩️ 🛩️ 🛩️ 🛩️ 🛩️ 🛩️ 🛩️ 🛩️ 🛩️ 🛩️
+
+//* //////////////////////////////////////////////////////
+//*                   124. Coding Challenge #4
+

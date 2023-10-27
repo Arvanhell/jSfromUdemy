@@ -1141,7 +1141,7 @@ document.querySelector('button').addEventListener('click', function() {
         second[0],
          second[0].toUpperCase()
       )}`; // output first letter in second word in the row we made as uppercase
-      console.log(`${output.padEnd(20)}${✅.repeat(i + 1)}`);
+      console.log(`${output.padEnd(20)}${'✅'.repeat(i + 1)}`);
 
   }
 });
@@ -1167,3 +1167,25 @@ ddelayed_departure
 
 //* //////////////////////////////////////////////////////
 //*                   125. String method practice.
+
+const flights = '_Delayed_Departure;fao93766109;thl1233758843;11:25+_Arrival;bru0943384722;fao93766109;11:45+_Delayed_Arrival;hel7439299980;fao935666108;12:05+_Departure;fao93766109;lis2323649855;12:30';
+console.log(flights.split('+'));
+/* first opt as array 
+(4)) ["_Delayed_Departure;fao93766109;thl1233758843;11:25"
+"_Arrival;bru0943384722;fao93766109;11:45"
+"_Delayed_Arrival;hel7439299980;fao935666108;12:05"
+"_Departure;fao93766109;lis2323649855;12:30"]
+*/
+const getCode = str =>str.slice(0, 3).toUpperCase();
+
+for (const flight of flights.split('+')) {
+ const [type, from, to, time] = flight.split(';');
+ const outpuut = `${type.startsWith('_Delayed') ? '🟥' : ''}${type.replaceAll('_', ' ')} ${getCode(from)} ${getCode(to)} ${time.replace(';', 'h')}`.padStart(36); //* string paded replaced and formated to look as original
+ console.log(outpuut);
+}
+/* 
+   🟥 Delayed Departure FAO THL 11:25
+                Arrival BRU FAO 11:45
+     🟥 Delayed Arrival HEL FAO 12:05
+              Departure FAO LIS 12:30
+*/

@@ -1,5 +1,7 @@
 'use strict';
 
+//const { text } = require("body-parser");
+
 /*
 const weekdays: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
@@ -1093,3 +1095,75 @@ pllanesInLine(2)
 //* //////////////////////////////////////////////////////
 //*                   124. Coding Challenge #4
 
+
+/*
+Wrrite a program that receives a list of variable names written in undersore_case and convert them to camelCase
+
+The input will come from a textarea inserted into the DOM (see code below), and convertion will happen when the button is pressed.
+
+THIS TEST DATA (pasted to textarea)
+underscore_case
+first_name
+Some_Variable
+calculate_AGE
+ddelayed_departure
+
+SHOUL PRODUCE THIS OUTPUT ( 5 separate console.log outputs)
+underscoreCase      ✅
+firstName           ✅✅
+Some_Variable       ✅✅✅
+calculate_Aae       ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+HINT 1: remember which character defines a new line in the textarea
+HINT 2: The solution only needs to work a variable made of 2 words, like a_b
+HINT 3: Start without worrying about the ✅. Tackle that only after you have the variable name conversion working
+HINT 4: This challenge is difficult in purpouse, so start watching solution in case you' re stuck.
+Then pause and continue!
+Then test with your own test data!
+
+GOOD LUCK
+*/
+
+document.body.append(document.createElement('testarea'));
+document.body.append(document.createElement('button'));
+
+
+document.querySelector('button').addEventListener('click', function() {
+  const text = document.querySelector('textarea').value;
+    const rows = text.split('\n');
+  //* console.log(text); //* check the text in the area
+  //* console.log(rows); //* check where is end and begining new row separate them 
+
+  for(const [i,row] of rows.entries()) {
+      const [first, second] = row.toLowerCase().trim().split('_');  // where is underscore beciming splitted and making two words separately lowercases and trim
+      const output = `${first}${second.replace(
+        second[0],
+         second[0].toUpperCase()
+      )}`; // output first letter in second word in the row we made as uppercase
+      console.log(`${output.padEnd(20)}${✅.repeat(i + 1)}`);
+
+  }
+});
+
+/*
+output should be like this 
+underscoreCase      ✅
+firstName           ✅✅
+Some_Variable       ✅✅✅
+calculate_Aae       ✅✅✅✅
+delayedDeparture    ✅✅✅✅✅
+
+*/
+
+/*
+we need to 
+underscore_case --> underscoreCase 
+first_name
+Some_Variable
+calculate_AGE
+ddelayed_departure
+*/
+
+//* //////////////////////////////////////////////////////
+//*                   125. String method practice.

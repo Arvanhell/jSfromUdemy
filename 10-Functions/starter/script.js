@@ -143,3 +143,18 @@ const newPassport = function(person) {
 
                     ['Cezar', 'Jola', 'Wiki'].forEach(high5);  // <---- threee time call, one time for each         
 //* ////////////////////////////////////////////////////////
+//*             132. Functions Returning Functions
+
+
+
+
+
+
+
+
+
+
+
+
+
+//* ////////////////////////////////////////////////////////

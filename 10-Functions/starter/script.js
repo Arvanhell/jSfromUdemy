@@ -310,10 +310,138 @@ A poll has a question, an array of options from which people can choose,
             
     1.2 Based on the input  number, update the answer array. For example,
     if the option is 3, increase the value AT POSITION 3 of the array by 1. 
-    Make sure to check if the input is a number and if the number makes sense
+     Make sure to check if the input is a number and if the number makes sense
     (e.g answer 52 wouldn't make sense right?)
+
     2. Call this method whenever the user click the 'Answer poll' button.
+
     3. Create a method 'displayResults' which displays the poll results.
     The method takes a string as an input ( called 'type'), which can be either 'string' or 'array'.
     If the type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like 
-    'Poll resylts re 13, 2, 4, 1'.*/
+    'Poll resylts re 13, 2, 4, 1'.
+
+    4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
+    
+    HINT: Use many of the tools you learned about in this and the last section
+    
+    BONUS: Use the 'displayREsults' method to display the 2 arrays in the  test data.
+    Use both the 'array' and the 'string' option. Do NOT put the arrays in the poll object! 
+    So what shoud the this keyword look like in this situation?
+    
+    BONUS TEST DATA 1: [5, 2, 3]
+    BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
+    
+    Good Luck
+    */
+
+
+    const poll = {
+        question: 'What is your favourite programming language?',
+        options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+
+        //This generates [0,0,0,0]. More in the next section 😎
+        answers: new Array(4).fill(0),
+        registerNewAnswer() {
+            // Get answer
+            const answer = Number(
+                prompt(
+                    `${this.question}\n${this.options.join('\n')}
+                    \n(Write option number)`
+                    )
+                );
+                        console.log(answer);
+
+            // Register the answer
+            // short circuiting 
+            typeof answer === 'number' && answer < this.answers.length && this.answers[answer]++;
+
+            this.displayResults();  
+            this.displayResults('string');
+        },
+        dispplayResults(type = 'array') {
+            if (type === 'array') {
+                console.log(this.answers);
+            } else if (type === 'string') {
+                // Poll results are 13, 2, 4, 1
+            console.log(`Poll results are ${this.answers.join(', ')}`);
+            }
+        }
+    };
+     //  poll.registerNewAnswer();
+
+     document.querySelector('.poll').addEventListener('click', poll.registerNewAnswer.bind(poll));
+
+    // poll.displayResults.call({ answers: [5, 2, 3] }, 'string'); 
+    // poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] }, 'string');
+    // poll.displayResults.call({ answers: [1, 5, 3, 9, 6, 1] } );
+    
+
+    //* //////////////////////////////////////////////////////////////////////////////////////
+    //*                 136. Immediately Invoked Function Expressions (IIFE)
+
+      const runOnce = function() {
+        console.log('THIS will never run again');
+      };
+      runOnce();
+      
+      (function() {
+        console.log('This will NEVER run again');
+        })();  
+        // < transformed into expression within parentese  IIFE immediately Invoked Function 
+      // also arrow IIFE
+      (() => console.log('This function will ALSO never run again'))
+      ();
+            /*
+             THIS will never run again
+             This will NEVER run again
+             This function will ALSO never run again
+            */
+         
+        
+//* //////////////////////////////////////////////////////////////////////////////////////
+//*                     137. Closures
+
+
+// the hardest part of ?
+
+const secureBooking = function() { 
+    let passengerCount = 0;
+                // this above function after executed is no more exist but closure letting to runing booker function after the time it was executed 
+                //👇
+    return function() {
+        passengerCount++;
+        // incremenet passanger by 1
+        console.log(`${passengerCount} passengers`);
+    }
+}
+
+    const booker = secureBooking();
+
+    booker();  // s1 passengers
+    booker();  // 2 passengers
+    booker();  // 3 passengers
+
+    console.dir(booker);  // < ------- f anonymous()
+    //      it is showing in console 
+    //          0: Closure (secureBooking)
+    //
+
+
+
+    // 👉 A closure is to closed - over variable environment of the execution context in which a function was created, even after that execution context is gone
+         //👇 less formal
+    // 👉 A closure gives a function acces to all the variables of its parent function, even after that parent function has returned. The function keeps a reference to irs outer  scope which preserves the scope chain throughout time.
+         // 👇 less formall
+    // 👉 A CLOSURE MAKES SURE THAT A FUNCTION DOESN'T LOOSE CONNECTION TO VARIABLES THAT EXISTED 
+   // AT THE FUNCTION'S BIRTH PLACE;
+        // 👇
+   //  A CLOSURE IS LIKE a backpack that a function carried around whenever it goes. 
+   // This backapack has all the variables that were present in the environment where the function was created.   
+
+            // 👆👆  We do NOT have to  manually create closures, this is a JavaScript feature 
+            // that happens automatically. We can't even acces closed-over vaiables explicity.
+            // A closure is NOT a tangible JavaScript object.
+
+//* //////////////////////////////////////////////////////////////////////////////////////
+//*             138. More Closure examples
+

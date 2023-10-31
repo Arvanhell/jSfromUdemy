@@ -445,3 +445,77 @@ const secureBooking = function() {
 //* //////////////////////////////////////////////////////////////////////////////////////
 //*             138. More Closure examples
 
+let f; // created in global scope 
+
+const g = function() {
+    const a = 23;
+
+    f = function() {    // redefined
+        console.log( a * 2 );
+    }
+}
+
+//* ///////////////
+
+
+const h = function() {
+    const b = 777;
+    f = function () {  // f re- assign again 
+        console.log( b* 2);
+    }
+}
+
+g();   // after call is gone 
+f();  // 46    closure is from g function variable set for a = 23
+//still have acces to variable set in g function ( in backpack)
+// re-assigning f function
+h();
+f(); //  777 * 2  = 1554   < ----- closure is from h function variable set for b = 777 
+
+
+//* 
+//*  example 2
+ 
+const boardPassengers = function(n, wait) {
+    const perGroup = n / 3;
+
+    setTimeout(function() {
+        console.log(`We are now boarding all ${n} passengers`);
+        console.log(`There are 3 group, each with ${perGroup} passengers`);
+    }, wait * 1000);   //<--- whatever code is inths function will be executaed afeter 1 second // callback
+        console.log(`Will start boarding in ${wait} seconds`);
+            // 3 second delay set by timeout// wait in parameters to start callback function (  , 3)
+}
+
+//const perGroup = 1000; // if there will be no set in closure then global variable will be executed 
+boardPassengers(100, 3)
+
+
+
+//* //////////    CODING challenge #2
+
+/*
+This is more of thinking challenge than a coding challenge 
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color
+of  the selected h1 element ('header') to blue , each time the BODY element is clicked. 
+DO not select the h1 element again!
+
+And now explain to YOURSELF ( or someone around you) Why this worked ! Take all time you need. 
+Think about WHEN exactly the callback function is executed, and what that means for the variables
+involves in this example.
+
+GL
+*/
+
+
+(function () {
+    const header = document.querySelector('h1');
+    header.style.color = 'red';
+
+    document.querySelector('body').addEventListener('click', function(){
+        header.style.color = 'yellow';
+    })
+})();
+
+// closure works like a backpack and is taking variables lefted inside function expression after is already gone and is able to give acces to this variables which were born with this function no more exist

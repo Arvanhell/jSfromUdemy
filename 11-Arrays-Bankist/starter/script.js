@@ -1,4 +1,4 @@
-labelSum'use strict';
+'use strict';
 
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -61,8 +61,8 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
+//* ///////////////////////////////////////////////
+//* ///////////////////////////////////////////////
 // LECTURES
 
 const currencies = new Map([
@@ -72,5 +72,30 @@ const currencies = new Map([
 ]);
 
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+//* ///////////////////////////////////////////////
 
-/////////////////////////////////////////////////
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+console.log(arr.slice(2)) // return new array with extracted  // ['c', 'd', 'e']
+
+console.log(arr.slice(2, 4)); // ['c', 'd']
+console.log(arr.slice(-2)); // ['d', 'e'] \\ less element of the aray
+console.log(arr.slice(-1)); // ['e']
+console.log(arr.slice(1, -2)); // ['b', 'c']
+console.log(arr.slice()); 
+console.log([...arr]);
+
+// SPLICE
+
+//console.log(arr.splice(2)); // ['c','d','e']
+arr.splice(-1); // ['a', 'b', 'c', 'd']
+console.log(arr); // mutated and left ['a', 'b'] only
+arr.splice(1, 2);  // second element is the number of elements you want to deleted 
+
+// reverse
+ arr = ['a', 'b', 'c', 'd', 'e'];
+ const arr2 = ['j', 'k', 'l', 'm', 'n'];
+ console.log(arr2.reverse()) 
+ console.log(arr2);
+
+

@@ -95,7 +95,9 @@ arr.splice(1, 2);  // second element is the number of elements you want to delet
 // reverse
  arr = ['a', 'b', 'c', 'd', 'e'];
  const arr2 = ['j', 'k', 'l', 'm', 'n'];
- console.log(arr2.reverse()) 
- console.log(arr2);
+ console.log(arr2.reverse()) // 
+ console.log(arr2); // mutated original array  ['n','m','l','k','j']
 
+// concat methid
 
+const letters = arr.concat(arr2);

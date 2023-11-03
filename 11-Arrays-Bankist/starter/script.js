@@ -73,7 +73,7 @@ const displayMovement = function (movements) {
         const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-          <div class="movements__value">${mov}</div> 
+          <div class="movements__value">${mov}€</div> 
         </div>
         `;
 // in this place we implemented movements to shown on within html DOM manipulation
@@ -82,6 +82,41 @@ const displayMovement = function (movements) {
     });
 }
 displayMovement(account1.movements)
+
+const calcDisplayPrintBalance = function(movements) {
+  const balance = movements.reduce((acc,mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+  };  
+  calcDisplayPrintBalance(account1.movements);
+
+const calcDisplaySummary = function(movements) {
+
+  const income = movements
+  .filter(mov => mov > 0)
+  .reduce((acc, mov) => acc + mov, 0);
+  labelSumIn.textContent = `${income}€`
+//*-------------------------------------------//
+  const outcome = movements
+  .filter(mov => mov < 0)
+  .reduce((acc, mov) => acc + mov, 0);
+  labelSumOut.textContent = `${Math.abs(outcome)}€`;
+//*----------------------- abs absolut value 
+
+  const interest = movements. filter(mov => mov > 0)
+  .map(deposit => deposit * 1.2/100) 
+  // calculate percentage for interests
+
+  .filter((int, i, arr) => {
+    return int >= 1;
+  })
+  .reduce(( acc, int) => acc + int, 0);
+  labelSumInterest.textContent = `${interest}€`;
+
+}
+calcDisplaySummary(account1.movements);
+
+
+
 
 const createUsernames = function (accs) {
     accs.forEach(function(acc){   // perfct to work to get side-efect looping trough entire 
@@ -94,11 +129,8 @@ const createUsernames = function (accs) {
 };
 createUsernames(accounts)
 
-const calcDisplayPrintBalance = function(movements) {
-  const balance = movements.reduce((acc,mov) => acc + mov, 0);
-  labelBalance.textContent = `${balance} EUR`;
-}
- calcDisplayPrintBalance(account1.movements);
+
+
 
 
 
@@ -467,4 +499,28 @@ const avg1 = calcAverageHunanAge([5,2,4,1,15,8,3]);
 const avg2 = calcAverageHunanAge([16,6,10,5,6,1,4]);  
   console.log(avg1, avg2); // <--44 47.333333333333336
 
+
   //* // ----------------- 155. Magic in chaining methods ---------------- //
+
+
+  // PIPELINE 
+  const totalDepositUSD = movements
+        .filter(mov => mov > 0 )
+        .map(mov => mov * eurToUsd)
+        .reduce((acc, mov) => acc + mov, 0);
+  console.log(totalDepositUSD); // 5522.000000000001
+
+
+    //* // ----------------- 156. CHallenge #3---------------- //
+
+    /*
+    Rewrite the 'calcAverageHumanAge' function from the previous challenge, but this tie as an arrow functionm and using chaining!
+    */
+
+    const calcAverageHumanAge = ages => ages.map(age => (age < 2 ? 2 * age : 16 + age * 4 ))
+    .filter(age => age >= 18)
+    .reduce((acc,age,i,arr) => acc + age / arr.length,0);
+
+    const avg3 = calcAverageHumanAge([6,4,6,7,2,8,12,17]);
+    const avg4 = calcAverageHumanAge([15,4,6,9,12,3,16,2])
+    console.log(avg3,avg4); // <-- 47 49.5

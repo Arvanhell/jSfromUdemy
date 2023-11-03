@@ -83,14 +83,22 @@ const displayMovement = function (movements) {
 }
 displayMovement(account1.movements)
 
+const createUsernames = function (accs) {
+    accs.forEach(function(acc){   // perfct to work to get side-efect looping trough entire 
+      acc.username = acc.owner  // we doing side effect to our app 
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('')
+    })
+};
+createUsernames(accounts)
 
-
-
-
-
-
-
-
+const calcDisplayPrintBalance = function(movements) {
+  const balance = movements.reduce((acc,mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+}
+ calcDisplayPrintBalance(account1.movements);
 
 
 
@@ -300,31 +308,163 @@ Dog number 7 is an adult, and is 4 year old
 
 //* ---------- 150. The Map Method ----------///
 
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300],
 
-const movementos = [200, 450, -400, 3000, -650, -130, 70, 1300];
-    const eurToUsd = 1.1;
-
-    const movementosUsd = movementos.map(function(mov){
+     eurToUsd = 1.1;
+    const movementsUsd = movements.map(function(mov){
       return mov * eurToUsd;
     })
-    console.log(movementos);
-    console.log(movementosUsd);
+    console.log(movements);
+    console.log(movementsUsd);
   /*
      [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
     */
 
-    const movemenntosUsd = movementos.map(mov => mov * eurToUsd); // arrow function same as above simplifier
-    console.log(movemenntosUsd);
+const movementUsdfor = [];
+    for ( const mov of movements) movementUsdfor.push(mov * eurToUsd);
+    console.log(movementUsdfor);
+     const movementsDecription = movements.map((mov, i) => 
 
+      `Movement ${i + 1} : You ${mov > 0 ?  'deposited' : 'withdrew'} ${Math.abs(mov)}`
+     // passing callback to this method map function
+    );
+    console.log(movementsDecription);
     /*
-     [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
+    (8) ['Movement 1 : You deposited 200', 'Movement 2 : You deposited 450', 'Movement 3 : You withdrew 400', 'Movement 4 : You deposited 3000', 'Movement 5 : You withdrew 650', 'Movement 6 : You withdrew 130', 'Movement 7 : You deposited 70', 'Movement 8 : You deposited 1300']
     */
+//* // ----------------- 151. Computing Usernames ----------------- //
+
+//console.log(createUsernames('Steven Thomas Williams')); // stw
+// const username = user.toLowerCase()     // 'steven thomas williams'
+// .split(' ')                             // 'steven', 'thomas', 'wiliams'
+// .map(name => name[0])                   // 's', 't', 'w'
+// .join('')                               // stw
+// console.log(username);
+
+
+        /*
+        const createUsernames = function (accs) {
+    accs.forEach(function(acc){   // perfct to work to get side-efect looping trough entire 
+      acc.username = acc.owner  // we doing side effect to our app 
+      .toLowerCase()
+      .split(' ')
+      .map(name => name[0])
+      .join('')
+    })
+};
+createUsernames(accounts)
+
+//*console.log(createUsernames('Steven Thomas Williams')); // stw
+//* const username = user.toLowerCase()     // 'steven thomas williams'
+//* .split(' ')                             // 'steven', 'thomas', 'wiliams'
+//* .map(name => name[0])                   // 's', 't', 'w'
+//* .join('')                               // stw
+//* console.log(username); 
+        */
+
+
+//* // ----------------- 152. The Filter mEthod ----------------- //
+
+const deposit = movements.filter(function(mov, i, arr) { // callback function 
+    return mov > 0  // filter only above on this example 
+});
+console.log(movements);
+console.log(deposit);   // only above 0  [200, 450, 3000, 70, 1300] 
+
+const depositsFor = [];
+for ( const mov of movements) if ( mov > 0 ) depositsFor.push(mov);
+console.log(depositsFor); // [200, 450, 3000, 70, 1300] same output for loop
+
+const withdrawals = movements.filter(mov => mov < 0); // return only negative value 
+console.log(withdrawals); // [-400, -650, -130]
+
+//* // ----------------- 153. The Reduce Moethod----------------- //
+
+console.log(movements); //8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+
+//accumulator is like snowball gathering everything is spoted on his way
+//* const balance = movements.reduce(function(acc, cur, i, arr) {
+//*  console.log(`iteration ${i}: ${acc}`);
+//*   return acc + cur;  
+//*}, 0); 
+/*
+iteration 0: 0
+iteration 1: 200
+iteration 2: 650
+iteration 3: 250
+iteration 4: 3250
+iteration 5: 2600
+iteration 6: 2470
+iteration 7: 2540
+Balance of this account is 3840
+*/
+
+
+// arrow accumaltor is 
+const balance = movements.reduce((acc,cur) => acc + cur, 0)
+console.log(`Balance of this account iterated by arrow function is ${balance} `); //Balance of this account iterated by arrow function is 3840
+
+
+//* now same efect we do within for loop 
+let balance2 = 0
+for ( const mov of movements) balance2 += mov;
+console.log(`Balance of this account looped for loop is ${balance2}`);
+//Balance of this account looped for loop is  3840.
+
+// other stuff with reduce to play with
+
+// Maximum value 
+const max = movements.reduce((acc,mov) => {
+    if ( acc > mov)
+    return acc;
+    else
+    return mov;
+}, movements[0]);
+console.log(max); //3000
+
+const min = movements.reduce((acc,mov) => {
+  if ( acc < mov)
+  return acc;
+  else
+  return mov;
+}, movements[0])
+console.log(min); //-650
+
+//* // ----------------- 154. Coding Chalenge #2----------------- //
 
 /*
-    const movementUsdfor = [];
-    for ( const mov of movementos) movementUsdfor.push(mov * eurToUsd);
-    console.log(movementUsdfor);
-     
-     [220.00000000000003, 495.00000000000006, -440.00000000000006, 3300.0000000000005, -715.0000000000001, -143, 77, 1430.0000000000002]
-    
-   */
+create a function 'calcAverageHunanAge', which accepts an arrays of dog's ages ('ages'), and does the following things order:
+
+1. calculate the dog age in human years using the following formula:
+  if the dog is <=2 years old, humanAge = 2 * dogAge, If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+
+2. Exclude all dogs that are less than 18 human years old ( which is the same as keeping dogs that are at least 18 years old)
+
+3. Calculate the average human age of all adult dogs (you should already know from the other challenges how we calculate averages)
+
+4. Run the function for both test datasets
+
+TD 1: [5,2,4,1,15,8,3]
+TD 2: [16,6,10,5,6,1,4]
+GL
+*/
+const calcAverageHunanAge = function(ages) {
+  const humanAge = ages.map( age => age <= 2 ? 2 * age : 16 + age * 4)  // map
+  console.log(humanAge); // <-- (7) [36, 4, 32, 2, 76, 48, 28]
+  const adults = humanAge.filter( age => age >= 18);
+  console.log(adults); // [36, 32, 76, 48, 28]<--
+
+  // const average = adults.reduce((acc, age) =>  acc + age, 0) / adults.length;  <--met 1
+  //                     
+  const average = adults.reduce ((acc, age, i, arr) => acc + age / arr.length, 0); //  <--met 2
+
+
+  // 2 3 ( 2 + 3 ) / 2 = 2.5.    2/2 + 3/2 = 2.5
+  return average
+}
+
+const avg1 = calcAverageHunanAge([5,2,4,1,15,8,3]);
+const avg2 = calcAverageHunanAge([16,6,10,5,6,1,4]);  
+  console.log(avg1, avg2); // <--44 47.333333333333336
+
+  //* // ----------------- 155. Magic in chaining methods ---------------- //

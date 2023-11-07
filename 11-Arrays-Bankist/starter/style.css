@@ -18,9 +18,13 @@ html {
 body {
   font-family: "Poppins", sans-serif;
   color: #444;
-  background-color: #f3f3f3;
+  background-color: #040303;
   height: 100vh;
   padding: 2rem;
+  background-image: url(./reall.avif); 
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: contain;
 }
 
 nav {
@@ -33,6 +37,8 @@ nav {
 .welcome {
   font-size: 1.9rem;
   font-weight: 500;
+  color: red;
+  text-shadow:black .5px .5px;
 }
 
 .logo {
@@ -53,7 +59,7 @@ nav {
   border-radius: 10rem;
   margin-right: 1rem;
   color: inherit;
-  border: 1px solid #fff;
+  border: 1.5px solid #ad8b8b;
   transition: all 0.3s;
 }
 
@@ -120,6 +126,7 @@ nav {
 .balance__value {
   font-size: 4.5rem;
   font-weight: 400;
+  color: grey;
 }
 
 /* MOVEMENTS */

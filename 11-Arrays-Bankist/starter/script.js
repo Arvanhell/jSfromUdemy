@@ -8,28 +8,28 @@
 //*  Data
 
 const account1 = {
-  owner: 'Jonas Schmedtmann',
+  owner: 'Martin Hertxel',
   movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
 };
 
 const account2 = {
-  owner: 'Jessica Davis',
+  owner: 'Jessica Dummies',
   movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
   interestRate: 1.5,
   pin: 2222,
 };
 
 const account3 = {
-  owner: 'Steven Thomas Williams',
+  owner: 'Theodor Mark Willson',
   movements: [200, -200, 340, -300, -20, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
 };
 
 const account4 = {
-  owner: 'Sarah Smith',
+  owner: 'Sarah Sanders',
   movements: [430, 1000, 700, 50, 90],
   interestRate: 1,
   pin: 4444,
@@ -64,13 +64,17 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovement = function (movements) {
+const displayMovement = function (movements, sort = false) { 
+  // adding second parameter 'sort'
   containerMovements.innerHTML = '';
-    movements.forEach(function(mov, i) {
-      
-        const type = mov > 0 ? 'deposit' : 'withdrawal'
 
-        const html = `
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+
+    movs.forEach(function(mov, i) {
+      //when sort will be true then display will be sorted
+      const type = mov > 0 ? 'deposit' : 'withdrawal';
+
+      const html = `
         <div class="movements__row">
           <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
           <div class="movements__value">${mov}€</div> 
@@ -220,6 +224,15 @@ const amount = Number(inputLoanAmount.value);
     }
     inputLoanAmount.value = '';
 })
+// need to sort for click to sort and reverse to unsorted to false
+
+let sorted = false;
+btnSort.addEventListener('click', function (e) {
+  e.preventDefault();
+  displayMovement(currentAccount.movements, !sorted); // true 
+  sorted = !sorted;
+  // and is working
+});
 
 
 
@@ -711,4 +724,266 @@ const overalBallance3 = accounts
 .reduce((acc, mov) =>acc + mov, 0); 
 console.log(overalBallance3); 
 
+
+
 //* // ----------------- 162.Sorting arrays --/*//
+
+
+// STRING
+const owners = ['Jones', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners); // Adam', 'Jones', 'Martha', 'Zach'
+
+// Numbers
+
+console.log(movements)
+
+// return < 0   =>  A, B //* keep order
+// return > 0   =>  B, A //* switch order
+
+//* Ascending 
+      //  if (a > b)  return  1;
+    //  if (a < b)  return -1;
+
+    movements.sort((a,b) => a - b)
+console.log(movements);
+// --> -650, -400, -130, 70, 200, 450, 1300, 3000
+
+//* ------------------------  -----------------------//
+
+//* Descendin
+       //if (a > b)  return -1;
+      //if (a < b)  return  1;
+      movements.sort((a,b) => b - a)  
+console.log(movements);
+// --> 3000, 1300, 450, 200, 70, -130, -400, -650
+
+//* // ------163. More ways of creating and filling arrays --/*//
+
+    const arrR = [1,2,3,4,5,6,7,8];
+    const x = new Array(7);
+
+
+    // Empty arrays + fill method
+    console.log(x); //[empty × 7]
+      //* console.log(x.map(()=> 5 )); // empty × 7] nothing change 
+             //console.log(x.map(()=> 5)); // [empty x7]
+
+
+      x.fill(1)  // with specyfic value we want
+      console.log(x); // [1, 1, 1, 1, 1, 1, 1]
+     
+      //when we specify start and index 
+
+      x.fill(1, 3, 5);
+      console.log(x); // [empty × 3, 1, 1, empty × 2]
+
+      arrR.fill(23, 4, 6);   // <--- from index 4 to index 6 
+      console.log(arrR); //*  --> [1, 2, 3, 4, 23, 23, 7, 8]
+
+
+// Array.from
+
+const y = Array.from({length: 7}, () => 1 ); // --> return 
+console.log(y); // --> [1, 1, 1, 1, 1, 1, 1]
+
+
+      const z = Array.from({length: 7}, (_, i) => i + 1) // first parameter '_' is callled underscore  
+      console.log(z); // --> [1, 2, 3, 4, 5, 6, 7]
+
+
+        
+
+        labelBalance.addEventListener('click', function () {
+          const movementUI = Array.from(document.querySelectorAll('.movements__value'), el => Number(el.textContent.replace('€', '')));
+        console.log(movementUI);
+
+        })
+
+//* // ------  164. Which array method to use? --------/*//  
+
+
+//What do I actualy want to get from the array ?
+
+//* To mutate original array  -------------------------------->
+
+ //  👉  Add to original:
+      //    .push (end)
+     //    .unshift(start)
+
+  // 👉 Remove from original
+        // .pop(end)
+       // .shift(start)
+      // .splice(any)
+      
+  // 👉  Others
+        //.reverse
+       //.sort
+      //.fill   
+
+//* To get a new array ---------------------------------------->
+
+      // 👉 Computed from original
+          // .map   loop
+
+      // 👉 Filtered using condition
+          //.filter   
+
+      // 👉 Portion of original
+          //.slice
+          
+      // 👉 Adding original to other
+          //.concat
+          
+      // 👉 Flattening the original 
+          // .flat
+         //.flatMap     
+
+//* An array index -------------------------------------------->
+//boolean
+        // 👉 Based on value
+              // .indexOf
+
+        // 👉  Based on test condition
+              //.findIndex
+
+          //*<-*-> An entire array element
+
+          // 👉 Based on test condition
+              // .find
+
+
+//* Or i want to know if array include certain element ------>
+
+        // 👉 Based on value
+              //.includes
+
+        // 👉 Based on test condition
+              //.some
+              //.every      
+
+
+            //*<-*-> maybe get a new string
+
+        // 👉 Based on separator string:
+              //.join
+
+        //* To transform to another value -------------------->
+
+        // 👉 Based on accumulator
+              //.reduce
+        //(boil down array to single value of any type
+       //-number, string, boolean or even new array or object)
+
+          //*<-*-> to simply to loop over the array
+
+         // 👉  Based on callback
+              //.forEach
+          //(does not create a new array, just loops over it)
+
+
+//* // ------  165. Array method practice--------/*//
+
+//* //////////////////////////////////////////////
+//*         Array Method Practice
+
+//*--------------------------------------------------------------------
+//*------------------------  Exercise #1  -----------------------------
+//*--------------------------------------------------------------------
+
+
+//* 
+
+const bankDepositSum = accounts
+.flatMap(acc => acc.movements)
+.filter(mov => mov > 0)
+.reduce((sum,cur) => sum + cur,0);
+
+
+console.log(bankDepositSum)
+//* after flat filter and finaly reduce final ampunt of deposit is 25180 from whole accouts.
+/*
+//* before flat only map 
+//* const bankDepositSum = accounts.flatMap(acc => acc.movements)
+
+0: (8) [200, 450, -400, 3000, -650, -130, 70, 1300]
+1: (8) [5000, 3400, -150, -790, -3210, -1000, 8500, -30]
+2: (8) [200, -200, 340, -300, -20, 50, 400, -460]
+3: (5) [430, 1000, 700, 50, 90]
+*/
+
+/*
+//* after flat and same output wit flatMap
+//* const bankDepositSum = accounts.flatMap(acc => acc.movements).flat
+(29) [200, 450, -400, 3000, -650, -130, 70, 1300, 5000, 3400, -150, -790, -3210, -1000, 8500, -30, 200, -200, 340, -300, -20, 50, 400, -460, 430, 1000, 700, 50, 90]
+*/
+
+//*--------------------------------------------------------------------
+//*---------------------- exercise 2#  --------------------------------
+//*--------------------------------------------------------------------
+
+//* 
+
+// ver1.
+/*
+//*   const numDeposits1000 = accounts
+//*   .flatMap(acc => acc.movements)
+//*   .filter(mov => mov > 1000)
+//*   .length
+//*     console.log(numDeposits1000);
+//*         <--- 5
+*/
+
+const numDeposits1000ver2 = accounts
+.flatMap(acc => acc.movements)
+.reduce((acc,dep)=> (dep >= 1000? acc + 1 : acc) , 0) 
+console.log(numDeposits1000ver2);
+//* <---- 6
+
+let a = 10;
+//console.log(a++); // increamenting adding one but 
+//console.log(a++);  <--- a++
+//is returning the old value --> 10
+console.log(++a); // 11 returning properly incrementing before ;)
+// 11 <------ ++a
+
+//*--------------------------------------------------------------------
+//*----------------------    exercise 3#   ----------------------------
+//*--------------------------------------------------------------------
+
+const {deposits, withdrawals} = accounts
+.flatMap(acc => acc.movements).reduce((sums, curr) => {
+//* curr > 0 ? sums.deposits += curr : sums.withdrawals += curr;  
+   sums[curr > 0 ? 'deposits' : 'withdrawals'] += curr; 
+      return sums;
+    },
+  {deposits: 0, withdrawals: 0}
+);
+console.log(deposits, withdrawals)
+
+
+//* --> {deposits: 25180, withdrawals: -7340}
+//* --> 25180, -7340
+//* //////////////////////////////////////////////
+
+/*
+Julia and Kate are still studiying dogs, and this time they are sudying 
+if dogs are eating too much or too little.
+Eating too much means the dog's current food portion is larger 
+than the recommended portion, and eating too little is the opposite.
+Eating an okay amounts means the dog's current food portion is within a range 10%
+above and 10% bellow the recommended portion ( see hint).
+
+1. Loop over the array containing dog objects, and for each dog, calculate the 
+recommended food portion and add it to the object as a new property.
+Do NOT create a new array, simply loop over the array.
+Formula : 
+recommendedFood = weight ** 0.75 * 28.
+(the result is in gram of food, and the weight needs to be on kg)
+
+2. FInd Sarah's dog and log to the console whether it's eating to much or to 
+little. 
+HINT: Some dogs have multiple owners, so you first need to find Sarah in the 
+owners array, and so this ine is a bit tricky.
+
+*/

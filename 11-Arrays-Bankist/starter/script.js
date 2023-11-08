@@ -962,9 +962,52 @@ const {deposits, withdrawals} = accounts
 console.log(deposits, withdrawals)
 
 
+
+//*--------------------------------------------------------------------
+//*----------------------    exercise 4#   ----------------------------
+//*--------------------------------------------------------------------
+// Capitalize First letters of each word from sentences exception for 
+// ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with']
+const converteTitleCase = function(title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+    const exceptions = ['a', 'an', 'the', 'but', 'or', 'on', 'in', 'with', 'and'];
+   
+    const titleCase = title
+    .toLowerCase()
+    .split(' ') // make all to lowerCase 
+    .map(word => (exceptions // make new array from our array ad take exceptions 
+      .includes(word)? word : capitalize(word))) // if exceptions included dont change to Upper if not 
+    
+//* --> ['This', 'Is', 'a', 'Title']
+//* --> ['This', 'Is', 'a', 'Long', 'Title', 'but', 'Not', 'To', 'Long']
+//* --> ['And', 'Here', 'Is', 'Another', 'Title', 'with', 'an', 'Example']
+    .join(' ');  // join them to make string again :)
+ /*
+This Is a Title
+This Is a Long Title but Not To Long
+And Here Is Another Title with an Example
+*/
+    return capitalize(titleCase);  // return title 
+};
+console.log(converteTitleCase('this is a title'));
+console.log(converteTitleCase('this is a LONG title but not to long'));
+console.log(converteTitleCase('and here is another title with an EXAMPLE'));
+//* -----> This Is a Title
+//* -----> This Is a Long Title but Not To Long
+//* -----> And Here Is Another Title with an Example
+
+
+
+
 //* --> {deposits: 25180, withdrawals: -7340}
 //* --> 25180, -7340
 //* //////////////////////////////////////////////
+
+
+
+
+//* // ------  167. Coding Chalenge #4 --------/*//
 
 /*
 Julia and Kate are still studiying dogs, and this time they are sudying 
@@ -986,4 +1029,151 @@ little.
 HINT: Some dogs have multiple owners, so you first need to find Sarah in the 
 owners array, and so this ine is a bit tricky.
 
+3. Create an array containing all owners of dogs who eat to 
+much ( 'ownerEatToMuch') and an array with all owners of dogs
+who eat to little ('ownersEatToLittle')
+
+4. Log a string to the console for each array created on 3. 
+Like this: 'Matilda and Alice and Bob's dogs aet to much'
+and 'Sarah and John and Michale's dogs eat to little!".
+
+5. Log to the console whether there is any dog eating EXACTLY 
+the amount of food that is recommended ( just true or false))
+
+6. Log to the console whether there is any dog eating an OKAY amount of food ( just true or false)
+
+7. Create an array containing the dogs that are eating OKAY amount of food ( try to reuse the condition used in 6.)
+
+8. Create a shallow copy of the dogs array and sort it by recommended
+food portion in an ascendiing order ( keep in mind that the portions 
+  inside the array's object)
+
+  HINT1: Use many different tools to solve these challenges, you can use the summary lecture to choose between them.
+  HINT2: Being within a range 10% above and below the recommended 
+  portion means: current > ( recommended * 0.90) && current < ( recommended * 1.10). Basically, the current portion should be between 90% and 110% of the recommended portion.
+
+
+  TEST DATA: 
+  const dogs = [
+    {weight: 22, 
+      curFood: 250,
+    owners: [
+      'Allice',
+      'Bob'] },
+
+      {weight: 8,
+      currFood: 200,
+      owners: ['Matilda'] },
+
+      {weight: 13,
+      curFood: 275,
+      owners: [
+        'Sarah',
+        'John'] },
+
+        {weight: 32,
+        curFod: 340,
+        owners: ['Michael'] }
+    ];
+    GL
 */
+
+const dogs = [
+  {weight: 22, 
+    curFood: 250,
+  owners: [
+    'Allice',
+    'Bob'] },
+
+    {weight: 8,
+    currFood: 200,
+    owners: ['Matilda'] },
+
+    {weight: 13,
+    curFood: 275,
+    owners: [
+      'Sarah',
+      'John'] },
+
+      {weight: 32,
+      curFod: 340,
+      owners: ['Michael'] }
+  ];
+
+
+  dogs.forEach(dog => (dog.recFood = Math.trunc(dog.weight ** 0.75 * 28 )));
+  console.log(dogs);
+/*
+//*1
+
+0: {weight: 22, curFood: 250, owners: Array(2), recFood: 284
+1: {weight: 8, currFood: 200, owners: Array(1), recFood: 133}
+2: {weight: 13, curFood: 275, owners: Array(2), recFood: 191}
+3: {weight: 32, curFod: 340, owners: Array(1), recFood: 376}
+length: 4
+*/
+
+/*
+//*2
+*/
+const dogSarah = dogs.find(dog => dog.owners.includes('Sarah'))
+console.log(dogSarah); //true
+console.log(`Sarah's dog is eating ${dogSarah.curFood > dogSarah.recFood ? 'much' : 'little'
+  }. `
+);
+//* --> Sarah's dog is eating much.
+
+/*
+//*3
+*/
+
+const ownersEatTooMuch = dogs.filter(dog => dog.curFood > dog.recFood)
+.flatMap(dog => dog.owners)
+//.flat();
+console.log(ownersEatTooMuch); // --> ['Sarah', 'John']
+
+const ownersEatTooLittle = dogs.filter(dog => dog.curFood < dog.recFood)
+.flatMap(dog => dog.owners)
+console.log(ownersEatTooLittle); // --> ['Allice', 'Bob']
+
+/*
+//*4
+*/
+//* example
+//*"Matilda and Alice and Bob's dogs eat too much"
+//*"Sarah and John and Michael's dogs eat too little!"
+
+
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
+//* --> Sarah and John's dogs eat too much!
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little!`);
+//* --> Allice and Bob's dogs eat too little!
+
+/*
+//*5
+*/
+
+console.log(dogs.some(dog => dog.curFood === dog.recFood));
+// --> false
+
+/*
+//*6
+*/
+//* current > ( recommended * 0.90) && current < ( recommended * 1.10)
+
+const checkEatingOk = dog => dog.curFood > dog.recFood * 0.9 && 
+dog.curFood < dog.recFood * 1.1;
+console.log(dogs.some(checkEatingOk));
+  
+/*
+//*7
+*/
+
+console.log(dogs.filter(checkEatingOk)); //* --> []
+
+/*
+//*8
+*/
+
+//sort by recomended food portion
+const dogsCopy = dogs.slice().sort((a,b) => a - b);

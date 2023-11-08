@@ -1176,4 +1176,14 @@ console.log(dogs.filter(checkEatingOk)); //* --> []
 */
 
 //sort by recomended food portion
-const dogsCopy = dogs.slice().sort((a,b) => a - b);
+const dogSorted = dogs.slice().sort((a,b) => a.recFood - b.recFood);
+console.log(dogSorted);
+/*
+weight: 8, currFood: 200, owners: Array(1), recFood: 133
+weight: 13, curFood: 275, owners: Array(2), recFood: 191
+weight: 22, curFood: 250, owners: Array(2), recFood: 284
+weight: 32, curFod: 340, owners: Array(1), recFood: 376
+*/
+
+//* --->  170.  Converting and Checking Numbers <----
+

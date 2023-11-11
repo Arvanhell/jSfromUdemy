@@ -97,7 +97,7 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__value">${mov.toFixed(2)}€</div>
       </div>
     `;
-
+// mov.toFixed(2) give us two decimal parts .00 in our movements 
     containerMovements.insertAdjacentHTML('afterbegin', html);
   });
 };
@@ -330,45 +330,51 @@ console.log(Number.isFinite(23 /0)) //false
 
 
 //*  ----->   <----------------------->  <-------
-//*  ----->   171. Math and Rounding     <-------
+//*  ----->     171. Math and Rounding   <-------
 //*  ----->   <----------------------->  <-------
  
-console.log(Math.sqrt(25));   // 5
-console.log(25 ** ( 1/ 2));   // 5
-console.log(8 ** (1/3));      // 2 
+console.log(Math.sqrt(25));   // 5 square root
+console.log(25 ** ( 1/ 2));   // 5 square root
+console.log(8 ** (1/3));      // 2 cubic root
 
 console.log(Math.max(5, 18, 23, 11, 2));     // 23
-console.log(Math.max (5, 18, '23', 11, 2));  // 23
-console.log(Math.max(5, 18, '23px', 11, 2)); // NaN
+console.log(Math.max (5, 18, '23', 11, 2));  // 23 coerction 
+console.log(Math.max(5, 18, '23px', 11, 2)); // NaN  but not parsing
 
 console.log(Math.min(5, 18, 23, 11, 2));     // 2
-console.log(Math.PI * Number.parseFloat('10px') ** 2) 
-//314.1592653589793
 
+//* calculating of the area of circle
+console.log(Math.PI * Number.parseFloat('10px') ** 2) 
+//314.1592653589793 
+
+//* --------------------------- *//
+
+//* trunc   - elimiating decimal parts of created randomly number
 console.log(Math.trunc(Math.random() * 6) + 1);  // 6  random
 
+// Random 
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min) + 1) + min  //* from this function 
 // 0..1 -> 0 ... ( max - min) -> min... max
 console.log(randomInt(10, 20));  //*random number from 10 - 20
 
 
 //*    Rounding Integers
-console.log(Math.round(23.3));    // 23
-console.log(Math.round(23.9));    // 24
+console.log(Math.round(23.3));    // 23 round always to nearest integer
+console.log(Math.round(23.9));    // 24 round always to nearest integer
 
-console.log(Math.ceil(23.3));     // 24
+console.log(Math.ceil(23.3));     // 24 round down e
 console.log(Math.ceil(23.9));     // 24
 
 console.log(Math.floor(23.3));    // 23
 console.log(Math.floor('23.9'));  // 23
 
 
-console.log(Math.trunc(23.3));    // 23 
+console.log(Math.trunc(23.3));    // 23 - remove any decimal parts ALWAYS
  
-console.log(Math.trunc(-23.3));   // -23
-console.log(Math.floor(-23.3));   //* -24 work for neg and positive
+console.log(Math.trunc(-23.3));   // -23 
+console.log(Math.floor(-23.3));   //* -24 work for neg and it is rounding Up like in ex -23.1 --- in to -24 
 
-
+//* FLOOR is way better when we working with positive and negative
 
 //* Rounding decimals
 console.log((2.7).toFixed(0));    //* '3' but is returning string
@@ -376,7 +382,108 @@ console.log((2.7).toFixed(3));    //* '2.700'
 console.log((2.345).toFixed(2));  // * '2.35' still string
 console.log(+(2.345).toFixed(2)); //* now is number 2.35
 
+//* decimals are using toFixed methods let us choose how many decimal part
+// but return strings until we add + sign 
+
 
 //*  ----->   <-------------------------->  <-------
 //*  ----->   172. The remainder operator   <-------
 //*  ----->   <-------------------------->  <-------
+
+// simply remainder return of reminder of division ....
+ //* console.log( 5 % 2);  // 1
+ //console.log( 5  / 2 ); // 5 = 2 + 2 + 1 
+ //* console.log( 8 % 3 );  // 2
+ //console.log( 8 / 3);  // 2.6666666666666665  8 = 2 x 3 + 2 
+
+ console.log(6 % 2);  // 0 even number
+ console.log(7 % 2);  // 1 odd number 
+
+ const isEven = n => n % 2 === 0;
+ console.log(isEven(8));  // true
+ console.log(isEven(23)); // false
+ console.log(isEven(514));// true
+
+
+ labelBalance.addEventListener('click', function() {
+ [...document.querySelectorAll('.movements__row')]
+      .forEach(function(row, i) {
+  if (i % 2 === 0)row.style.backgroundColor = 'rgb(154, 213, 149)'; // 0 ,2, 4, 6   <--//  every even
+
+  // if (i % 3 === 0)row.style.backgroundColor = 'rgb(255, 209,111)';  // 0, 3, 6, 9  <--// every odd
+  else row.style.backgroundColor = 'rgb(255, 209,111)'; // every other than even <-- 
+  // or we can use nth to choose which one we want to color
+    });
+ });
+
+
+//*  ----->   <-------------------------->  <-------
+//*  ----->       173. Numeric separator    <-------
+//*  ----->   <-------------------------->  <------- 
+
+// 287.460.000.000
+const diameter = 287_460_000_000;  
+console.log(diameter); //287460000000
+
+const priceInCents = 345_99;
+console.log(priceInCents);  // 34599
+
+const transferFee = 15_00;
+const transferFee2 = 1_500; 
+
+const PI = 3.1415; 
+console.log(PI); 
+
+console.log(Number('230_000')); // NaN  probably income bug in aplication
+console.log(Number('230000'));  // 230000
+
+
+//*  ----->   <-------------------------->  <-------
+//*  ----->     174. Working with BigInt    <-------
+//*  ----->   <-------------------------->  <------- 
+
+console.log(2 ** 53 - 1); //  9007199254740991 // <- the biggest number js can represent
+console.log(Number.MAX_SAFE_INTEGER);  // 9007199254740991 same number 
+
+console.log(2 ** 53 + 1) // 9007199254740992  what?
+console.log(2 ** 53 + 2) // 9007199254740994
+console.log(2 ** 53 + 0) // 9007199254740992  what?
+console.log(2 ** 53 + 3)   // 9007199254740996 
+console.log(2 ** 53 + 4)   // 9007199254740996
+console.log(2 ** 53 + 5)   // 9007199254740996 
+console.log(2 ** 53 + 6)   // 9007199254740998
+console.log(2 ** 53 + 7)   // 9007199254741000
+console.log(2 ** 53 + 8)   // 9007199254741000
+console.log(2 ** 53 + 9)   // 9007199254741000
+
+
+console.log(3352625726837593757625726527n);       // 3352625726837593757625726527 //* with n giving exact number we want but
+console.log(BigInt(3352625726837593757625726527));// 3352625726837593641534357504n //* BigInt is not <-- to big number try with smaller
+console.log(BigInt(900719925474100022)); // 900719925474099968n //* still is diferent
+
+//* Operations
+ 
+console.log(10000n + 10000n);  // 20 000
+console.log(67340205043562356235731n + 423652257n); // 67340205043562779887988n
+
+const huge = 54523432625623623623454363425n
+const num = 23;
+// console.log( huge * num )  //* error Cannot mix BigInt and other types, use explicit conversions
+
+console.log(huge * BigInt(num)); // now is working //* 1254038950389343343339450358775n
+
+console.log(20n > 15);    // true
+console.log(20n === 20);  // false
+console.log(20n == '20');   // true
+console.log(typeof 20n);  // bigint
+console.log(huge + ' is REALLY big !!!');  // 54523432625623623623454363425 is REALLY big !!! 
+
+
+// Division
+console.log(10n / 3n);  // 3n  // cut off decimal part 
+console.log(10 / 3);    // 3.3333333333333335
+
+
+//*  ----->   <-------------------------->  <-------
+//*  ----->       175. Creating dates       <-------
+//*  ----->   <-------------------------->  <------- 

@@ -28,7 +28,7 @@ const account1 = {
     '2023-11-11T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'pl-PL',  // 
+  locale: 'en-GB',  
 };
 
 const account2 = {
@@ -47,8 +47,8 @@ const account2 = {
     '2023-06-25T18:49:59.371Z',
     '2023-07-26T12:01:20.894Z',
   ],
-  currency: 'PL',
-  locale: 'pt-PT', // 
+  currency: 'EUR',
+  locale: 'de-DE', // 
 };
 
 const accounts = [account1, account2];
@@ -97,8 +97,16 @@ const formatMovementDate = function(date, locale) {
   // const year  =  date.getFullYear();
   // return `${day}/${month}/${year}`;
   return new Intl.DateTimeFormat(locale).format(date);
-
 };
+
+
+const formatCur = function(value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
+};
+
 const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
 
@@ -111,13 +119,15 @@ const displayMovements = function (acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
+    const formattedMov = formatCur(mov, acc.locale, acc.currency);
+   
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
     <div class="movements__date">${displayDate}</div>
-        <div class="movements__value">${mov.toFixed(2)}€</div>
+        <div class="movements__value">${formattedMov}</div>
       </div>
     `;
 // mov.toFixed(2) give us two decimal parts .00 in our movements 
@@ -127,19 +137,22 @@ const displayMovements = function (acc, sort = false) {
 
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+ 
+   
+  labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency);
 };
 
 const calcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = formatCur(incomes, acc.locale, acc.currency);
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
+  labelSumOut.textContent = formatCur(Math.abs(out), acc.locale, acc.currency);
+  
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -149,7 +162,8 @@ const calcDisplaySummary = function (acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = formatCur(interest, acc.locale, acc.currency);
+  
 };
 
 const createUsernames = function (accs) {
@@ -174,16 +188,40 @@ const updateUI = function (acc) {
   calcDisplaySummary(acc);
 };
 
-///////////////////////////////////////
+const startLogoutTimer = function () {
+  const tick = function(){
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = time % 60;
+  // in each call, print the reamining time to UI 
+    labelTimer.textContent = `${min}:${sec}`
+  
+  //when  0 sec, stop timer and log out user
+  if (time === 0 ){
+    clearInterval(timer);
+    labelWelcome.textContent = "Log in to get started"
+    containerApp.style.opacity = 0;
+      }
+      //decreaase 1 s
+    time--;
+  }
+  // setting the time to 5 min
+  let time = 300;
+  // call timer every second 
+  tick();
+  const timer = setInterval(tick, 1000)
+  return timer;
+}
+//* ///////////////////////////////////
 // Event handlers
-let currentAccount;
-//* -----------------> FAKE always logged in
-
+let currentAccount, timer;
 currentAccount = account1
-updateUI(currentAccount)
-containerApp.style.opacity = 100;
+// //* -----------------> FAKE always logged in
 
-//* -----------------> FAKE always logged in
+// currentAccount = account1
+// updateUI(currentAccount)
+// containerApp.style.opacity = 100;
+
+// //* -----------------> FAKE always logged in
 
 // Experimenting API
 const now  = new Date();
@@ -243,6 +281,9 @@ btnLogin.addEventListener('click', function (e) {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
 
+    //Timer
+    if (timer)clearInterval(timer);
+    timer = startLogoutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -271,6 +312,10 @@ btnTransfer.addEventListener('click', function (e) {
     receiverAcc.movementsDates.push(new Date().toISOString());
     // Update UI
     updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timer);
+    timer = startLogoutTimer();
   }
 });
 
@@ -281,14 +326,21 @@ btnLoan.addEventListener('click', function (e) {
 
 
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    
+    setTimeout(function() {
     // Add movement
-    currentAccount.movements.push(amount);
+      currentAccount.movements.push(amount);
 
     // Add loan date
     currentAccount.movementsDates.push(new Date().toISOString());
 
     // Update UI
-    updateUI(currentAccount);
+    updateUI(currentAccount); 
+
+    //reset timer 
+    clearInterval(timer);
+    timer = startLogoutTimer();
+  }, 4000)
   }
   inputLoanAmount.value = '';
 });
@@ -643,3 +695,53 @@ console.log(days1); // 864000000 => 10 days
 //*  ----->   <---------------------------------->  <-------
 //*  ----->      179. nternationalizing Numbers     <-------
 //*  ----->   <---------------------------------->  <------- 
+
+const numsi = 321512345215.23;
+
+const options1 = {
+  //style: 'unit',
+  style: 'currency',
+  unit: 'mile-per-hour',
+  currency: 'PLN'
+}
+
+console.log(new Intl.NumberFormat('en-US', options1).format(numsi));
+// PLN 321,512,345,215.23 mph formated // us  
+console.log(new Intl.NumberFormat('pl-PL', options1).format(numsi));
+// 321 512 345 215,23 mili / h formated // pl zł
+console.log(new Intl.NumberFormat('ar-SY', options1).format(numsi));
+//  ٣٢١٬٥١٢٬٣٤٥٬٢١٥٫٢٣ ميل/سf PLN ormated for syria 
+console.log(new Intl.NumberFormat('it-IT', options1).format(numsi));
+// 321.512.345.215,23 PLN | mi/ h formated for italy
+console.log(new Intl.NumberFormat('tr-TR', options1).format(numsi));
+// 321.512.345.215,23 PLN | mil/ sa formated for Turkiye
+
+
+//*  ----->   <------------------------------------------>  <-------
+//*  ----->      180. Timers: Settimeout and Setinterval    <-------
+//*  ----->   <------------------------------------------>  <------- 
+
+/*
+const ingriedients = ['olive', 'spinach']
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your ordered Pizza  with ${ing1} and ${ing2} 🍕`),
+   3000, 
+   ...ingriedients
+); 
+console.log('Waiting...');                                              
+
+  if (ingriedients.includes('spinach')) clearTimeout(pizzaTimer)
+*/
+
+// set Interval
+
+/*
+setInterval(function(){
+  const now = new Date();
+  console.log(now);
+}, 1000)
+*/
+//*  ----->   <------------------------------------------>  <-------
+//*  ----->       181. Implementing a countdown timer       <-------
+//*  ----->   <------------------------------------------>  <------- 
+

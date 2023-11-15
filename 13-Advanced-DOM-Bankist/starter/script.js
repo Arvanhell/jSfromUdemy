@@ -157,7 +157,7 @@ console.log(getComputedStyle(message).height); // 49px
 
 message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) +  30 + 'px';
 
-document.documentElement.style.setProperty('--color-primary', 'orangered');
+//document.documentElement.style.setProperty('--color-primary', 'orangered');
 
 
 //Attributes
@@ -193,4 +193,41 @@ logo.classList.contains('c'); // not includes when called in array
 
 //*-------->    ------------------------------------   <---------
 //*---->         188. Implementing smooth scroling          <----
+//*-------->    ------------------------------------   <---------
+
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
+
+btnScrollTo.addEventListener('click', function(e) {
+  //const s1coords = section1.getBoundingClientRect(); 
+  //console.log(s1coords);
+
+  //console.log(e.target.getBoundingClientRect());
+
+  //console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
+
+  //console.log('height/width viewport',
+  //document.documentElement.clientHeight,
+  //document.documentElement.clientWidth
+  //);
+
+  //scrolling calculating positions
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset, // curent position plus the current scroll
+  //   s1coords.top + window.pageYOffset // curent position plus the current scroll
+  //   ); 
+
+ //* oldschool
+    // window.scrollTo({
+    //   left: s1coords.left + window.pageXOffset, 
+    //   top: s1coords.top + window.pageYOffset,
+    //   behavior: 'smooth',
+    // });
+
+    section1.scrollIntoView({behavior: 'smooth'})
+});
+
+
+//*-------->    ------------------------------------   <---------
+//*---->       188. Types of events and event hnadlers      <----
 //*-------->    ------------------------------------   <---------

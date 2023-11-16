@@ -57,7 +57,29 @@ document.querySelector('.nav__links')
       }
 });
       
+//* /////////////  Tabbed component   //////////////////////////
 
+const tabs = document.querySelectorAll('.operations__tab');
+const tabsContainer = document.querySelector('.operations__tab-container');
+const tabsContent = document.querySelectorAll('.operations__content');
+
+// event delegation 
+tabsContainer.addEventListener('click', function (e){
+  const clicked = e.target.closest('.operations__tab'); // traversing to closest parent element
+
+        // Guard clause
+  if(!clicked) return;  // if there is no click return imediately
+
+        //Remove active classes // <--- 
+  tabs.forEach(t => t.classList.remove('operations__tab--active'));
+  tabsContent.forEach(c => c.classList.remove('operations__content--active'));
+
+    // Active tab
+  clicked.classList.add('operation__tab--active');
+  // Activate content area 
+  document.querySelector(`.operations__content--${clicked.dataset.tab}`)
+  .classList.add('operations__content--active');
+});
 
 
 
@@ -225,38 +247,31 @@ logo.classList.contains('c'); // not includes when called in array
 //*---->         188. Implementing smooth scroling          <----
 //*-------->    ------------------------------------   <---------
 
-// const btnScrollTo = document.querySelector('.btn--scroll-to');
-// const section1 = document.querySelector('#section--1');
+//* const btnScrollTo = document.querySelector('.btn--scroll-to');
+//* const section1 = document.querySelector('#section--1');
 
-// btnScrollTo.addEventListener('click', function(e) {
+//* btnScrollTo.addEventListener('click', function(e) {
   //const s1coords = section1.getBoundingClientRect(); 
   //console.log(s1coords);
-
   //console.log(e.target.getBoundingClientRect());
-
   //console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset);
-
   //console.log('height/width viewport',
   //document.documentElement.clientHeight,
   //document.documentElement.clientWidth
   //);
-
   //scrolling calculating positions
   // window.scrollTo(
-  //   s1coords.left + window.pageXOffset, // curent position plus the current scroll
-  //   s1coords.top + window.pageYOffset // curent position plus the current scroll
+  //  s1coords.left + window.pageXOffset, // curent position plus the current scroll
+  //  s1coords.top + window.pageYOffset // curent position plus the current scroll
   //   ); 
-
- //* oldschool
+//* oldschool
     // window.scrollTo({
     //   left: s1coords.left + window.pageXOffset, 
     //   top: s1coords.top + window.pageYOffset,
     //   behavior: 'smooth',
     // });
-
-
-   // section1.scrollIntoView({behavior: 'smooth'})
-//});
+   //* section1.scrollIntoView({behavior: 'smooth'})
+//*});
 
 
 //*-------->    ------------------------------------   <---------
@@ -355,5 +370,47 @@ document.querySelector('.nav').addEventListener('click', function (e){
 
 //*-------->    ------------------------------------   <---------
 //*---->                193. DOM Traversing                 <----
+//*-------->    ------------------------------------   <---------
+
+// selecting h1
+ 
+const h1 = document.querySelector('h1');
+
+// going downwards
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'red';
+
+// Going upwards : parent
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)'
+
+h1.closest('h1').style.background = 'var(--gradient-primary)'  
+
+// Going sideways: siblings
+console.log(h1.previousElementSibling); // null nothing there
+console.log(h1.nextElementSibling);     // h4
+
+console.log(h1.previousSibling);  //text
+console.log(h1.nextSibling);    // text
+
+console.log(h1.parentElement.children); // HTML collection
+
+[...h1.parentElement.children].forEach(function(el) {
+  if(el !== h1) el.style.transform = 'scale(0.5)';
+});
+
+//*-------->    ------------------------------------   <---------
+//*---->          194. Building A tabbed component          <----
+//*-------->    ------------------------------------   <---------
+
+
+//*-------->    ------------------------------------   <---------
+//*---->      195. Passing Arguments to Event Handlers      <----
 //*-------->    ------------------------------------   <---------
 

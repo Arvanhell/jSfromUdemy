@@ -66,23 +66,23 @@ document.querySelector('.nav__links')
       
 //* /////////////  Tabbed component   //////////////////////////
 //tabs.forEach(t => t.addEventListener('click', () =>  console.log('TAB')));
-//* event delegation 
 
+//* event delegation 
 tabsContainer.addEventListener('click', function (e) {
   const clicked = e.target.closest('.operations__tab'); // traversing to closest parent element
- 
-        // Guard clause
+        //* Guard clause
   if(!clicked) return;  // if there is no click return imediately it fix return Null
  
-        // Remove active classes //
+        //* ------->    Remove active classes //
         // <--- Active Tab
   tabs.forEach(t => t.classList.remove('operations__tab--active'));
       clicked.classList.add('operations__tab--active'); 
         //  <--- Active content
   tabsContent.forEach(c => c.classList.remove('operations__content--active'));
   
-  // Activate content area 
-document.querySelector(`.operations__content--${clicked.dataset.tab}`) // templet literals to manage data tab / clicked
+  // -------->  Activate content area 
+document.querySelector(`.operations__content--${clicked.dataset.tab}`) 
+// templet literals to manage data tab / clicked
 // Adding content to be active and visible instead of none
   .classList.add('operations__content--active');
 }); 
@@ -90,33 +90,26 @@ document.querySelector(`.operations__content--${clicked.dataset.tab}`) // temple
 
 //* /////////////  Menu fade animation   //////////////////////////
 
-//Event delegation  parent container for babling up for the target NAV
-nav.addEventListener('mouseover', function(e) {
+// Refactoring ---> to dry code
+const handleHover =  function(e, opacity) {
+  //console.log(this, e.currentTarget);
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
     const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-    const logo = link.closest('.nav').querySelector('img');
+    const logo = link.closest('.nav').querySelector('img'); 
 
     siblings.forEach(el => {
-      if(el !== link) el.style.opacity = 0.5;
-    })
-    logo.style.opacity = 0.5;
+      if (el !== link) el.style.opacity = this;
+    });
+    logo.style.opacity = this;
   }
-});
+};
+// Passing 'argument  into handler 
+nav.addEventListener('mouseover', handleHover.bind(0.5));
+nav.addEventListener('mouseout', handleHover.bind(1));
 
 
-nav.addEventListener('mouseout', function(e) {
-  if (e.target.classList.contains('nav__link')) {
-    const link = e.target;
-    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
-    const logo = link.closest('.nav').querySelector('img');
-
-    siblings.forEach(el => {
-      if(el !== link) el.style.opacity = 1;
-    })
-    logo.style.opacity = 1;
-  }
-});
+//* ----------------- before -----------------
 
 //*-------->        ------------------------------------      <---------
 //*-------->           184. PROJECT: "Bankist" Website        <---------
@@ -325,9 +318,9 @@ setTimeout(() =>  h1.removeEventListener('mouseenter', alertH1), 3000);
 
 /*
 //* oldschoool
-// h1.onmouseenter = function (e) { 
-//   alert('onmouseenter: great you are reading the heading');
-// }; 
+//* h1.onmouseenter = function (e) { 
+//*   alert('onmouseenter: great you are reading the heading');
+//* }; 
 //*
 
 
@@ -341,7 +334,7 @@ setTimeout(() =>  h1.removeEventListener('mouseenter', alertH1), 3000);
 //*---->         191. Event Propagation in Practice         <----
 //*-------->    ------------------------------------   <---------
 
-// random color rgb(255,255,255)
+//* random color rgb(255,255,255)
 
 const randomInt = (min, max) => 
   Math.floor(Math.random() * (max - min + 1 ) + min );
@@ -349,13 +342,13 @@ const randomColor = () => `rgb(${randomInt(0,255)}, ${randomInt(0,255)}, ${rando
 console.log(randomColor(0, 255)); 
 
 document.querySelector('.nav__link').addEventListener('click', function (e){
-  //console.log('Link');
+  //*console.log('Link');
   this.style.backgroundColor = randomColor();
   console.log('Link', e.target);
   console.log(e.currentTarget === this);
 
-  // stop propagation
-  // e.stopPropagation(); // but it is not a good idea only to use sometimes in very complex  aplications with many  handlers with the same event
+  //* stop propagation
+  //* e.stopPropagation(); // but it is not a good idea only to use sometimes in very complex  aplications with many  handlers with the same event
 });
 /*
 document.querySelector('.nav__links').addEventListener('click', function (e){
@@ -408,11 +401,11 @@ document.querySelector('.nav').addEventListener('click', function (e){
 //*-------->    ------------------------------------   <---------
 
 /*
-// selecting h1
+//* selecting h1 checking the connections in child 
  
 const h1 = document.querySelector('h1');
 
-// going downwards
+//* going downwards
 console.log(h1.querySelectorAll('.highlight'));
 console.log(h1.childNodes);
 console.log(h1.children);
@@ -420,7 +413,7 @@ console.log(h1.children);
 h1.firstElementChild.style.color = 'white';
 h1.lastElementChild.style.color = 'red';
 
-// Going upwards : parent
+//* Going upwards : parent
 console.log(h1.parentNode);
 console.log(h1.parentElement);
 
@@ -428,7 +421,7 @@ h1.closest('.header').style.background = 'var(--gradient-secondary)'
 
 h1.closest('h1').style.background = 'var(--gradient-primary)'  
 
-// Going sideways: siblings
+//* Going sideways: siblings
 console.log(h1.previousElementSibling); // null nothing there
 console.log(h1.nextElementSibling);     // h4
 
@@ -449,4 +442,50 @@ console.log(h1.parentElement.children); // HTML collection
 //*-------->    ------------------------------------   <---------
 //*---->      195. Passing Arguments to Event Handlers      <----
 //*-------->    ------------------------------------   <---------
+
+
+/*
+//*with a callback
+nav.addEventListener('mouseover', function(e) {
+  handleHover(e, 0.5);
+});
+nav.addEventListener('mouseout', function(e) {
+  handleHover(e, 1);
+});
+
+
+//*Event delegation  parent container for babling up for the target NAV
+nav.addEventListener('mouseover', function(e) {
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img'); 
+    //* we could select by a class name 
+    //*but to learn  we use .closest 
+
+    siblings.forEach(el => {
+      if(el !== link) el.style.opacity = 0.5; // if not a link change opacity 
+    })
+    logo.style.opacity = 0.5; // and change opacity for logo  
+  }
+});
+nav.addEventListener('mouseout', function(e) {    // reverting after mouse out 
+  if (e.target.classList.contains('nav__link')) {
+    const link = e.target;
+    const siblings = link.closest('.nav').querySelectorAll('.nav__link');
+    const logo = link.closest('.nav').querySelector('img');
+
+    siblings.forEach(el => {
+      if(el !== link) el.style.opacity = 1;
+    })
+    logo.style.opacity = 1;
+  }
+});
+*/
+
+
+//*-------->        ------------------------------------         <---------
+//*---->   196. Implementing a Sticky Navigation: The Scroll Event    <----
+//*-------->         ------------------------------------        <---------
+
 

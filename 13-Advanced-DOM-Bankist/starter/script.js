@@ -109,7 +109,77 @@ nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
 
-//* ----------------- before -----------------
+//* /////////////  Sticky Navigation:  //////////////////////////
+
+//* creating the observer 
+const header = document.querySelector('header')
+const navHeight = nav.getBoundingClientRect().height;
+// console.log(navHeight)
+const stickyNav = function(entries) {
+  const [entry] = entries;
+  //console.log(entry);
+  if (!entry.isIntersecting) nav.classList.add('sticky');
+  else nav.classList.remove('sticky');
+};
+const headerObserver = new IntersectionObserver(stickyNav, {
+  root: null,
+  threshold: 0,
+  rootMargin: `-${navHeight}px` // box of 90 pixels of the header intersetion margin 
+});
+headerObserver.observe(header);
+
+//* ///////////// Reveal Section : ////////////////////////////////
+
+const allSections = document.querySelectorAll('.section');
+
+const revealSection = function(entries, observer) {
+    const [entry] = entries;
+    //console.log(entry);
+
+    if (!entry.isIntersecting) return; 
+
+    entry.target.classList.remove('section--hidden');
+    observer.unobserve(entry.target);
+};
+  const sectionObserver = new IntersectionObserver(revealSection, {
+    root: null,
+    threshold: 0.15,
+});
+
+  allSections.forEach(function (section) {
+    sectionObserver.observe(section); // observing each section before reveal
+    section.classList.add('section--hidden'); // adding for each section hidden class
+});
+
+//*/ //////////////// Lazy loading images //////////////////
+
+      //* -------> Selecting all img with property of data-src !
+const imgTarget = document.querySelectorAll('img[data-src]'); 
+const loadImg = function (entries, observer) {
+
+  const [entry] = entries;
+      //console.log(entry); // showing that img-Entry are fired corectly
+      if (!entry.isIntersecting) return;
+
+      //* -------> Replace src with data-src
+      entry.target.src = entry.target.dataset.src;
+
+      //* --------> Load Img event -------> 
+      entry.target.addEventListener('load', function() {
+            entry.target.classList.remove('lazy-img');
+      });
+      //* ------> stop observing 
+      observer.unobserve(entry.target);
+};
+      //* -------> Create img observer
+const imgObserver = new IntersectionObserver(loadImg, 
+  {
+root: null,
+threshold: 0
+})
+
+imgTarget.forEach(img => imgObserver.observe(img));
+
 
 //*-------->        ------------------------------------      <---------
 //*-------->           184. PROJECT: "Bankist" Website        <---------
@@ -488,4 +558,48 @@ nav.addEventListener('mouseout', function(e) {    // reverting after mouse out
 //*---->   196. Implementing a Sticky Navigation: The Scroll Event    <----
 //*-------->         ------------------------------------        <---------
 
+ //console.log(window.scrollY); // position of viewport 
+ /*
+ const initialCoords = section1.getBoundingClientRect();
+ console.log(initialCoords);
+ 
+ window.addEventListener('scroll', function (e){
+   //*console.log(window.scrollY); // position of viewport 
+       if (window.scrollY > initialCoords.top ) 
+       //* if window reach level smaller than coords to top is activating sticky class. /* nav and stickly class at the same time  from css
+       nav.classList.add('sticky');
+     else nav.classList.remove('sticky');
+ });
+*/
+
+//*-------->        ------------------------------------         <---------
+//*---->      197. A Better Way: The Intersection Observer API        <----
+//*-------->         ------------------------------------        <---------
+//* Sticky navigation 
+/*
+//* 3. creating callback function
+const obsCallback = function(entries, observer) {    // 3.this callback here willl get call each time when our observed element intersecting the root element will be defined.
+  entries.forEach(entry => {
+    console.log(entry);
+  })
+};
+const obsOptions = {
+  root: null,
+  threshold: [0, 0.2]// percentage of intersection at which the observing 3.callback will be call
+};
+//* 1. creating new section observer
+const observer = new IntersectionObserver (obsCallback, obsOptions);
+//* 2. observing choosen section
+observer.observe(section1);
+*/
+
+
+//*-------->        ------------------------------------         <---------
+//*---->            198. Revealing Elements on Scrolling              <----
+//*-------->        ------------------------------------         <---------
+
+
+//*-------->        ------------------------------------         <---------
+//*---->                  199. Lazy Loading Images                    <----
+//*-------->        ------------------------------------         <---------
 

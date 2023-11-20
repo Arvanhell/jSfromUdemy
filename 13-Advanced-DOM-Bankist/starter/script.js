@@ -42,7 +42,6 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-
 btnScrollTo.addEventListener('click', function(e) {
   const s1coords = section1.getBoundingClientRect(); 
   console.log(s1coords);
@@ -87,7 +86,6 @@ document.querySelector(`.operations__content--${clicked.dataset.tab}`)
   .classList.add('operations__content--active');
 }); 
 
-
 //* /////////////  Menu fade animation   //////////////////////////
 
 // Refactoring ---> to dry code
@@ -108,7 +106,6 @@ const handleHover =  function(e, opacity) {
 nav.addEventListener('mouseover', handleHover.bind(0.5));
 nav.addEventListener('mouseout', handleHover.bind(1));
 
-
 //* /////////////  Sticky Navigation:  //////////////////////////
 
 //* creating the observer 
@@ -124,7 +121,7 @@ const stickyNav = function(entries) {
 const headerObserver = new IntersectionObserver(stickyNav, {
   root: null,
   threshold: 0,
-  rootMargin: `-${navHeight}px` // box of 90 pixels of the header intersetion margin 
+  rootMargin: `-${navHeight}px` // box of pixels of the header intersetion margin 
 });
 headerObserver.observe(header);
 
@@ -158,7 +155,7 @@ const imgTarget = document.querySelectorAll('img[data-src]');
 const loadImg = function (entries, observer) {
 
   const [entry] = entries;
-      //console.log(entry); // showing that img-Entry are fired corectly
+                          //console.log(entry);// showing that img-Entry are fired corectly
       if (!entry.isIntersecting) return;
 
       //* -------> Replace src with data-src
@@ -175,12 +172,67 @@ const loadImg = function (entries, observer) {
 const imgObserver = new IntersectionObserver(loadImg, 
   {
 root: null,
-threshold: 0
-})
+threshold: 0,
+rootMargin: '200px'
+});
 
 imgTarget.forEach(img => imgObserver.observe(img));
+///
+//* /////////////////// Sliders  ///////////////////
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+const dotContainer = document.querySelector('.dots');
 
+let curSlide = 0;
+const maxSlide = slides.length;  // how many slides available to go trough
+// dots creating an element of html 
+const createDots = function (){
+  slides.forEach(function(_, i){ // conventional var we don't even need  '_'
+    dotContainer.insertAdjacentHTML("beforeend", `<button class='dots__dot' data-slide="${i}"></button>`); //  adding index to looping forEAch
+  }); 
+};
+createDots();
+/////////////////////
+const goToSlide = function(slide) {
+  slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)  // logic here 
+  );
+};
+goToSlide(0);
 
+// Next slide <------ depends on btnRight
+const nextSlide = function() {
+  if (curSlide === maxSlide - 1) {
+    curSlide = 0;
+  }
+  curSlide++
+          goToSlide(curSlide);
+};
+// Previous slide <----- depends on btnLeft
+const prevSlide = function() {
+  if (curSlide === 0) {
+    curSlide = maxSlide -1;
+  }else{
+  curSlide--;
+  }
+  goToSlide(curSlide);
+};
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
+ // curSlide = 1 : -100%, 0%, 100%, 200%
+ 
+ document.addEventListener('keydown', function (e) {
+  if (e.key ==='ArrowLeft') prevSlide(); // key event left
+  e.key === 'ArrowRight' && nextSlide(); // key event right
+});
+
+// event delegation for dots
+dotContainer.addEventListener('click', function (e){
+  if (e.target.classList.contains('dots__dot')) {
+    const { slide } = e.target.dataset;
+    goToSlide(slide);
+  }
+});
 //*-------->        ------------------------------------      <---------
 //*-------->           184. PROJECT: "Bankist" Website        <---------
 //*-------->        ------------------------------------      <---------
@@ -188,8 +240,6 @@ imgTarget.forEach(img => imgObserver.observe(img));
 //*-------->        ------------------------------------      <---------
 //*-------->           185. How the DOM really works          <---------
 //*-------->        ------------------------------------      <---------
-
-
 
 /* What is DOM 
 Interface between JS and browser
@@ -204,12 +254,14 @@ Interface between JS and browser
    //* that contains lots of methods and properties to interact with the DOM tree
 
 */
+
 /*
 represented by JavaScript object                            
 .textContent                     //* Event Target    .addEventlistener()
 .childNides   //*                                 .removeEventListener()
 .parentNode                      ⬇️            ⬇️
 .cloneNode()
+
 //*                            Node  :         Window: 
 
 § //* Text <p> Paragraph</p>                                                          
@@ -243,7 +295,6 @@ represented by JavaScript object
                 .cloneNode() or .closest() methods.2
 
 */
-
 
 //*-------->        ------------------------------------        <---------
 //*---->       186. Selecting, Creating, and Deleting Elements       <----
@@ -279,7 +330,6 @@ header.append(message);  //*  only on bottom our header element
 //* header.before(message); // before
 //* header.after(message);   // after 
 
-
 //* Delete elements
 
 document.querySelector('.btn--close-cookie').addEventListener('click', function(){
@@ -287,6 +337,7 @@ document.querySelector('.btn--close-cookie').addEventListener('click', function(
    //* message.parentElement.removeChild(message); // old school, before in use
 });
 */
+
 //*-------->    ------------------------------------   <---------
 //*---->         187. Styles Atributes and classes          <----
 //*-------->    ------------------------------------   <---------
@@ -371,7 +422,6 @@ logo.classList.contains('c'); // not includes when called in array
    //* section1.scrollIntoView({behavior: 'smooth'})
 //*});
 
-
 //*-------->    ------------------------------------   <---------
 //*---->       188. Types of events and event hadnlers      <----
 //*-------->    ------------------------------------   <---------
@@ -393,12 +443,9 @@ setTimeout(() =>  h1.removeEventListener('mouseenter', alertH1), 3000);
 //* }; 
 //*
 
-
-
 //*-------->    ------------------------------------   <---------
 //*---->   190. Event Propagation: Bubbling and Capturing   <----
 //*-------->    ------------------------------------   <---------
-
 
 //*-------->    ------------------------------------   <---------
 //*---->         191. Event Propagation in Practice         <----
@@ -435,8 +482,7 @@ document.querySelector('.nav').addEventListener('click', function (e){
 //*-------->    ------------------------------------   <---------
 //*----> 192.Event Delegation: Implementing Page Navigation <----
 //*-------->    ------------------------------------   <---------
-
-       
+      
 //* document.querySelectorAll('.nav__link') // nodelist then we loop forEach
 //* .forEach(function(el){ // acces to current element in the nodelist
 //*   el.addEventListener('click', function(e){  // acces to the event 
@@ -447,7 +493,6 @@ document.querySelector('.nav').addEventListener('click', function (e){
 //*     document.querySelector(id).scrollIntoView({behavior: 'smooth'});
 //*   });
 //* }); 
-
 
 //*        // event delegation is //
 
@@ -464,7 +509,6 @@ document.querySelector('.nav').addEventListener('click', function (e){
 //      document.querySelector(id).scrollIntoView({behavior: 'smooth'});
 //       }
 // });
-
 
 //*-------->    ------------------------------------   <---------
 //*---->                193. DOM Traversing                 <----
@@ -504,15 +548,14 @@ console.log(h1.parentElement.children); // HTML collection
   if(el !== h1) el.style.transform = 'scale(0.5)';
 });
 */
+
 //*-------->    ------------------------------------   <---------
 //*---->          194. Building A tabbed component          <----
 //*-------->    ------------------------------------   <---------
 
-
 //*-------->    ------------------------------------   <---------
 //*---->      195. Passing Arguments to Event Handlers      <----
 //*-------->    ------------------------------------   <---------
-
 
 /*
 //*with a callback
@@ -522,7 +565,6 @@ nav.addEventListener('mouseover', function(e) {
 nav.addEventListener('mouseout', function(e) {
   handleHover(e, 1);
 });
-
 
 //*Event delegation  parent container for babling up for the target NAV
 nav.addEventListener('mouseover', function(e) {
@@ -553,7 +595,6 @@ nav.addEventListener('mouseout', function(e) {    // reverting after mouse out
 });
 */
 
-
 //*-------->        ------------------------------------         <---------
 //*---->   196. Implementing a Sticky Navigation: The Scroll Event    <----
 //*-------->         ------------------------------------        <---------
@@ -575,6 +616,7 @@ nav.addEventListener('mouseout', function(e) {    // reverting after mouse out
 //*-------->        ------------------------------------         <---------
 //*---->      197. A Better Way: The Intersection Observer API        <----
 //*-------->         ------------------------------------        <---------
+
 //* Sticky navigation 
 /*
 //* 3. creating callback function
@@ -593,13 +635,71 @@ const observer = new IntersectionObserver (obsCallback, obsOptions);
 observer.observe(section1);
 */
 
-
 //*-------->        ------------------------------------         <---------
 //*---->            198. Revealing Elements on Scrolling              <----
 //*-------->        ------------------------------------         <---------
 
-
 //*-------->        ------------------------------------         <---------
 //*---->                  199. Lazy Loading Images                    <----
+//*-------->        ------------------------------------         <---------
+
+//*-------->        ------------------------------------         <---------
+//*---->           200. Building a slider component part.1            <----
+//*-------->        ------------------------------------         <---------
+
+/* javascript 
+const slides = document.querySelectorAll('.slide');
+const btnLeft = document.querySelector('.slider__btn--left');
+const btnRight = document.querySelector('.slider__btn--right');
+
+let curSlide = 0;
+const maxSlide = slides.length;  // how many slides available to go trough
+
+const gotToSLide = function(slide) {
+  slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)  // logic here 
+  );
+}
+gotToSLide(0);
+
+// Next slide <------ depends on btnRight
+const nextSlide = function() {
+  if (curSlide === maxSlide - 1) {
+    curSlide = 0;
+  }
+  curSlide++
+          gotToSLide(curSlide);
+}
+// Previous slide <----- depends on btnLeft
+const prevSlide = function() {
+  if (curSlide === 0) {
+    curSlide = maxSlide -1;
+  }else{
+  curSlide--;
+  }
+  gotToSLide(curSlide);
+}
+btnRight.addEventListener('click', nextSlide);
+btnLeft.addEventListener('click', prevSlide);
+ // curSlide = 1 : -100%, 0%, 100%, 200%
+
+  document.addEventListener('keydown', function (e) {
+  if (e.key ==='ArrowLeft') prevSlide(); // key event left
+  e.key === 'ArrowRight' && nextSlide(); // key event right
+});
+ */
+//* //// html 
+//  ...html   
+//  <div class="slider">
+//   <div class="slide"><img src="img/img-1.jpg" alt="Photo 1" /></div>
+//         <div class="slide"><img src="img/img-2.jpg" alt="Photo 2" /></div>
+//         <div class="slide"><img src="img/img-3.jpg" alt="Photo 3" /></div>
+//         <div class="slide"><img src="img/img-4.jpg" alt="Photo 4" /></div>
+//         <button class="slider__btn slider__btn--left">&larr;</button>
+//         <button class="slider__btn slider__btn--right">&rarr;</button>
+//         <div class="dots"></div>
+//       </div>
+//  ...
+//*-------->        ------------------------------------         <---------
+//*---->           200. Building a slider component part.2            <----
 //*-------->        ------------------------------------         <---------
 

@@ -191,7 +191,7 @@ const maxSlide = slides.length;  // how many slides available to go
 // Functions
 // Functions
 const createDots = function () {
-  slides.forEach(function (_, i) {
+  slides.forEach(function ( _, i) {
     dotContainer.insertAdjacentHTML(
       'beforeend',
       `<button class="dots__dot" data-slide="${i}"></button>`
@@ -210,14 +210,14 @@ const activateDot = function (slide) {
 };
 /////////////////////
 const goToSlide = function(slide) {
-  slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)  // logic here 
+  slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - slide)}%)`)  // logic here 
   );
 };
 
 
 // Next slide <------ depends on btnRight
 const nextSlide = function() {
-  if (curSlide === maxSlide - 1) {
+  if (curSlide === maxSlide - 1) {code
     curSlide = 0;
   }
   curSlide++

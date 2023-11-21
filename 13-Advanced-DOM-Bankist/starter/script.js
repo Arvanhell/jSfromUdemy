@@ -179,27 +179,34 @@ rootMargin: '200px'
 imgTarget.forEach(img => imgObserver.observe(img));
 ///
 //* /////////////////// Sliders  ///////////////////
+
+const slider = function() {
+
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
 const dotContainer = document.querySelector('.dots');
-
-let curSlide = 0;
-const maxSlide = slides.length;  // how many slides available to go trough
-// dots creating an element of html 
-const createDots = function (){
-  slides.forEach(function(_, i){ // conventional var we don't even need  '_'
-    dotContainer.insertAdjacentHTML("beforeend", `<button class='dots__dot' data-slide="${i}"></button>`); //  adding index to looping forEAch
+        let curSlide = 0;
+const maxSlide = slides.length;  // how many slides available to go  
+// Functions
+const createDots = function (){ // create dots function
+  slides.forEach(function(_, i) { // conventional var we don't even need  '_'
+    dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"></button>`); //  adding index to looping forEAch
   }); 
 };
-createDots();
 /////////////////////
 const goToSlide = function(slide) {
   slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)  // logic here 
   );
 };
-goToSlide(0);
-
+const activateDot = function(slide) {
+  document
+  .querySelectorAll('.dots__dot')
+  .forEach(dot => dot.classList.remove('dots__dot--active')); // removing active class for dots
+ document
+  .querySelector(`.dots__dot[data-slide="${slide}"]`)
+  .classList.add('.dots__dot--active') // adding active class for dots
+};
 // Next slide <------ depends on btnRight
 const nextSlide = function() {
   if (curSlide === maxSlide - 1) {
@@ -207,6 +214,7 @@ const nextSlide = function() {
   }
   curSlide++
           goToSlide(curSlide);
+          activateDot(curSlide);
 };
 // Previous slide <----- depends on btnLeft
 const prevSlide = function() {
@@ -216,10 +224,20 @@ const prevSlide = function() {
   curSlide--;
   }
   goToSlide(curSlide);
+  activateDot(curSlide);
 };
+
+const init = function () { // initialization 
+  goToSlide(0);
+  createDots();
+
+  activateDot(0);
+}
+init();
+
+//Event Handler
 btnRight.addEventListener('click', nextSlide);
 btnLeft.addEventListener('click', prevSlide);
- // curSlide = 1 : -100%, 0%, 100%, 200%
  
  document.addEventListener('keydown', function (e) {
   if (e.key ==='ArrowLeft') prevSlide(); // key event left
@@ -227,12 +245,16 @@ btnLeft.addEventListener('click', prevSlide);
 });
 
 // event delegation for dots
-dotContainer.addEventListener('click', function (e){
-  if (e.target.classList.contains('dots__dot')) {
-    const { slide } = e.target.dataset;
-    goToSlide(slide);
-  }
-});
+    dotContainer.addEventListener('click', function (e){
+      if (e.target.classList.contains('dots__dot')) {
+        const {slide} = e.target.dataset;
+        goToSlide(slide);
+        activateDot(slide);
+     }
+  });
+};
+slider();
+
 //*-------->        ------------------------------------      <---------
 //*-------->           184. PROJECT: "Bankist" Website        <---------
 //*-------->        ------------------------------------      <---------

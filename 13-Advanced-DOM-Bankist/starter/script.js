@@ -189,24 +189,32 @@ const dotContainer = document.querySelector('.dots');
         let curSlide = 0;
 const maxSlide = slides.length;  // how many slides available to go  
 // Functions
-const createDots = function (){ // create dots function
-  slides.forEach(function(_, i) { // conventional var we don't even need  '_'
-    dotContainer.insertAdjacentHTML('beforeend', `<button class="dots__dot" data-slide="${i}"></button>`); //  adding index to looping forEAch
-  }); 
+// Functions
+const createDots = function () {
+  slides.forEach(function (_, i) {
+    dotContainer.insertAdjacentHTML(
+      'beforeend',
+      `<button class="dots__dot" data-slide="${i}"></button>`
+    );
+  });
+};
+
+const activateDot = function (slide) {
+  document
+    .querySelectorAll('.dots__dot')
+    .forEach(dot => dot.classList.remove('dots__dot--active'));
+
+  document
+    .querySelector(`.dots__dot[data-slide="${slide}"]`)
+    .classList.add('dots__dot--active');
 };
 /////////////////////
 const goToSlide = function(slide) {
   slides.forEach((s, i) => (s.style.transform = `translateX(${100 * (i - curSlide)}%)`)  // logic here 
   );
 };
-const activateDot = function(slide) {
-  document
-  .querySelectorAll('.dots__dot')
-  .forEach(dot => dot.classList.remove('dots__dot--active')); // removing active class for dots
- document
-  .querySelector(`.dots__dot[data-slide="${slide}"]`)
-  .classList.add('.dots__dot--active') // adding active class for dots
-};
+
+
 // Next slide <------ depends on btnRight
 const nextSlide = function() {
   if (curSlide === maxSlide - 1) {
@@ -245,13 +253,13 @@ btnLeft.addEventListener('click', prevSlide);
 });
 
 // event delegation for dots
-    dotContainer.addEventListener('click', function (e){
-      if (e.target.classList.contains('dots__dot')) {
-        const {slide} = e.target.dataset;
-        goToSlide(slide);
-        activateDot(slide);
-     }
-  });
+dotContainer.addEventListener('click', function (e) {
+  if (e.target.classList.contains('dots__dot')) {
+    const { slide } = e.target.dataset;
+    goToSlide(slide);
+    activateDot(slide);
+  }
+}); 
 };
 slider();
 
@@ -722,6 +730,14 @@ btnLeft.addEventListener('click', prevSlide);
 //       </div>
 //  ...
 //*-------->        ------------------------------------         <---------
-//*---->           200. Building a slider component part.2            <----
+//*---->           201. Building a slider component part.2            <----
 //*-------->        ------------------------------------         <---------
+
+// Refactoring  and setting kedown and dots < --- dots not working :(
+
+//*-------->        ------------------------------------         <---------
+//*---->                   202. Lifecycle DOM Events                  <----
+//*-------->        ------------------------------------         <---------
+
+
 

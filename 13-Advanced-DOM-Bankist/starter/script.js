@@ -739,5 +739,60 @@ btnLeft.addEventListener('click', prevSlide);
 //*---->                   202. Lifecycle DOM Events                  <----
 //*-------->        ------------------------------------         <---------
 
+document.addEventListener('DOMContentLoaded', function (e) {
+console.log('HTML parsed and DOM tree built!', e);
+});
 
+window.addEventListener('load', function(e){
+  console.log('Page fully loaded', e);
+});
 
+// dont abuse people with this msg with normal sites 
+// window.addEventListener('beforeunload', function(e){
+//   e.preventDefault();
+//   console.log(e);
+//   e.returnValue = '';
+// });
+
+//*-------->        ------------------------------------         <---------
+//*---->      203. Efficient script loading defer and sync            <----
+//*-------->        ------------------------------------         <---------
+
+//* ----- regular 
+//* <script src = 'script.js'> // when is added to Head // not practice
+// | parsing HTML | --> Waiting    -->     | Fininshing parsing hTML |
+//                |fetch script |  execute |                         | DOMContentLoaded
+//* ------------------------------------------ ------------------------------------------
+
+//* regular <script src = 'script.js'> // when is added before end Body
+      // Parsing HTML | Fetch script | execute | DOMContentLoaded
+
+// 👉 Scripts are fetched and executed  after the HTML is completely parsed
+//* 👉 Use if you need tp suport old brpwsers
+
+//* ------------------------------------------ ------------------------------------------
+
+//* ----- async when is added to Head 
+//  <script async src = 'script.js'> 
+// | parsing HTML     | waiting |  Finishing parsing HTML |
+//     |fetch script  | execute |                         | DOMContentLoaded
+
+//👉 Script are fetched asynchronously and executed immediately
+//👉 Usually the DOMContentLoaded event waits for all scripts to execute, except for async script.
+// So, DOMContentLoaded does not wait for an async script
+//👉 Script not guaranteed to execute in order
+
+//* 👉 Use for 3-rd party scripts where order doesn't matter (e.g. Google Analytics)
+
+//* ------------------------------------------ ------------------------------------------
+
+//* ----- defer when is added to Head 
+//  <script defer src = 'script.js'> 
+// | Parsing HTML            | Execute | 
+//    |Fetch script|                   |    DOMContentLoaded
+
+// 👉 Script are fetched asynchronously and executed after the HTM is completely parsed
+// 👉 DOMCOntentLoaded event fires after defer script is executed in order
+
+//* 👉 This is overal the best solution! Use for your own scripts,
+//*    and when order matters (e.g. including a library)

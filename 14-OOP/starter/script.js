@@ -126,3 +126,100 @@ this.birthYear = birthYear;
 //* <----------------------------------------------------------------------> 
 
 // Prototypes 
+console.log(Person.prototype);                              //prototype of constructor 
+Person.prototype.calcAge  = function () {
+        console.log(2037 - this.birthYear);
+};
+cezary.calcAge();
+jola.calcAge();
+adam.calcAge();
+kris.calcAge();
+
+console.log(cezary.__proto__);
+console.log(cezary.__proto__ === Person.prototype);  // true
+console.log(Person.prototype.isPrototypeOf(cezary)); // true
+console.log(Person.prototype.isPrototypeOf(Person)); // false 
+ 
+//  .prototypeOfLinkedObjects ( not named as this only option what it is )
+
+//set property for prototype 
+Person.prototype.species = 'Homo Sapiens';
+console.log(cezary);  // inherit from the prototype  species: "Homo Sapiens"
+console.log(cezary.hasOwnProperty('firstName'));  //true
+console.log(cezary.hasOwnProperty('species'));    //false   <--- inherited
+
+//* <---------------------------------------------------------------------->
+//* <------ 210. Prototypal Inheritance and The Prototype Chain ----------->
+//* <----------------------------------------------------------------------> 
+
+/*
+How prototypal inheritance / delegation works
+
+
+
+  __________________________________________
+        Constructor function                | ---- .prototype --->   Prototy[e]   <-- it NOT of Person, but object created by Person
+        [Person()]                          |                        [Person.prototype]
+  __________________________________________|  <--- .constructor --  calcAge: function
+
+        const Person = function (name, birthYear) {                           ⬆|                         🆕 The new operator:
+        this,name = name;                                               .__proto__                     //*1. 
+                                                                               |                         //*  An empty object is created
+                                                                               |
+        this.birthYear = birthYear;                                _____________________                //*2. 
+                                                                        Object          |                //*  this keyword in constructor function call 
+                                                                        [cezary]        |                //*  is set to new object         
+        }                                                                               |                
+              const cezar = new Person('Cezary', 197                   name: 'Cezary'   |              //*3. 
+                         cezary.calcAge();                           birthYear: 1976    |               //*   The new object ilinked 
+                                                                                        |               //*   (__proto__property)  to the constructor
+                                                                                                       //*   functions prototype property      
+                                                                        __proto__:
+                                                                     Person.prototype <------ always point to an object prototype
+
+
+       
+       
+        🟨 calcAge is inherited from prototype has not his own
+        🟨 This how it works with function constructor and ES6 classes
+
+        */
+       
+       
+       
+//* <---------------------------------------------------------------------->
+//* <------   211. Prototypal Inheritance on Built-In Objects   ----------->
+//* <----------------------------------------------------------------------> 
+
+       console.log(cezary.__proto__); // {species: 'Homo Sapiens', calcAge: ƒ, constructor: ƒ}
+       console.log(cezary.__proto__.__proto__);  // Object.prototype --> top of the chain   
+       // {constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+       console.log(cezary.__proto__.__proto__.__proto__);   // null
+
+       console.dir(Person.prototype.constructor);  // ƒ Person(firstName, birthYear)
+
+       const arr = [3,5,6,7,8,9,3];
+       console.log(arr.__proto__); // <---- each array is inherit all methods from prototype 
+       console.log(arr.__proto__ === Array.prototype); // true
+
+       console.log(arr.__proto__.__proto__); // {constructor: ƒ, __defineGetter__: ƒ, __defineSetter__: ƒ, hasOwnProperty: ƒ, __lookupGetter__: ƒ, …}
+
+       // it is egsist somewhere in javascript engine and we have access to it 
+
+// Array.prototype.unique = function() {   // randowmly created name unique only for experiments
+//         return [...new Set(this)];
+// }
+// console.log(arr.unique()); // [3, 5, 6, 7, 8, 9] 
+
+const h1 = document.querySelector('h1')
+console.dir(h1)
+
+/*
+//* console.dir(x => x + 1); 
+anonymous()length: 1name: ""arguments: (...)caller: (...)[[FunctionLocation]]: script.js:216[[Prototype]]: ƒ ()[[Scopes]]: Scopes[2]
+*/
+
+//* <---------------------------------------------------------------------->
+//* <---------            212 .  Coding Challenge #1            ----------->
+//* <---------------------------------------------------------------------->
+

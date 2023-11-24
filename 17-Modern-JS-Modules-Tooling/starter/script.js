@@ -176,6 +176,57 @@ console.log('Importing module ✅');
 //*            <    276. A Brief Introduction to the Command Line   >
 //*            <---------------------------------------------------->
 
+/*
+     ls - listing 
+     cd - change directory when you in file and you see interesting folder you want to go
+     start typing then use tab to complete]
+     cd ../.. move two level
+     rm -R file - remove 
+     mv - move file  mv file.js ../   which folder you wanted you must specify or slowly backward then 
+*/
+
+//*            <---------------------------------------------------->
+//*            <              277. Introduction to NPM              >
+//*            <---------------------------------------------------->
+
+import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+const state = {
+        cart: [
+                {product: 'keyboard', quantity: 20},
+                {product: 'joystick', quantity: 20},
+        ],    //     <------- always forgetting coma in here grrr
+        user: { loggedIn: true },
+};
+
+const stateClone = Object.assign({}, state);
+const stateDeepClone = cloneDeep(state);
+
+// if we change is deep cloned as the module is stating for
+state.user.loggedIn = false;
+console.log(stateClone);
+
+console.log(stateDeepClone);
+
+//if(module.hot) {
+       // module.hot()
+//}
+
+//*            <---------------------------------------------------->
+//*            <     278. Bundling With Parcel and NPM Scripts      >
+//*            <---------------------------------------------------->
+
+//* instaling parcel 
+        // npm i parcell --save-dev    (<---- developer dependencies)
+
+        // comand to working within parcel is 
+                // npx (<--- not npm) parcel index.html
+                 // 
+                 // now instead live-server I received acces to server trough http://localhost:1234
+                 // created after command  //    npx parcel index.html 
+                 // this is on local host as live-server but has different port 
+                 // instead 8080 has 1234
+
+
 //*            <---------------------------------------------------->
 //*            <     -----------------------------------------      >
 //*            <---------------------------------------------------->
@@ -183,3 +234,8 @@ console.log('Importing module ✅');
 //*            <---------------------------------------------------->
 //*            <     -----------------------------------------      >
 //*            <---------------------------------------------------->
+
+//*            <---------------------------------------------------->
+//*            <     -----------------------------------------      >
+//*            <---------------------------------------------------->
+

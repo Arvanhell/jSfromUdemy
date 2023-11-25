@@ -292,3 +292,11 @@ import 'regenerator-runtime/runtime';
 //*            <282. Declarative and Functional JavaScript Principles>
 //*            <----------------------------------------------------->
 
+//*            <---------------------------------------------------->
+//*            <         283. Let's Fix Some Bad Code: Part 2       >
+//*            <---------------------------------------------------->
+
+
+
+
+

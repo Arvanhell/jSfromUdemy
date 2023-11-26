@@ -1,9 +1,9 @@
 'use strict';
 
 
-//* <---------------------------------------------------------------------->
-//* <----------  206. What is Object-Oriented Programing   ---------------->
-//* <----------------------------------------------------------------------> 
+                        //* <---------------------------------------------------------------------->
+                        //* <----------  206. What is Object-Oriented Programing   ---------------->
+                        //* <----------------------------------------------------------------------> 
 
 //* ----------->  OOP Baby OOP BABY !!!!!!
 //* 👉 Object oriented programing paradigm based on the concept of objects;
@@ -50,9 +50,9 @@
 // [it's more complex that that but enough for our purposes].
 
 
-//* <---------------------------------------------------------------------->
-//* <------------          207. OOP in JavaScript          ---------------->
-//* <----------------------------------------------------------------------> 
+                        //* <---------------------------------------------------------------------->
+                        //* <------------          207. OOP in JavaScript          ---------------->
+                        //* <----------------------------------------------------------------------> 
 
 //*   -----> OOP in JS: Prototype
 
@@ -84,9 +84,9 @@
    //  👉 The easiest and most straingforwars way of linking an object to a prototype object.
 
 
-//* <---------------------------------------------------------------------->
-//* <-------   208. Constructor Functions and the new Operator  ----------->
-//* <----------------------------------------------------------------------> 
+                        //* <---------------------------------------------------------------------->
+                        //* <-------   208. Constructor Functions and the new Operator  ----------->
+                        //* <----------------------------------------------------------------------> 
 
 
 //* CONSTRACTOR FUNCTION how to build a 'house' with this blueprint
@@ -121,9 +121,9 @@ this.birthYear = birthYear;
  console.log(jola, adam, kris); 
  console.log(cezary instanceof Person); // true
 
-//* <---------------------------------------------------------------------->
-//* <-------------------       209. Prototypes        --------------------->
-//* <----------------------------------------------------------------------> 
+                        //* <---------------------------------------------------------------------->
+                        //* <-------------------       209. Prototypes        --------------------->
+                        //* <----------------------------------------------------------------------> 
 
 // Prototypes 
 console.log(Person.prototype);                              //prototype of constructor 
@@ -148,9 +148,9 @@ console.log(cezary);  // inherit from the prototype  species: "Homo Sapiens"
 console.log(cezary.hasOwnProperty('firstName'));  //true
 console.log(cezary.hasOwnProperty('species'));    //false   <--- inherited
 
-//* <---------------------------------------------------------------------->
-//* <------ 210. Prototypal Inheritance and The Prototype Chain ----------->
-//* <----------------------------------------------------------------------> 
+                        //* <---------------------------------------------------------------------->
+                        //* <------ 210. Prototypal Inheritance and The Prototype Chain ----------->
+                        //* <----------------------------------------------------------------------> 
 
 /*
 How prototypal inheritance / delegation works
@@ -187,9 +187,9 @@ How prototypal inheritance / delegation works
        
        
        
-//* <---------------------------------------------------------------------->
-//* <------   211. Prototypal Inheritance on Built-In Objects   ----------->
-//* <----------------------------------------------------------------------> 
+                        //* <---------------------------------------------------------------------->
+                        //* <------   211. Prototypal Inheritance on Built-In Objects   ----------->
+                        //* <----------------------------------------------------------------------> 
 
        console.log(cezary.__proto__); // {species: 'Homo Sapiens', calcAge: ƒ, constructor: ƒ}
        console.log(cezary.__proto__.__proto__);  // Object.prototype --> top of the chain   
@@ -219,7 +219,113 @@ console.dir(h1)
 anonymous()length: 1name: ""arguments: (...)caller: (...)[[FunctionLocation]]: script.js:216[[Prototype]]: ƒ ()[[Scopes]]: Scopes[2]
 */
 
-//* <---------------------------------------------------------------------->
-//* <---------            212 .  Coding Challenge #1            ----------->
-//* <---------------------------------------------------------------------->
+                        //* <---------------------------------------------------------------------->
+                        //* <---------            212 .  Coding Challenge #1            ----------->
+                        //* <---------------------------------------------------------------------->
 
+/*
+1. Use a constructor function to implement a Car. A car has a make and a speed property.
+The speed property is the current speed of the car in km/h;
+2. Implement an 'accelerate' method that will increase the car's speed by 10, and log the 
+new speed to the console.
+3. Implement a 'brake', method that will decrese the car's speed  by 5, and log the new speed to the console;
+4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
+
+DATA CAR 1: 'BMW' going at 120 km/h
+DATA CAR 2: 'Mercedes' going at 95 km/h
+*/
+
+const Car = function( make, speed) {   // only function declaration and expresion
+        this.make = make;
+        this.speed = speed
+};
+
+Car.prototype.accelerate = function() {
+        this.speed += 10;
+        console.log(`${this.make} is going at ${this.speed}km/h`);
+};
+
+Car.prototype.brake = function() {
+        this.speed -= 5;
+        console.log(`${this.make} going  ${this.speed}`);
+}
+//-------------------------------------------------------------------
+const bmw = new Car ('BMW', 120); 
+//-------------------------------------------------------------------
+bmw.accelerate(); //BMW is going at 130km/h
+bmw.accelerate(); //BMW is going at 140km/h
+bmw.brake();      //BMW going  135
+bmw.accelerate(); //BMW is going at 145km/h
+//-------------------------------------------------------------------
+const mercedes = new Car('Mercedes', 95 ); 
+//-------------------------------------------------------------------
+mercedes.accelerate(); //Mercedes is going at 105km/h
+mercedes.accelerate(); //Mercedes is going at 115km/h
+mercedes.brake();      //Mercedes going  110
+mercedes.accelerate(); //Mercedes is going at 120km/h
+
+                        //* <---------------------------------------------------------------------->
+                        //* <---------                213.  ES6 Classes                 ----------->
+                        //* <---------------------------------------------------------------------->
+
+//Classes in JavaScript are not same as in Java or C++ they are //* syntetic Sugar
+// they still  behind the scenes implement prototypes inheritants 
+// but with that syntax that this more more sense for the people comming from
+// other programing languages.
+
+                        //* class expression
+//* const PersonCl = class {}
+
+                         //* class declaration
+
+class PersonCl {  
+     constructor(firstName, birthYear){   // method of this class need to be call contructor
+                this.firstName = firstName;
+                this.birthYear = birthYear;
+  }    
+  // Methods will be added to .prototype property
+        calcAge() { 
+        //* method written outside the constructor will be on the prototype of the object 
+        //*not on the object himself
+        // prototype inheritant
+        /*
+PersonCl {firstName: 'Cezar', birthYear: 1976}
+birthYear:  1976
+firstName: "Cezar"
+[[Prototype]]: Object
+calcAge: ƒ calcAge()
+constructor: class PersonCl
+*/
+                        console.log(2037 - this.birthYear);
+  } //*         <--------                    ------->  no commas after end of methods
+        greet() {
+                console.log(`Hey ${this.firstName}`);
+        }   //* <--------  no commas after end of methods
+}
+const cezar = new PersonCl('Cezar', 1976);
+console.log(cezar);  // PersonCl {firstName: 'Cezar', birthYear: 1976}
+cezar.calcAge(); // 61 I will be old man oh lord
+console.log(cezar.__proto__);
+/*
+{constructor: ƒ, calcAge: ƒ}
+calcAge: ƒ calcAge()
+constructor: class PersonCl
+[[Prototype]]: Object
+*/
+console.log(cezar.__proto__ === PersonCl.prototype); // true
+
+// PersonCl.prototype.greet = function () {
+//         console.log(`Hey ${this.firstName}`);
+// };
+cezar.greet(); //Hey Cezar
+
+//* 1 Classes are NOT hoisted 
+//* 2 Classes are first-class citizens ( special kind of fucntion behind the scene)
+//* 3 Classes are executed in strict mode 
+
+
+                        //* <---------------------------------------------------------------------->
+                        //* <---------           214. Setters and Getters               ----------->
+                        //* <---------------------------------------------------------------------->
+
+                        

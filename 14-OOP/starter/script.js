@@ -588,7 +588,7 @@ EV.prototype.chargeBattery = function(chargeTo) {
         this.charge = chargeTo;
 }
 
-EV.prototype.accelerate = function() {
+EV.prototype.accelerate = function() {  // override prototype chain
         this.speed += 10;
         this.charge--;
         console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.charge}.`);
@@ -604,3 +604,74 @@ tesla.brake(); // Tesla going  120 km/h
 /*
 //* we have two simmiliar methods in the prototype chain  Object and Car1 , always will be in use the first one in the chain <---- accelerate 
 */
+
+
+
+
+                        //* <---------------------------------------------------------------------->
+                        //* |           220. Inheritance Between "Classes": ES6 Classes            |
+                        //* <---------------------------------------------------------------------->
+
+       
+                        
+                
+                class PersonCl2 {  
+                        constructor(fullName, birthYear){   
+                                   this.fullName = fullName;
+                                   this.birthYear = birthYear;
+                     }    
+                   
+                     //* Instance methods
+             
+                           calcAge() { 
+                                console.log(2037 - this.birthYear);
+                     } 
+                           greet() {
+                                   console.log(`Hey ${this.fullName}`);
+                     }  
+                   
+                           get age() {
+                                   return 2037 - this.birthYear
+                           }
+                         
+                           set fullName(name){
+                                   console.log(name);
+                                   if (name.includes(" ")) this._fullName = name;
+                                   else alert(`${name} is not full name!`);
+                           }
+                   
+                           get fullName() {
+                                   return this._fullName;
+                           }
+                   
+                           //* Static method
+                           static hey() {
+                                   console.log('Hey there 👀');
+                                   console.log(this);
+                           }
+                   
+                   }
+            
+
+class StudentCl2 extends PersonCl2 {
+         constructor(fullName, birthYear, course) {
+                // Always need to happen first !!!
+            super(fullName, birthYear)  // constructor function parent class we need specified parameters from 
+            this.course = course;
+                }
+                introduce(){
+                        console.log(`My name is ${this._fullName} and I study ${this.course}.`); 
+                }
+                calcAge(){
+                        console.log(`I'm ${2037 - this.birthYear} years old, but as a student I feel more like ${2037 - this.birthYear + 10}`); // I'm 25 years old, but as a student I feel more like 35
+                }
+        }
+
+        const martha = new StudentCl2('Martha Jones', 2012, 'Computer Science')
+        martha.introduce(); // My name is Martha Jones and I study Computer Science.
+        martha.calcAge(); // <----- not shoiwing up because is overwriten up
+
+
+                        //* <---------------------------------------------------------------------->
+                        //* |         221. Inheritance Between "Classes": Object create            |
+                        //* <---------------------------------------------------------------------->

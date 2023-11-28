@@ -611,10 +611,7 @@ tesla.brake(); // Tesla going  120 km/h
                         //* <---------------------------------------------------------------------->
                         //* |           220. Inheritance Between "Classes": ES6 Classes            |
                         //* <---------------------------------------------------------------------->
-
-       
-                        
-                
+ 
                 class PersonCl2 {  
                         constructor(fullName, birthYear){   
                                    this.fullName = fullName;
@@ -652,7 +649,6 @@ tesla.brake(); // Tesla going  120 km/h
                    
                    }
             
-
 class StudentCl2 extends PersonCl2 {
          constructor(fullName, birthYear, course) {
                 // Always need to happen first !!!
@@ -663,7 +659,8 @@ class StudentCl2 extends PersonCl2 {
                         console.log(`My name is ${this._fullName} and I study ${this.course}.`); 
                 }
                 calcAge(){
-                        console.log(`I'm ${2037 - this.birthYear} years old, but as a student I feel more like ${2037 - this.birthYear + 10}`); // I'm 25 years old, but as a student I feel more like 35
+                        console.log(`I'm ${2037 - this.birthYear} years old, but as a student I feel more like ${2037 - this.birthYear + 10}`); // I'm 25 years old, 
+                        //but as a student I feel more like 35
                 }
         }
 
@@ -675,3 +672,58 @@ class StudentCl2 extends PersonCl2 {
                         //* <---------------------------------------------------------------------->
                         //* |         221. Inheritance Between "Classes": Object create            |
                         //* <---------------------------------------------------------------------->
+        
+const PersonProto2 = {
+        calcAge() {
+                console.log(2047 - this.birthYear);
+        },
+
+        init(firstName, birthYear) {
+                this.firstName = firstName;
+                this.birthYear = birthYear
+        },
+};
+
+const StudentProto2 = Object.create(PersonProto2);
+StudentProto2.init = function(firstName, birthYear, course) {
+        PersonProto2.init.call(this, firstName, birthYear);
+        this.course = course;
+};
+
+StudentProto2.introduce = function() {
+        console.log(`Hello my name is ${this.firstName} and I study ${this.course}`);
+}
+const jays = Object.create(StudentProto2);
+jays.init('Jays', 2020, 'AI & Computer Science')
+jays.introduce();
+jays.calcAge();
+
+                                        /*
+                                     |   Prototype         |
+                                     |   [PersonProto2]    |      
+                                     |   calcAge: function |
+                                      ----------------------
+                                                ^   
+                                                |                       
+     //*   const StudentProto2 = Object.create(PersonProto2)             .__proto__
+                                                |
+                                 _______________________________                           
+                                |       Prototype               |
+                                |       [StudentProto2]         |
+                                |       proto :                 |       //* Student inherit from PersonProto2
+                                |       PersonProto2            |
+                                |_______________________________|   
+                                                ^
+                                                |
+     //*  const jays = Object.create StudentProto2                      .__proto__    
+                                                |
+                                _________________________________
+                               |        Object                  |
+                               |        [jays]                  |
+                               |                                |
+                               |        proto  :                |
+                               |     StudentProto2              |
+                               _________________________________|                        
+                                       */
+
+        

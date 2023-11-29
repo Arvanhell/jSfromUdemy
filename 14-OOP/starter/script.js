@@ -726,4 +726,144 @@ jays.calcAge();
                                _________________________________|                        
                                        */
 
+                               
+
+//*                             <---------------------------------------------------------------------->
+//*                             |                      222. Another Class Example                      |
+//*                             <---------------------------------------------------------------------->  
+
+
+//        class Account {
+//         constructor(owner, currency, pin) {
+//                 this.owner = owner;
+//                 this.currency= currency;
+//                 this._pin = pin;
+//                 //*Protected property movements by convention 
+//                 this._movements = [];
+// //---------------------------------------------------------------
+//                 this.locale = navigator.language;
+
+//         console.log(`Thank you for choosing our service ${owner}, and opening an account with us.`);
+//         }
+
+//         //* Public Interface 
+//         getMovements() {
+//                 return this._movements        
+//         }
+
+//         deposit(val) {
+//                 this._movements.push(val);
+//         }
+//          withdraw(val) {
+//                 this.deposit(-val) // abstraction 
+//          }
+//          _approveLoan(val) {
+//                 return true ;
+//          }
+
+//          requestLoan(val) {
+//                 if ( this._approveLoan(val)){
+//                         this.deposit(val);
+//                         console.log(`Loan approved`);
+//                 }
+//          }
+//        }   
+//          const acc1 = new Account('Cezary', 'EUR', 1111);
+//* -------------------------------------------------------------------------
+        //acc1.movements.push(250)  
+        //acc1.movements.push(-140)
+//* instead of above we do  deposit and withdraw methods for each created accounts within Public Interface
+   
+//        acc1.deposit(250);
+//        acc1.withdraw(140);
+//        acc1.requestLoan(100);
+
+//        console.log(acc1);
+//        console.log(acc1.getMovements()); //(3) [250, -140, 100]
+       //*     Account {owner: 'Cezary', currency: 'EUR', pin: 1111, movements: Array(2), locale: 'en-US'}
+       //*         currency: "EUR" locale: "en-US"
+       //*                 movements: (3) [250, -140, 100] owner: "Cezary" pin: 1111
+       //*         [[Prototype]]: Object  
+
+
+//*                             <---------------------------------------------------------------------->
+//*                             |       223. Encapsulation: Protected Properties and Methods           |
+//*                             <---------------------------------------------------------------------->  
+
+    /*
+        API encapsulation involves hiding internal implementation details, 
+        exposing a simplified interface, and providing access control to ensure modularity, 
+        data protection, code reusability, versioning, compatibility, and maintainability. 
+        It helps create well-designed APIs that are easier to understand, use, maintain, and evolve.
+    */
+
+// first we use convenction for protection // _movements... by adding underscore... mean dont touch you can broke
+
+
+
+//*                             <---------------------------------------------------------------------->
+//*                             |       224. Encapsulation: Private Class Fields and Methods           |
+//*                             <---------------------------------------------------------------------->  
+//* 1 Public field
+//* 2 Private fields
+//* 3 Public methods
+//* 4 Private methods
+class Account {
+        //*    1. Public fields (instances)
+        locale = navigator.language;  // same as this.locale = navigator.language
+        // _movements = [];              // same as this._movements = [];
+
+        //*    2. Private fields (instances)
+        #movements = [];     // # <---- 
+        #pin;      //* created as undefine 
+                constructor(owner, currency, pin) {
+                        this.owner = owner;
+                        this.currency= currency;
+                        //protected property
+                        this.#pin = pin;
+                        //this._movements = [];
+                        //this.locale = navigator.language;
+                console.log(`Thank you for choosing our service ${owner}, and opening an account with us.`);
+                }
+        
+                //* Public Interface 
+                getMovements() {
+                        return this.#movements        
+                }
+        
+                deposit(val) {
+                        this.#movements.push(val); 
+                }
+                 withdraw(val) {
+                        this.deposit(-val); // abstraction 
+                 }
+                 _approveLoan(val) {
+                        return true ;
+                 }
+        
+                 requestLoan(val) {
+                        if ( this._approveLoan(val)){
+                                this.deposit(val);
+                                console.log(`Loan approved`);
+                        }
+                 }
+}   
+                 const acc1 = new Account('Cezary', 'EUR', 1111);
+
+                 acc1.deposit(250);
+                        acc1.withdraw(140);
+                        acc1.requestLoan(100);
+                 
+                        console.log(acc1);   //      .... the rest the same but movements appear as
+                        // #movements: Array(3)
+                        //* but  if we try to get acces to movements protected by # 
+     //*   console.log(acc1.#movements);   we got the syntax error it is protected
+        //*SyntaxError: Private field '#movements' must be declared in an enclosing class
+//-------------------------------------------------------------------------------------------------------------
+        //* We can still get into movements but with created API geMovement 
+        console.log(acc1.getMovements()); //(3) [250, -140, 100]
+//------------------------------------------------------------------------------------------------------------   
+        //*console.log(acc1.#pin);
+        //* SyntaxError: Private field '#pin' must be declared in an enclosing class
+
         

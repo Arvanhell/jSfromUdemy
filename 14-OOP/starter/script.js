@@ -808,6 +808,7 @@ jays.calcAge();
 //* 2 Private fields
 //* 3 Public methods
 //* 4 Private methods
+//* ( there is also the staic version)
 class Account {
         //*    1. Public fields (instances)
         locale = navigator.language;  // same as this.locale = navigator.language
@@ -825,29 +826,42 @@ class Account {
                         //this.locale = navigator.language;
                 console.log(`Thank you for choosing our service ${owner}, and opening an account with us.`);
                 }
-        
-                //* Public Interface 
+        //*     3. Public methods
+                //* Public Interface <-------------- public methods
                 getMovements() {
                         return this.#movements        
                 }
         
                 deposit(val) {
                         this.#movements.push(val); 
+                        return this; //* for chaining we add return this;
                 }
+
                  withdraw(val) {
                         this.deposit(-val); // abstraction 
+                        return this; //* for chaining we add return this;
                  }
-                 _approveLoan(val) {
-                        return true ;
-                 }
-        
+
                  requestLoan(val) {
-                        if ( this._approveLoan(val)){
+                        //if ( this.#approveLoan(val)) 
+                        if ( this._approveLoan(val)) {
                                 this.deposit(val);
                                 console.log(`Loan approved`);
-                        }
-                 }
-}   
+                                return this; //* for chaining we add return this;
+                    }
+                }
+
+                static helper(){
+                     console.log('Helper!');   
+                }
+
+        //*     4 Private methods <-----------------------
+
+        //#approveLoan(val) {  
+        _approveLoan(val) {  
+                return true;
+                }
+         }   
                  const acc1 = new Account('Cezary', 'EUR', 1111);
 
                  acc1.deposit(250);
@@ -863,7 +877,88 @@ class Account {
         //* We can still get into movements but with created API geMovement 
         console.log(acc1.getMovements()); //(3) [250, -140, 100]
 //------------------------------------------------------------------------------------------------------------   
-        //*console.log(acc1.#pin);
+//*console.log(acc1.#pin);
         //* SyntaxError: Private field '#pin' must be declared in an enclosing class
+//*console.log(acc1.#approveLoan(100));  
+        //* SyntaxError: Private field '#approveLoan' must be declared in an enclosing class 
+Account.helper();
 
+//*                        <---------------------------------------------------------------------->
+//*                        |                        225. Chaining methods                         |
+//*                        <---------------------------------------------------------------------->  
+
+
+//*  Chaining
+
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000); 
+console.log(acc1.getMovements());  //(8) [250, -140, 100, 300, 500, -35, 25000, -4000] 
+//*    after adding return this; to methods chainig working properly without errors
+
+//*                        <---------------------------------------------------------------------->
+//*                        |                             226. Class Summary                       |
+//*                        <---------------------------------------------------------------------->  
+
+//*                        <---------------------------------------------------------------------->
+//*                        |                             227. Coding challenge#4                  |
+//*                        <---------------------------------------------------------------------->  
+/*
+1.Re-create challenge #3, but this time using ES6 classes:create an 'EVCl' child class of the 'CarCl' class
+2.Make the 'charge' property private;
+3.Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the Car class. They experiment with chaining!
+
+data  car 1: 'Rivian' going at 120 km/h, with a charge of 23%
+*/
+class carCl {
+        constructor(make, speed) {
+                this.make = make;
+                this.speed = speed;
+        }
+        accelerate() {
+                this.speed += 10;
+                console.log(`${this.make} is going at ${this.speed} km/h`);
+        }
+        brake() {
+                this.speed -= 5;
+                console.log(`${this.make} is going at ${this.speed} km/h`);
+                return this;
+        }
+
+        get speedUS() {
+                return this.speed / 1.6;
+        }
+
+        set speedUS(speed){
+                this.speed = speed * 1.6;
+        }
+};
+class EVCl extends carCl  {
+        #charge;
+        constructor   (make, speed, charge) {
+        super( make, speed);
+        this.#charge = charge;
+};
+chargeBattery (chargeTo) {
+        this.#charge = chargeTo;
+                return this;
+};
+accelerate () {
+        this.speed += 20;
+        this.#charge--;
+        console.log(`${this.make} is going at ${this.speed} km/h, with a charge of ${this.#charge}`);
+                return this;    
+        };     
+};
+const rivian = new EVCl('Rivian', 120, 23);  //*EVCl {make: 'Rivian', speed: 120, charge: 23}
+console.log(rivian); //EVCl {make: 'Rivian', speed: 120, charge: 23, #charge: undefined}
+//console.log(rivian.#charge); //*SyntaxError: Private field '#charge' must be declared in an enclosing class
+
+rivian
+        .accelerate() //Rivian is going at 140 km/h, with a charge of 22
+        .accelerate() //Rivian is going at 160 km/h, with a charge of 21
+        .accelerate() //Rivian is going at 180 km/h, with a charge of 20
+        .brake() //Rivian is going at 175 km/h
+        .chargeBattery(50) //Rivian is going at 195 km/h, with a charge of 49
+        .accelerate();
+
+        console.log( rivian.speedUS); //121.875
         

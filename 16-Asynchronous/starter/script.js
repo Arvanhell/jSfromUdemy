@@ -696,9 +696,23 @@ console.log('1: Will get location');
    //* const city =  whereAmI();
    //* console.log(city);   // Promise {<pending>}
 
-   whereAmI().then(city => console.log(city)).catch(err => console.error(`2: ${err.message} 💩`)) 
-   .finally(() => console.log('3: Finished getting location'));
+//    whereAmI()
+//    .then(city => console.log(city))
+//    .catch(err => console.error(`2: ${err.message} 💩`)) 
+//    .finally(() => console.log('3: Finished getting location'));
 
+
+//* --------------------- in real life is pretty common to use async -----------------------------
+//*             ------------------------ and return value -------------------------- 
+   (async function(){
+    try {
+        const city = await  whereAmI();
+        console.log(`2: ${city}`);
+    }catch(err) {
+        console.error(`2: ${err.message} 💩`)
+    }
+    console.log(`3: Finished getting location`);
+   })();
 
   
     // console.log('First'); // I will be first then otherbecause I am global log
@@ -734,20 +748,35 @@ alert (err.message);
 
 //   
         // Reject promise returned from a scync function
-//         throw err;
+//     //*    throw err;
 //     }
 // };
 //  console.log('1: Will get location');
 //                                      //* const city =  whereAmI();
 //                                      //* console.log(city);   // Promise {<pending>}
-                                    
-//  whereAmI().then(city => console.log(city)).catch(err => console.error(`2: ${err.message} 💩`)) 
-//  .finally(() => console.log('3: Finished getting location'));
 
+////              whereAmI()
+////              .then(city => console.log(city))
+////              .catch(err => console.error(`2: ${err.message} 💩`)) 
+////              .finally(() => console.log('3: Finished getting location'));
+// 
+/*
+//* --------------------- in real life is pretty common to use async -----------------------------
+//*             ------------------------ and return value -------------------------- 
+   (async function(){
+    try {
+        const city = await  whereAmI();
+        console.log(`2: ${city}`);
+    }catch(err) {
+        console.error(`2: ${err.message} 💩`)
+    }
+    console.log(`3: Finished getting location`);
+   })();
+*/
 
 
 //*            <----------------------------------------------------------------->
-//*            |              260. Promisifying the Geolocation API              |
+//*            |                265. Running Promises in Parallel                |
 //*            <----------------------------------------------------------------->
 
 //*            <----------------------------------------------------------------->

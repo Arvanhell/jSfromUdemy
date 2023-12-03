@@ -12,33 +12,48 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 let map, mapEvent;  // <------ global 
 
- if (navigator.geolocation)
-    navigator.geolocation.getCurrentPosition(function (position) {
-    console.log(position);                  // success callback
-    const {latitude} = position.coords;
-    const {longitude} = position.coords;
-    console.log(`https://www.google.pt/maps/@${latitude},${longitude}`); //* coords live google map
-       
-    const coords = [latitude, longitude];
-    map = L.map('map').setView(coords, 13);
-
-    L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-   //* handling click on map <--------------------------------- handling click on map
-   
-       map.on('click', function(mapE){
-        mapEvent = mapE;   // <------------ global variable set for scope only to this function
-        form.classList.remove('hidden');
-        inputDistance.focus(); // first immediatly we can typing in this field
-       });
-
-}, 
-function(){
-    alert ('Could not get your position')   // error callback
+class App {
+    constructor() {
+        this._getPosition();
     }
-);
+
+    _getPosition() {
+        if (navigator.geolocation)
+    navigator.geolocation.getCurrentPosition(this._loadMap, function() {
+    alert ('Could not get your position')   // error callback
+    });
+}
+    _loadMap(position) {
+            const {latitude} = position.coords;
+            const {longitude} = position.coords;
+            console.log(`https://www.google.pt/maps/@${latitude},${longitude}`); //* coords live google map
+               
+            const coords = [latitude, longitude];
+
+            map = L.map('map').setView(coords, 13);
+        
+            L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+        
+           //* handling click on map <--------------------------------- handling click on map
+           
+               map.on('click', function(mapE){
+                mapEvent = mapE;   // <------------ global variable set for scope only to this function
+                form.classList.remove('hidden');
+                inputDistance.focus(); // first immediatly we can typing in this field
+               });
+        }
+
+    _showForm() {}
+
+    _toggleElevationField() {}
+
+    _newWorkout() {}
+}
+
+const app = new App();
+app._getPosition();
 
 form.addEventListener('submit', function(e) {
     e.preventDefault(); 

@@ -6,6 +6,8 @@
 class Workout {
     date = new Date();
     id = (Date.now() + '').slice(-10);
+    cicks = 0;
+
 
     constructor(coords, distance, duration) {
            // this.date = ...
@@ -21,6 +23,10 @@ class Workout {
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
         this.description = `${this.type[0].toUpperCase()}${this.type.slice(1)} on ${months[this.date.getMonth()]} ${this.date.getDate()}`;
+    }
+
+    click() {
+        this.clicks++;
     }
 }
 
@@ -71,6 +77,7 @@ const inputElevation = document.querySelector('.form__input--elevation');
 
 class App {
     #map;                   // private class
+    #mapZoomLevel = 13;
     #mapEvent               // private class
     #workouts = [];
 
@@ -99,7 +106,7 @@ class App {
                
             const coords = [latitude, longitude];
 
-            this.#map = L.map('map').setView(coords, 13);
+            this.#map = L.map('map').setView(coords, this.#mapZoomLevel);
         
             L.tileLayer('https://tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -196,13 +203,14 @@ class App {
            L.popup({    // methods for binding markers
                 maxWidth: 250,
                 minWidth: 100,
-                autoclose: false,
+                autoClose: false,
                 closeOnClick: false,
                 className: `${workout.type}-popup`,
         })
         
    )
-        .setPopupContent(`${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`
+        .setPopupContent(
+            `${workout.type === 'running' ? '🏃‍♂️' : '🚴‍♀️'} ${workout.description}`
         )
         .openPopup();
         }
@@ -259,7 +267,7 @@ class App {
           }
 
           _moveToPopup(e) {
-            const workoutEl = e.taget.closest('.workout');
+            const workoutEl = e.target.closest('.workout');
             console.log(workoutEl);
             // working on moving from one popup to another on map
             // to find workout between workouts array
@@ -270,6 +278,15 @@ class App {
                 work => work.id === workoutEl.dataset.id
                 );
                 console.log(workout);
+
+                this.#map.setView(workout.coords, this.#mapZoomLevel, {
+                    aninmate: true,
+                    pan: {
+                        duration: 1,
+                    }
+                })
+               // using the public interface
+               workout.click();
           }
         }
 
@@ -335,4 +352,8 @@ leafletjs.com
 
 //*                     <----------------------------------------------------------------->
 //*                     |                    241. Move to Marker On Click                 |
+//*                     <----------------------------------------------------------------->
+
+//*                     <----------------------------------------------------------------->
+//*                     |                   242. Working with localStorage                |
 //*                     <----------------------------------------------------------------->

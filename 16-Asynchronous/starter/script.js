@@ -18,17 +18,24 @@ const countriesContainer = document.querySelector('.countries');
 //*            <----------------------------------------------------------------->
 
 
-    // const p = document.querySelector('.p');
-    // p.textContent = 'My name is Cezary';
-    // alert('text set!');
-    // p.style.color = 'red';
-
-
-    100 + 4 #100DaysOfCode 
-
-    🎲 ANKI daily
-    🎲 Code Wars daily
-    Udemy:  JavaScript Course 2023: From Zero to Expert!
-    Asynchronous JavaScript, AJAX and APIs 
    
-    #html #css #LearningInPublic
+
+//*  AJAX   Asonchrynous JavaScript And XML:
+//   Allows us to cimmunicate with remote web servers in an //* asynchronous way.
+//   With AJAX calls, we can //* request data from web servers dynamically.
+
+
+//* Client ( e.g browser) ------------- request (asking fir some data) ---->  WEB Sever
+//* Client ( e.g browser) <------------ Response (sending data back)   ---->  WEB Server
+
+//* API Aplication Prograning Interface:
+// 👉Piece of software that cna be used by another piece of software, in order to allow 
+    //* aplication to talk each other. 
+    //( very high level of abstraction)
+
+    
+
+
+
+
+ 

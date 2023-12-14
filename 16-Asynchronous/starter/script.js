@@ -654,31 +654,53 @@ const createImage = function (imgPath) {
 
             const whereAmI = async function () { 
  // async/awaits yntetic sugar over consuming promises 
+ try {
 //* Geolocation
             const pos = await getPosition();
             const { latitude:lat, longitude:lng} = pos.coords;
-
+// we don't need to adding try catch here because it will be anyway reject 
+// while we build our promise and will be caught by our catch block...
+//but in others bellow we have created try catch as follow
+//if (!resGeo.ok) throw new Error('Problem gettin location data')
+//if (!res.ok) throw new Error('Problem gettin country')
 //* Reverse geocoding
             const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+if (!resGeo.ok) throw new Error('Problem gettin location data')
             const dataGeo = await resGeo.json()
-        console.log(dataGeo);
+            console.log(dataGeo);
 
 //* Country data
         
             const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.country}`)
+if (!res.ok) throw new Error('Problem getting country')
             const data = await res.json(); 
-        console.log(data);
-        renderCountry(data[0])
-        // all without chaining promisses as we did before and same output
+            console.log(data);
+            renderCountry(data[0]);}
+            // all without chaining promisses as we did before and same output
+     catch (err) {
+        console.error(`${err} 💥 👀`);
+        renderError(`💥 ${err.message}`)
     }
+};
     whereAmI();
-    console.log('First'); // I will be first then otherbecause I am global log
+    whereAmI();
+    whereAmI();
+    // console.log('First'); // I will be first then otherbecause I am global log
+//* Never ignore error handling while doing eplications
 
 //*            <----------------------------------------------------------------->
 //*            |              263. Error Handling With try...catch               |
 //*            <----------------------------------------------------------------->
 
-
+/*
+try {
+    let y = 1;
+    const x =2;
+    x = 3;
+} catch(err) {
+alert (err.message);
+}
+*/
 
 //*            <----------------------------------------------------------------->
 //*            |              260. Promisifying the Geolocation API              |

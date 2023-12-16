@@ -415,23 +415,28 @@ Test Coords:
 //*            |                  259. Building a simple promise                 |
 //*            <----------------------------------------------------------------->
 
-     const lotteryPromise =  new Promise(function(resolve, reject){
 
-       // console.log('Lottery draw is happening 🔮');
-        setTimeout(function() {
-            if(Math.random() >= 0.5) {
-                //future value of executing promise
-                resolve('You WIN 💰'); 
-            } else {
-                reject('You lost your money 💩');
-            } 
-     }, 2000)
-                  // this is how we encapsulate any asynchronous behaviour in to a Promise
-        });
+//*  ----------------------------------------------------
+//*  ----------------------------------------------------
+
+    //  const lotteryPromise =  new Promise(function(resolve, reject){
+
+    //*    // console.log('Lottery draw is happening 🔮');
+    //     setTimeout(function() {
+    //         if(Math.random() >= 0.5) {
+    //*             //future value of executing promise
+    //             resolve('You WIN 💰'); 
+    //         } else {
+    //             reject('You lost your money 💩');
+    //         } 
+    //  }, 2000)
+    //*               // this is how we encapsulate any asynchronous behaviour in to a Promise
+    //     });
         
-        lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
+    //     lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
 
-
+//*  ----------------------------------------------------
+//*  ----------------------------------------------------
         // consuming the Promise
 
        //*     --------->    Promisifying setTimeout   <----------
@@ -475,8 +480,8 @@ Test Coords:
             }, 1000);
        */
 
-            Promise.resolve('abc').then(x => console.log(x));
-            Promise.reject('abc').then(x => console.error(x));
+         //   Promise.resolve('abc').then(x => console.log(x));
+        //    Promise.reject('abc').then(x => console.error(x));
 
 //*            <----------------------------------------------------------------->
 //*            |              260. Promisifying the Geolocation API              |
@@ -663,28 +668,37 @@ const createImage = function (imgPath) {
 //but in others bellow we have created try catch as follow
 //if (!resGeo.ok) throw new Error('Problem gettin location data')
 //if (!res.ok) throw new Error('Problem gettin country')
+
 //* Reverse geocoding
             const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
 if (!resGeo.ok) throw new Error('Problem gettin location data')
             const dataGeo = await resGeo.json()
-            console.log(dataGeo);
-
+           
 //* Country data
         
             const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.country}`)
 if (!res.ok) throw new Error('Problem getting country')
             const data = await res.json(); 
-            console.log(data);
-            renderCountry(data[0]);}
-            // all without chaining promisses as we did before and same output
-     catch (err) {
+            renderCountry(data[0]);
+
+            return `You are in ${dataGeo.city}, ${dataGeo.country}`;
+         
+        } catch (err) {
+            // all without chaining promisses as we did before and same output 
         console.error(`${err} 💥 👀`);
-        renderError(`💥 ${err.message}`)
+        renderError(`💥 ${err.message}`);
+
+        // Reject promise returned from a scync function
+        throw err;
     }
 };
 console.log('1: Will get location');
-    whereAmI();
-console.log('3: Finished getting location');
+   //* const city =  whereAmI();
+   //* console.log(city);   // Promise {<pending>}
+
+   whereAmI().then(city => console.log(city)).catch(err => console.error(`2: ${err.message} 💩`)) 
+   .finally(() => console.log('3: Finished getting location'));
+
 
   
     // console.log('First'); // I will be first then otherbecause I am global log
@@ -707,6 +721,28 @@ alert (err.message);
 //*            <----------------------------------------------------------------->
 //*            |             264. Returning Values from Async Functions          |
 //*            <----------------------------------------------------------------->
+
+ 
+// const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.country}`)
+// if (!res.ok) throw new Error('Problem getting country')
+//             const data = await res.json(); 
+//             renderCountry(data[0]);
+
+//*             return `You are in ${dataGeo.city}, ${dataGeo.country}`;
+
+//         } catch (err) {
+
+//   
+        // Reject promise returned from a scync function
+//         throw err;
+//     }
+// };
+//  console.log('1: Will get location');
+//                                      //* const city =  whereAmI();
+//                                      //* console.log(city);   // Promise {<pending>}
+                                    
+//  whereAmI().then(city => console.log(city)).catch(err => console.error(`2: ${err.message} 💩`)) 
+//  .finally(() => console.log('3: Finished getting location'));
 
 
 

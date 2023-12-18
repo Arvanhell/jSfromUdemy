@@ -20,13 +20,22 @@ const renderCountry = function(data, className = '') {
   </article>
   `;
     countriesContainer.insertAdjacentHTML('beforeend', html)
-    // countriesContainer.style.opacity = 1;
+    countriesContainer.style.opacity = 1;
 };
 
 const renderError = function (msg) {
     countriesContainer.insertAdjacentText('beforeend', msg);
-    //countriesContainer.style.opacity = 1;
+    countriesContainer.style.opacity = 1;
 };
+
+const getJSON = function(url, errorMsg = 'Something went wrong') {
+    return fetch(url).then(
+        response => {if(!response.ok)
+   throw new Error(`Country not found (${response.status})`);
+
+return response.json()}
+);
+}
 /*
 const getCountryAndNeighbour = function (country) {
 //* old school is no more in use but worth to know how to handle
@@ -177,14 +186,8 @@ getCountryAndNeighbour('ireland')
             //         renderCountry(data[0])
             //     });
             // };
-    const getJSON = function(url, errorMsg = 'Something went wrong') {
-         return fetch(url).then(
-             response => {if(!response.ok)
-        throw new Error(`Country not found (${response.status})`);
+            
 
-    return response.json()}
-    );
-  }
 
     // const getCountryData = function (country) {
     //                 // country 1
@@ -222,7 +225,7 @@ getCountryAndNeighbour('ireland')
     //             })
     //         };
 
-
+/*
     const getCountryData = function (country) {
         // country 1
     getJSON(`https://restcountries.com/v2/name/${country}`, 
@@ -257,7 +260,7 @@ getCountryAndNeighbour('ireland')
             })
           
 
-
+*/
 
 //*            <----------------------------------------------------------------->
 //*            |                      252. Consuming Promises                    |
@@ -322,30 +325,92 @@ const whereAmI = function(lat,lng) {
         if(!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
         return res.json();
     })
-    //console.log(res);
     .then(data => {
         console.log(data);
         console.log(`You are in ${data.city}, ${data.country}`);
 
-        return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`);
+        return fetch(`https://restcountries.com/v2/name/${data.country}`);
     })
     .then(res => {
         if (!res.ok)
             throw new Error(`Country not found (${res.status})`);
             return res.json();
     })
-    .then(data => renderCountry(data))
+    .then(data => renderCountry(data[0]))
     .catch(err => console.error(`${err.message} 💥`));
 
 };
+// because we can take three request in second not always the code is rendered. 
 whereAmI(52.508, 13.381);
 whereAmI(19.037, 72.873);
 whereAmI(-33.933, 18.474);
+// and we getting the error from console
+
+
+//*            <----------------------------------------------------------------->
+//*            |        257. Asynchronous Behind the Scenes: The Event Loop      |
+//*            <----------------------------------------------------------------->
+    /*
+    Js Runtime in the browser ( any browser safari chrome ect.) - 
+        //*'Container which inckudes all the pieces necessary to execute Js code
+
+    Js Engine
+        //* Heart of runtime ( Heap , call stack)
+
+        Heap 
+        //* where object are stored in memory
+        Call Stack
+        //* Where code is actually executed ---> Only one thread of execution.
+        //* no multitasking
+
+
+        WEB APIs 
+        //* APIs provided to the engine ( DOM , timers, fetch API )
+
+        Callback Queue ( click, timer, data ....))
+        //* Ready to be- executed callback functions (comin from event)
+
+        Event Loop 
+        //* sends callbacks from queue to call stack
+
+        //*
+        Concurency model //* How Js handles multiple tasks happening in the same time
+        //*
+    */
+
+        //*--------    ----------------------------------
 
 
 
 //*            <----------------------------------------------------------------->
-//*            |                                |
+//*            |                258. The Event Loop in Practice                  |
+//*            <----------------------------------------------------------------->
+
+        console.log('test start');  // 1 because id in global 
+        setTimeout(() => console.log(`0 sec timer`), 0); // 4 last 
+        Promise.resolve(`Resolved promise1`).then(res => 
+     console.log(res)); // 3 micro- task queue will be executed first before 0 sec timer 
+
+        Promise.resolve(`Resolved promise 2`).then( res => {
+          
+
+            
+        console.log(res);
+     })
+        console.log(`test end`); // 2 as in global but is second in the queue
+
+
+        /*
+        1  test start
+        2  test end
+        3  Resolved promise 1
+        4  Resolved promise 2
+        5  0 sec timer
+        */
+
+
+//*            <----------------------------------------------------------------->
+//*            |                  259. Building a simple promise                 |
 //*            <----------------------------------------------------------------->
 
 //*            <----------------------------------------------------------------->

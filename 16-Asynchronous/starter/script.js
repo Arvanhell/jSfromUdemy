@@ -319,31 +319,31 @@ Test Coords:
 
 */
 
-const whereAmI = function(lat,lng) {
-    fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-    .then(res => {
-        if(!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
-        return res.json();
-    })
-    .then(data => {
-        console.log(data);
-        console.log(`You are in ${data.city}, ${data.country}`);
+// const whereAmI = function(lat,lng) {
+//     fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+//     .then(res => {
+//         if(!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
+//         return res.json();
+//     })
+//     .then(data => {
+//         console.log(data);
+//         console.log(`You are in ${data.city}, ${data.country}`);
 
-        return fetch(`https://restcountries.com/v2/name/${data.country}`);
-    })
-    .then(res => {
-        if (!res.ok)
-            throw new Error(`Country not found (${res.status})`);
-            return res.json();
-    })
-    .then(data => renderCountry(data[0]))
-    .catch(err => console.error(`${err.message} 💥`));
+//         return fetch(`https://restcountries.com/v2/name/${data.country}`);
+//     })
+//     .then(res => {
+//         if (!res.ok)
+//             throw new Error(`Country not found (${res.status})`);
+//             return res.json();
+//     })
+//     .then(data => renderCountry(data[0]))
+//     .catch(err => console.error(`${err.message} 💥`));
 
-};
+// };
 // because we can take three request in second not always the code is rendered. 
-whereAmI(52.508, 13.381);
-whereAmI(19.037, 72.873);
-whereAmI(-33.933, 18.474);
+//whereAmI(52.508, 13.381);
+//whereAmI(19.037, 72.873);
+//whereAmI(-33.933, 18.474);
 // and we getting the error from console
 
 
@@ -386,18 +386,20 @@ whereAmI(-33.933, 18.474);
 //*            |                258. The Event Loop in Practice                  |
 //*            <----------------------------------------------------------------->
 
-        console.log('test start');  // 1 because id in global 
-        setTimeout(() => console.log(`0 sec timer`), 0); // 4 last 
-        Promise.resolve(`Resolved promise1`).then(res => 
-     console.log(res)); // 3 micro- task queue will be executed first before 0 sec timer 
 
-        Promise.resolve(`Resolved promise 2`).then( res => {
+
+    //     console.log('test start');  // 1 because id in global 
+    //     setTimeout(() => console.log(`0 sec timer`), 0); // 4 last 
+    //     Promise.resolve(`Resolved promise1`).then(res => 
+    //     console.log(res)); // 3 micro- task queue will be executed first before 0 sec timer 
+
+    //     Promise.resolve(`Resolved promise 2`).then( res => {
           
 
             
-        console.log(res);
-     })
-        console.log(`test end`); // 2 as in global but is second in the queue
+    //     console.log(res);
+    //  })
+    //     console.log(`test end`); // 2 as in global but is second in the queue
 
 
         /*
@@ -413,6 +415,64 @@ whereAmI(-33.933, 18.474);
 //*            |                  259. Building a simple promise                 |
 //*            <----------------------------------------------------------------->
 
+     const lotteryPromise =  new Promise(function(resolve, reject){
+
+        console.log('Lottery draw is happening 🔮');
+        setTimeout(function() {
+            if(Math.random() >= 0.5) {
+                //future value of executing promise
+                resolve('You WIN 💰'); 
+            } else {
+                reject('You lost your money 💩');
+            } 
+     }, 2000)
+                  // this is how we encapsulate any asynchronous behaviour in to a Promise
+        });
+        
+        lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
+        // consuming the Promise
+
+       // Promisifying setTimeout
+       const wait = function(seconds) {
+        return new Promise(function(resolve){
+            setTimeout(resolve, seconds * 1000);
+        });
+       };
+
+    wait(1)
+    .then(() => {
+        console.log('1 second passed');
+        return wait(1);
+    })
+    .then(() => {
+        console.log('2 second passed');
+        return wait(1);
+    })
+    .then(() => {
+        console.log('3 second passed');
+        return wait(1);
+    })
+    .then(() => {
+        console.log('4 second passed');
+    })
+//* We can do as above instead of as bellow Callback Hell.... ✔️
+       /*
+            setTimeout(() => {
+                console.log('1 second gone');
+                setTimeout(() => {
+                    console.log('2 second gone');
+                    setTimeout(() => {
+                        console.log('3 second gone');
+                        setTimeout(() => {
+                            console.log('4 second gone');
+                        }, 1000);
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+       */
+
+            Promise.resolve('abc').then(x => console.log(x));
+            Promise.reject('abc').then(x => console.error(x));
 //*            <----------------------------------------------------------------->
 //*            |                                |
 //*            <----------------------------------------------------------------->

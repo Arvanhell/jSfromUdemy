@@ -13,7 +13,7 @@ const renderCountry = function(data, className = '') {
       <h3 class="country__name">${data.name}</h3>
       <h4 class="country__region">${data.region}</h4>
       <p class="country__row"><span>👫</span>${(+data.population / 1000000).toFixed(1)} ${data.demonym} people</p>
-      <p class="country__row"><span>🗣️</span>${data.languages[0].name}</p>
+      <p class="country__row"><span>🗣️</span>${data.languages[0, 1].name}</p>
       <p class="country__row"><span>💰</span>${data.currencies[0].name}</p>
       <p class="country__row"><span>🌇</span>${data.capital}</p>
     </div>
@@ -430,31 +430,35 @@ Test Coords:
         });
         
         lotteryPromise.then(res => console.log(res)).catch(err => console.error(err))
+
+
         // consuming the Promise
 
-       // Promisifying setTimeout
-       const wait = function(seconds) {
-        return new Promise(function(resolve){
-            setTimeout(resolve, seconds * 1000);
-        });
-       };
+       //*     --------->    Promisifying setTimeout   <----------
+      /* 
+      //*     const wait = function(seconds) {
+      //*     return new Promise(function(resolve){
+      //*      setTimeout(resolve, seconds * 1000);
+      //*      });
+      //*    };
 
-    wait(1)
-    .then(() => {
-        console.log('1 second passed');
-        return wait(1);
-    })
-    .then(() => {
-        console.log('2 second passed');
-        return wait(1);
-    })
-    .then(() => {
-        console.log('3 second passed');
-        return wait(1);
-    })
-    .then(() => {
+    //*    wait(1)
+    //*    .then(() => {
+    //*    console.log('1 second passed');
+    //*    return wait(1);
+    //*    })
+    //*    .then(() => {
+    //*    console.log('2 second passed');
+    //*    return wait(1);
+    //*    })
+    //*    .then(() => {
+    //*    console.log('3 second passed');
+    //*    return wait(1);
+    //*     })
+    //*    .then(() => {
         console.log('4 second passed');
-    })
+    //*  })
+    */
 //* We can do as above instead of as bellow Callback Hell.... ✔️
        /*
             setTimeout(() => {
@@ -473,6 +477,174 @@ Test Coords:
 
             Promise.resolve('abc').then(x => console.log(x));
             Promise.reject('abc').then(x => console.error(x));
+
 //*            <----------------------------------------------------------------->
-//*            |                                |
+//*            |              260. Promisifying the Geolocation API              |
+//*            <----------------------------------------------------------------->
+
+          
+
+                const getPosition = function () {
+                    return new Promise(function (resolve, reject) {
+                        // navigator.geolocation.getCurrentPosition(
+                        //     position => resolve(position), // succes callback function
+                        //     err => reject(err)          // error callback function
+                        // );
+                        navigator.geolocation.getCurrentPosition(resolve, reject);
+                    });
+                };
+
+// getPosition().then(pos => console.log(pos));
+
+    const whereAmI = function() {
+        getPosition()
+    .then(pos =>{
+           const { latitude: lat, longitude: lng } = pos.coords;
+
+           return fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+        }) // dont use semicolon before .then
+            
+    .then(res => {
+                if(!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
+        return res.json();
+    })  // dont use semicolon before .then
+    .then(data => {
+        //console.log(data);
+        //console.log(`You are in ${data.city}, ${data.country}`);
+
+        return fetch(`https://restcountries.com/v2/name/${data.country}`);
+    })  // dont use semicolon before .then
+    .then(res => {
+        if (!res.ok)
+            throw new Error(`Country not found (${res.status})`);
+            return res.json();
+    })  // dont use semicolon before .then
+    .then(data => renderCountry(data[0]))
+    .catch(err => console.error(`${err.message} 💥`));
+
+};
+
+btn.addEventListener('click', whereAmI);
+
+
+//*            <----------------------------------------------------------------->
+//*            |                     261. Coding Challenge #2                    |
+//*            <----------------------------------------------------------------->
+
+/*
+//* Coding Challenge #2
+
+Build the image landing functionality that I just showed you on the screen.
+
+Tasks are not super-description this time, so that you can figure out some stuff on your own.
+Pretend you're working on your own.
+
+Part 1.
+1. Create a function 'createImage' which receives imgPath as an input. 
+This function returns a promise which creates a new image (use document.createElement('img)) 
+and sets the .src attribute to the provided img path. When the image is done loading, 
+append it to the DOM element with the 'images' class, and resolve the promise. 
+The fulfilled value should be the image element itself. In case there is an error loading 
+the image ('error' event), reject the promise.
+//*---
+const imgContainer = document.querySelector('.images')
+
+const createImage = function (imgPath) {
+    return new Promisr (function (resolve, reject) {
+        const img = document.createElement('img');
+        img.src = imgPath;
+
+        img.addEventListener('load', function () {
+            imgContainer.append(img);
+            resolve(img);
+        });
+
+        img.addEventListener('error', function(){
+            reject(new Error('Image not found'))
+        })
+    });
+};
+//*---
+*/
+/*
+If this part is too tricky for you, just watch the first part of the solution.
+
+Part 2.
+2. Consume the promise using .then and also add an error handler;
+3. After the image has loaded, pause execution for 2 seconds usung the wait function
+    we create earlier.
+4. After the image has passed, hide the curent image (set display to 'none'), and load 
+    a second ( HINT: use the image element returned by the createIMage promise to hide 
+    the current omage. You will need a global variable for that):
+5. After the second image has loaded, pause execution for 2 second agaim;
+6. After the 2 second have passed, hide the current image.
+
+TD : Images in the img folder. Test the error handler by passing a wrong image path. 
+        Set the network speed to 'fast 3g' inthe dev tools Network tab, otherwise images
+        load to fast.
+*/
+const wait = function(seconds) {
+    return new Promise(function(resolve){
+        setTimeout(resolve, seconds * 1000);
+    });
+   };
+
+const imgContainer = document.querySelector('.images')
+
+const createImage = function (imgPath) {
+    return new Promise (function (resolve, reject) {
+        const img = document.createElement('img');
+        img.src = imgPath;
+
+        img.addEventListener('load', function () {
+            imgContainer.append(img);
+            resolve(img);
+        });
+
+        img.addEventListener('error', function(){
+            reject(new Error('Image not found'));
+        });
+    });
+};
+
+// createImage('img/img-1.jpgd').then(img => { 
+    //Error: Image not found at HTMLImageElement <anonymous> 
+    let currentImg;
+
+    createImage('img/img-1.jpg')
+    .then(img => { 
+        currentImg = img;
+        console.log('Img 1 loaded');
+        return wait(3)
+    })
+    .then(() => {
+        currentImg.style.display = 'none';
+        return createImage('img/img-2.jpg');
+    })
+    .then(img => {
+        currentImg = img;
+        console.log('Img 2 loaded');
+        return wait(3)
+    })
+    .then(() =>{
+        currentImg.style.display = 'none';
+    })
+    .catch(err => console.log(err));
+
+//*            <----------------------------------------------------------------->
+//*            |             262. Consuming Promises with Async/Await            |
+//*            <----------------------------------------------------------------->
+
+
+
+//*            <----------------------------------------------------------------->
+//*            |              260. Promisifying the Geolocation API              |
+//*            <----------------------------------------------------------------->
+
+//*            <----------------------------------------------------------------->
+//*            |              260. Promisifying the Geolocation API              |
+//*            <----------------------------------------------------------------->
+
+//*            <----------------------------------------------------------------->
+//*            |              260. Promisifying the Geolocation API              |
 //*            <----------------------------------------------------------------->

@@ -495,6 +495,7 @@ Test Coords:
                 };
 
 // getPosition().then(pos => console.log(pos));
+/*
 
     const whereAmI = function() {
         getPosition()
@@ -525,7 +526,7 @@ Test Coords:
 };
 
 btn.addEventListener('click', whereAmI);
-
+*/
 
 //*            <----------------------------------------------------------------->
 //*            |                     261. Coding Challenge #2                    |
@@ -635,6 +636,10 @@ const createImage = function (imgPath) {
 //*            |             262. Consuming Promises with Async/Await            |
 //*            <----------------------------------------------------------------->
 
+    const whereAmI = async function(country) {
+        await fetch(`https://restcountries.com/v2/name/${data.country}`);
+    // await is for stop code execution oft his function untill promise will be fulfilled
+    }
 
 
 //*            <----------------------------------------------------------------->

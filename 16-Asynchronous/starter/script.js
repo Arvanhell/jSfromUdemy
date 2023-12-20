@@ -484,15 +484,15 @@ Test Coords:
 
           
 
-                const getPosition = function () {
-                    return new Promise(function (resolve, reject) {
-                        // navigator.geolocation.getCurrentPosition(
-                        //     position => resolve(position), // succes callback function
-                        //     err => reject(err)          // error callback function
-                        // );
-                        navigator.geolocation.getCurrentPosition(resolve, reject);
-                    });
-                };
+                // const getPosition = function () {
+                //     return new Promise(function (resolve, reject) {
+                //        navigator.geolocation.getCurrentPosition(
+                //            position => resolve(position), // succes callback function
+                //            err => reject(err)          // error callback function
+                //        );
+                //         navigator.geolocation.getCurrentPosition(resolve, reject);
+                //     });
+                // };
 
 // getPosition().then(pos => console.log(pos));
 /*
@@ -584,6 +584,9 @@ TD : Images in the img folder. Test the error handler by passing a wrong image p
         Set the network speed to 'fast 3g' inthe dev tools Network tab, otherwise images
         load to fast.
 */
+
+//* setting img <|------------------<<<<<<<
+/*
 const wait = function(seconds) {
     return new Promise(function(resolve){
         setTimeout(resolve, seconds * 1000);
@@ -632,18 +635,48 @@ const createImage = function (imgPath) {
     })
     .catch(err => console.log(err));
 
+    */
+
 //*            <----------------------------------------------------------------->
 //*            |             262. Consuming Promises with Async/Await            |
 //*            <----------------------------------------------------------------->
+// 
+        // await is for stop code execution in an async function  untill promise will be fulfilled
+        // but is not blocking my thread of executions of codes is running in the background
+// instead of chaining 
+// fetch(`https://restcountries.com/v2/name/${country}`).then(res => console.log(res))
 
-    const whereAmI = async function(country) {
-        await fetch(`https://restcountries.com/v2/name/${data.country}`);
-    // await is for stop code execution oft his function untill promise will be fulfilled
+           const getPosition = function () {
+                    return new Promise(function (resolve, reject) {
+                       navigator.geolocation.getCurrentPosition(resolve, reject)
+                    });
+                };
+
+
+            const whereAmI = async function () { 
+ // async/awaits yntetic sugar over consuming promises 
+//* Geolocation
+            const pos = await getPosition();
+            const { latitude:lat, longitude:lng} = pos.coords;
+
+//* Reverse geocoding
+            const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+            const dataGeo = await resGeo.json()
+        console.log(dataGeo);
+
+//* Country data
+        
+            const res = await fetch(`https://restcountries.com/v2/name/${dataGeo.country}`)
+            const data = await res.json(); 
+        console.log(data);
+        renderCountry(data[0])
+        // all without chaining promisses as we did before and same output
     }
-
+    whereAmI();
+    console.log('First'); // I will be first then otherbecause I am global log
 
 //*            <----------------------------------------------------------------->
-//*            |              260. Promisifying the Geolocation API              |
+//*            |              263. Error Handling With try...catch               |
 //*            <----------------------------------------------------------------->
 
 //*            <----------------------------------------------------------------->

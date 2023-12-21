@@ -417,7 +417,7 @@ Test Coords:
 
      const lotteryPromise =  new Promise(function(resolve, reject){
 
-        console.log('Lottery draw is happening 🔮');
+       // console.log('Lottery draw is happening 🔮');
         setTimeout(function() {
             if(Math.random() >= 0.5) {
                 //future value of executing promise
@@ -652,7 +652,6 @@ const createImage = function (imgPath) {
                     });
                 };
 
-
             const whereAmI = async function () { 
  // async/awaits yntetic sugar over consuming promises 
 //* Geolocation
@@ -678,6 +677,8 @@ const createImage = function (imgPath) {
 //*            <----------------------------------------------------------------->
 //*            |              263. Error Handling With try...catch               |
 //*            <----------------------------------------------------------------->
+
+
 
 //*            <----------------------------------------------------------------->
 //*            |              260. Promisifying the Geolocation API              |

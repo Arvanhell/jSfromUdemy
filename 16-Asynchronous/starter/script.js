@@ -682,9 +682,11 @@ if (!res.ok) throw new Error('Problem getting country')
         renderError(`💥 ${err.message}`)
     }
 };
+console.log('1: Will get location');
     whereAmI();
-    whereAmI();
-    whereAmI();
+console.log('3: Finished getting location');
+
+  
     // console.log('First'); // I will be first then otherbecause I am global log
 //* Never ignore error handling while doing eplications
 
@@ -701,6 +703,20 @@ try {
 alert (err.message);
 }
 */
+
+//*            <----------------------------------------------------------------->
+//*            |             264. Returning Values from Async Functions          |
+//*            <----------------------------------------------------------------->
+
+
+
+//*            <----------------------------------------------------------------->
+//*            |              260. Promisifying the Geolocation API              |
+//*            <----------------------------------------------------------------->
+
+//*            <----------------------------------------------------------------->
+//*            |              260. Promisifying the Geolocation API              |
+//*            <----------------------------------------------------------------->
 
 //*            <----------------------------------------------------------------->
 //*            |              260. Promisifying the Geolocation API              |

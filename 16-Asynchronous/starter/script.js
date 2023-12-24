@@ -761,7 +761,7 @@ alert (err.message);
 ////              .finally(() => console.log('3: Finished getting location'));
 // 
 /*
-//* --------------------- in real life is pretty common to use async -----------------------------
+//* <--------------------- in real life is pretty common to use async ---------------------------->
 //*             <------------------------ and return value --------------------------> 
    (async function(){
     try {
@@ -779,7 +779,7 @@ alert (err.message);
 //*            |                265. Running Promises in Parallel                |
 //*            <----------------------------------------------------------------->
 
-   const get3countires = async function(c1, c2, c3) {
+   const get3countires = async function(c1, c2, c3, c4) {
     try {
         // const [data1] = await getJSON(`https://restcountries.com/v2/name/${c1}`);
         // const [data2] = await getJSON(`https://restcountries.com/v2/name/${c2}`);
@@ -790,7 +790,8 @@ alert (err.message);
         const data = await Promise.all([
             getJSON(`https://restcountries.com/v2/name/${c1}`),
             getJSON(`https://restcountries.com/v2/name/${c2}`),
-            getJSON(`https://restcountries.com/v2/name/${c3}`)
+            getJSON(`https://restcountries.com/v2/name/${c3}`),
+            getJSON(`https://restcountries.com/v2/name/${c4}`)
             // they are loading now in papralel all together not in sequence now
     ]); 
         console.log(data);
@@ -799,7 +800,7 @@ alert (err.message);
         console.error(err);
     }
    };
-   get3countires('portugal', 'poland', 'ireland')
+   get3countires('portugal', 'poland', 'ireland', "canada")
 
 //*            <----------------------------------------------------------------->
 //*            |              260. Promisifying the Geolocation API              |

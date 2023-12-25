@@ -787,14 +787,15 @@ alert (err.message);
         // console.log([data1.capital, data2.capital, data3.capital]);
         // they are loading in sequence here 
         
-        const data = await Promise.all([
+        const res = await Promise.all([
             getJSON(`https://restcountries.com/v2/name/${c1}`),
             getJSON(`https://restcountries.com/v2/name/${c2}`),
             getJSON(`https://restcountries.com/v2/name/${c3}`),
             getJSON(`https://restcountries.com/v2/name/${c4}`)
             // they are loading now in papralel all together not in sequence now
     ]); 
-        console.log(data);
+
+        console.log(res.map(r => r[0].capital)); //* requesting capital city of requested countiries
 
     }  catch(err) {
         console.error(err);
@@ -802,9 +803,16 @@ alert (err.message);
    };
    get3countires('portugal', 'poland', 'ireland', "canada")
 
+   /*
+   this function is called combinator it is alowing us to combine multiple promises 
+   Problem is only when one of the requesterd promises wwill be rejected then others will be rejected as well.
+   */
+
+
 //*            <----------------------------------------------------------------->
-//*            |              260. Promisifying the Geolocation API              |
+//*            |      266. Other Promise Combinators: race, allSettled and any   |  
 //*            <----------------------------------------------------------------->
+
 
 //*            <----------------------------------------------------------------->
 //*            |              260. Promisifying the Geolocation API              |

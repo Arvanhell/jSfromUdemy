@@ -1,12 +1,3 @@
-//* Importing module
-//* no strict mode --> all modules are executed in stricte mode as default
-
-import './shoppingCart.js' 
-
-// we must to specify in html file that we have script type of module
-// <script type = "module"  <----------   defer src="script.js"></script>
-console.log('Importing module will be first? '); // logged as second to console
-
 
 
 
@@ -60,11 +51,134 @@ console.log('Importing module will be first? '); // logged as second to console
 //*            <     272. Exporting and Importing in ES6 Modules    >
 //*            <---------------------------------------------------->
 
+//* Importing module
+console.log('Importing module ✅');
+
+//* 
+//Learning how to import export rename and import as module in different way
+//*
+
 //* no strict mode --> all modules are executed in stricte mode as default
 // import './shoppingCart.js' 
-//* // we must to specify in html file that we have script type of module
+// we must to specify in html file that we have script type of module
 //* // <script type = "module"  <----------   defer src="script.js"></script>
-// console.log('Importing module will be first? '); // logged as second to console
+
+//* export must be happen in the top level code.
+
+
+// import {addToCart, price, totalQuantity as quantity} from './shoppingCart.js';
+//  'as'   is for changing name of variable set before into new name which we use 
+// after exporting, we can change name now ar after within imported file.
+
+
+// import { addToCart, price , totalQuantity as quantity } from './shoppingCart.js';
+// addToCart('bread', 5)
+// console.log(price , quantity);   //opt    237 23
+
+//console.log(shippingCost); 
+
+//  import * as ShoppingCart from './shoppingCart.js';
+//* create an object containing everything from the module we exporting from
+// ShoppingCart.addToCart('bread', 5);
+// console.log(ShoppingCart.price); // 237 
+//* when we importing | default | named object from module we using //* add
+
+// import add, { addToCart, price, totalQuantity }
+// from './shoppingCart.js';
+// import add, {cart} from './shoppingCart.js'
+//* how is easy to import default export, no need to adding curly braces
+//* but we can also mixing default with others objects like this example
+// add('pizza', 2);
+// console.log(price); // 2 pizza added to cart
+// add('bananas', 25);
+// add('aranges', 40);
+
+//console.log(cart); 
+// we mutating an array in the exported file and manipulated to use as function to push objects into array
+//* IMPORT ARE NOT COPIES OF THE EXPORT, 
+//* the are like an a live conection.
+
+
+//*            <---------------------------------------------------->
+//*            <            273. Top-Level await (ES2022)           >
+//*            <---------------------------------------------------->
+
+
+        // console.log('Start fetching');
+        // const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+        // const data = await res.json();
+        // console.log(data);
+        // console.log('Checking Checking connection');
+
+        // const getLastPost = async function () {
+        //         const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+        //         const data = await res.json();
+                //console.log(data);
+
+//                 return {title: data.at(-1).title, ttext: data.at(-1).body };
+//         };
+// const lastPost = getLastPost();
+// console.log(lastPost);
+
+// Not very clean option
+// lastPost.then(last => console.log(last));
+
+// const lastPost2 = await getLastPost();
+// console.log(lastPost2);
+        
+//*            <---------------------------------------------------->
+//*            <     -------- 274. The Module Pattern   ------      >
+//*            <---------------------------------------------------->
+
+//        const ShoppingCart2 = (function(){
+//                 const cart = []
+//                 const shippingCost = 10;
+//                 const totalPrice = 245;
+//                 const totalQuantity = 32;
+
+//                 const addToCart = function (product, quantity) {
+//                         cart.push({product, quantity});
+//                         console.log(`${quantity} ${product} is added to cart, shipping cost is ${shippingCost}`);
+//                 };
+
+//                 const orderStock = function (product, quantity) {
+//                         console.log(`${quantity} ${product} ordered from  suplier`);
+//                 };
+
+//                 return {
+//                         addToCart,
+//                         cart,
+//                         totalPrice,
+//                         totalQuantity,
+//                 };
+//         })(); 
+        
+//         ShoppingCart2.addToCart('monitor', 3);
+//         ShoppingCart2.addToCart('wireles mouse',2)
+//         console.log(ShoppingCart2);
+//         console.log(ShoppingCart2.shippingCost);
+
+//*            <---------------------------------------------------->
+//*            <                275. CommonJS Modules               >
+//*            <---------------------------------------------------->
+
+  //* Export
+        // export.addToCart = function (product, quantity) {
+        //         cart.push({product, quantity});
+        //         console.log(
+        //                 `${quantity} ${product} added to cart, shipping cost is ${shippingCost}`
+        //         );
+        // };
+  //* Import
+        // const { addToCart } = require('./shoppingCart.js');      
+
+//*            <---------------------------------------------------->
+//*            <    276. A Brief Introduction to the Command Line   >
+//*            <---------------------------------------------------->
+
+//*            <---------------------------------------------------->
+//*            <     -----------------------------------------      >
+//*            <---------------------------------------------------->
 
 //*            <---------------------------------------------------->
 //*            <     -----------------------------------------      >

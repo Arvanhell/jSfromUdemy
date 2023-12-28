@@ -757,8 +757,11 @@ console.log(stateDeepClone); //if(module.hot) {
  // 
  // now instead live-server I received acces to server trough http://localhost:1234
  // created after command  //    npx parcel index.html 
- // this is on local host as live-server but has different port 
+ // this is on localhost as live-server but has different port 
  // instead 8080 has 1234
+ //*            <---------------------------------------------------->
+ //*            <     -----------------------------------------      >
+ //*            <---------------------------------------------------->
  //*            <---------------------------------------------------->
  //*            <     -----------------------------------------      >
  //*            <---------------------------------------------------->

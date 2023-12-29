@@ -189,7 +189,8 @@ console.log('Importing module ✅');
 //*            <              277. Introduction to NPM              >
 //*            <---------------------------------------------------->
 
-import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+// import cloneDeep from './node_modules/lodash-es/cloneDeep.js';
+import cloneDeep from 'lodash-es';
 const state = {
         cart: [
                 {product: 'keyboard', quantity: 20},
@@ -207,9 +208,11 @@ console.log(stateClone);
 
 console.log(stateDeepClone);
 
-//if(module.hot) {
-       // module.hot()
-//}
+// if(module.hot) {
+//         module.hot()
+// }
+//* hot module is not working under this version of parcel 
+
 
 //*            <---------------------------------------------------->
 //*            <     278. Bundling With Parcel and NPM Scripts      >
@@ -226,10 +229,23 @@ console.log(stateDeepClone);
                  // this is on localhost as live-server but has different port 
                  // instead 8080 has 1234
 
+//* To start parcel we can set script within package jason 
+// "scripts": {
+//    "start": "parcel index.html"
+//   },
+//*command from npm instead npx simply executing in terminal 
+//* npm run start
+//* to build 
+//"scripts": {
+//"build": "parcel build index.html"
+//},
+
+//*---------
 
 //*            <---------------------------------------------------->
-//*            <     -----------------------------------------      >
+//*            <       279. Configuring Babel and Polyfilling       >
 //*            <---------------------------------------------------->
+
 
 //*            <---------------------------------------------------->
 //*            <     -----------------------------------------      >

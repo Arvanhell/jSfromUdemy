@@ -9,8 +9,10 @@
   "author": "ARV",
   "license": "ISC",
   "dependencies": {
+    "core-js": "^3.35.0",
     "leaflet": "^1.9.4",
     "lodash-es": "^4.17.21",
-    "parcel": "^2.10.3"
+    "parcel": "^2.10.3",
+    "regenerator-runtime": "^0.14.1"
   }
 }

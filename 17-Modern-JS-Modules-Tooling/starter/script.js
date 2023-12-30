@@ -246,13 +246,46 @@ console.log(stateDeepClone);
 //*            <       279. Configuring Babel and Polyfilling       >
 //*            <---------------------------------------------------->
 
+//*example
+/*
+before conversion 
+class Person {
+        #greeting = 'Hey';
+        constructor(name) {
+                this.name =name;
+                console.log(`${this.#greeting}, ${this.name}`);
+        }
+}
+const cezar = new Person('Cezar') // Hey Cezar
+///
+after conversing to ES5
+var Person = function Person(name) {
+        _classCallCheck(this, Person);
+        -greeting.set(this, {
+                writable: true,
+                value: 'Hey'
+        });
+        this.name = name;
+        console.log(''.concat(_classPrivateFieldGet(this, _greeting), ", ").concat(this.name));
+};
+
+console.log(cart.find(el => el.quanitity >=2));
+Promise.resolve('Test').then (x => console.log(x));
+*/
+import 'core-js/stable'
+// import 'core-js/stable/array/find';
+
+//npm instal regenerator-runtime another 
+
+//*     Polifiling async function
+import 'regenerator-runtime/runtime';
 
 //*            <---------------------------------------------------->
-//*            <     -----------------------------------------      >
+//*            < 280. Review: Writing Clean and Modern JavaScript   >
 //*            <---------------------------------------------------->
 
 //*            <---------------------------------------------------->
-//*            <     -----------------------------------------      >
+//*            <         281. Let's Fix Some Bad Code: Part 1       >
 //*            <---------------------------------------------------->
 
 //*            <---------------------------------------------------->

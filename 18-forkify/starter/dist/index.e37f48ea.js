@@ -759,7 +759,7 @@ const id = window.location.hash.slice(1);
  // refactoring to the Model Controller View within files 
  // model.js - controller.js - recipeView.js
  //*  ------------------------------------------------------
- //*              
+ //*            294. Helpers and Configuration Files  
  //*  ------------------------------------------------------
  //*  ------------------------------------------------------
  //*              

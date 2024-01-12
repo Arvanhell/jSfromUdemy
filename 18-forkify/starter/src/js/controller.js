@@ -21,7 +21,8 @@ const controlRecipes = async function () {
      await model.loadRecipe(id);
 
     //2 Rendering recipe
-    recipeView.render(model.state.recipe);       
+     recipeView.render(model.state.recipe);      // rendering all results
+    
     } catch (err) {
      recipeView.renderError();
   }
@@ -39,8 +40,11 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) Render result
-    //console.log(model.state.search.results); 
-    resultsView.render(model.state.search.results);
+    // resultsView.render(model.state.search.results);  
+    // all results
+    
+       resultsView.render(model.getSearchResultsPage());  
+       // result only set per page within config.js for pagination features
   } catch (err) {
     console.log(err);
   }
@@ -274,8 +278,13 @@ const id = window.location.hash.slice(1);
 //*           299. Implementing Pagination - Part 1
 //*  ---------------------------------------------------------
 
+
 //*  ---------------------------------------------------------
 //*           300. Implementing Pagination - Part 2
+//*  ---------------------------------------------------------
+
+//*  ---------------------------------------------------------
+//*                   301. Project Planning II
 //*  ---------------------------------------------------------
 
 

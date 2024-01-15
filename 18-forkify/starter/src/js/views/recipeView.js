@@ -1,7 +1,7 @@
  // import icons from '../../img/icons.svg'; // Parcel 1
 import icons from 'url:../../img/icons.svg'; // Parcel 2
 import {Fraction} from 'fractional';
-//console.log(Fraction);
+
  class RecipeView {
   #parentElement = document.querySelector('.recipe');  
   #data;
@@ -37,7 +37,7 @@ import {Fraction} from 'fractional';
               <span>${this.#data.title}</span>
             </h1>
           </figure>
-
+          
           <div class="recipe__details">
             <div class="recipe__info">
               <svg class="recipe__info-icon">

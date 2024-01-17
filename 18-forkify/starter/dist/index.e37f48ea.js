@@ -769,7 +769,7 @@ const id = window.location.hash.slice(1);
  //*           297. Implementing Search Results - Part 1
  //*  ---------------------------------------------------------
  //*  ---------------------------------------------------------
- //*   
+ //*           298. Implementing Search Results - Part 2
  //*  ---------------------------------------------------------
 var _modelJs = require("./model.js");
 var _recipeViewJs = require("./views/recipeView.js");
@@ -792,9 +792,12 @@ const controlRecipes = async function() {
 };
 const controlSearchResults = async function() {
     try {
+        // 1) Get search query
         const query = (0, _searchViewJsDefault.default).getQuery();
         if (!query) return;
+        // 2) Load search results
         await _modelJs.loadSearchResults(query);
+        // 3) Render result
         console.log(_modelJs.state.search.results);
     } catch (err) {
         console.log(err);
@@ -3202,7 +3205,12 @@ parcelHelpers.defineInteropFlag(exports);
 class SearchView {
     #parentEl = document.querySelector(".search");
     getQuery() {
-        return this.#parentEl.querySelector(".search__field").value;
+        const query = this.#parentEl.querySelector(".search__field").value;
+        this.#clearInput();
+        return query;
+    }
+    #clearInput() {
+        this.#parentEl.querySelector(".search__field").value = "";
     }
     // part of the publisher subscriber pattern
     addHandlerSearch(handler) {

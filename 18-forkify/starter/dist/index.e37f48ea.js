@@ -771,6 +771,12 @@ const id = window.location.hash.slice(1);
  //*  ---------------------------------------------------------
  //*           298. Implementing Search Results - Part 2
  //*  ---------------------------------------------------------
+ //*  ---------------------------------------------------------
+ //*           299. Implementing Pagination - Part 1
+ //*  ---------------------------------------------------------
+ //*  ---------------------------------------------------------
+ //*           300. Implementing Pagination - Part 2
+ //*  ---------------------------------------------------------
 var _modelJs = require("./model.js");
 var _recipeViewJs = require("./views/recipeView.js");
 var _recipeViewJsDefault = parcelHelpers.interopDefault(_recipeViewJs);
@@ -779,6 +785,7 @@ var _searchViewJsDefault = parcelHelpers.interopDefault(_searchViewJs);
 var _resultViewJs = require("./views/resultView.js");
 var _resultViewJsDefault = parcelHelpers.interopDefault(_resultViewJs);
 var _runtime = require("regenerator-runtime/runtime");
+if (module.hot) module.hot.accept();
 const controlRecipes = async function() {
     try {
         const id = window.location.hash.slice(1);
@@ -801,7 +808,7 @@ const controlSearchResults = async function() {
         // 2) Load search results
         await _modelJs.loadSearchResults(query);
         // 3) Render result
-        console.log(_modelJs.state.search.results);
+        //console.log(model.state.search.results); 
         (0, _resultViewJsDefault.default).render(_modelJs.state.search.results);
     } catch (err) {
         console.log(err);
@@ -2811,9 +2818,7 @@ class RecipeView extends (0, _viewJsDefault.default) {
             </div>
 
             <div class="recipe__user-generated">
-              <svg>
-                <use href="${0, _iconsSvgDefault.default}#icon-user"></use>
-              </svg>
+              
             </div>
             <button class="btn--round">
               <svg class="">
@@ -3166,6 +3171,8 @@ var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class View {
     _data;
     render(data) {
+        // if no data or array as returned data is empty return error
+        if (!data || Array.isArray(data) && data.length === 0) return this.renderError();
         this._data = data;
         const markup = this._generateMarkup();
         this._clear();
@@ -3242,27 +3249,26 @@ var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 var _viewJs = require("./View.js");
 var _viewJsDefault = parcelHelpers.interopDefault(_viewJs);
-//import icons from 'url:../../img/icons.svg'; // Parcel 2
+var _iconsSvg = require("url:../../img/icons.svg"); // Parcel 2
+var _iconsSvgDefault = parcelHelpers.interopDefault(_iconsSvg);
 class ResultsView extends (0, _viewJsDefault.default) {
     _parentElement = document.querySelector(".results");
+    _errorMessage = "No recipes found for your query! Please try again ";
+    _message = "";
     _generateMarkup() {
         console.log(this._data);
         return this._data.map(this._generateMarkupPreview).join("");
     }
-    _generateMarkupPreview() {
+    _generateMarkupPreview(result) {
         return `
         <li class="preview">
-            <a class="preview__link preview__link--active" href="#23456">
+            <a class="preview__link " href="#${result.id}">
               <figure class="preview__fig">
-                <img src="src/img/test-1.jpg" alt="Test" />
+                <img src="${result.image}" alt="${result.title}" />
               </figure>
               <div class="preview__data">
-                <h4 class="preview__title">Pasta with Tomato Cream ...</h4>
-                <p class="preview__publisher">The Pioneer Woman</p>
-                <div class="preview__user-generated">
-                  <svg>
-                    <use href="src/img/icons.svg#icon-user"></use>
-                  </svg>
+                <h4 class="preview__title">${result.title}</h4>
+                <p class="preview__publisher">${result.publisher}</p>
                 </div>
               </div>
             </a>
@@ -3272,6 +3278,6 @@ class ResultsView extends (0, _viewJsDefault.default) {
 }
 exports.default = new ResultsView();
 
-},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["f0HGD","aenu9"], "aenu9", "parcelRequire3a11")
+},{"./View.js":"5cUXS","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","url:../../img/icons.svg":"loVOp"}]},["f0HGD","aenu9"], "aenu9", "parcelRequire3a11")
 
 //# sourceMappingURL=index.e37f48ea.js.map

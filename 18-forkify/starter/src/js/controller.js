@@ -6,6 +6,10 @@ import resultsView from './views/resultView.js';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 
+if (module.hot) {
+    module.hot.accept();
+}
+
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -35,7 +39,7 @@ const controlSearchResults = async function () {
     await model.loadSearchResults(query);
 
     // 3) Render result
-    console.log(model.state.search.results); 
+    //console.log(model.state.search.results); 
     resultsView.render(model.state.search.results);
   } catch (err) {
     console.log(err);
@@ -265,3 +269,14 @@ const id = window.location.hash.slice(1);
 //*  ---------------------------------------------------------
 //*           298. Implementing Search Results - Part 2
 //*  ---------------------------------------------------------
+
+//*  ---------------------------------------------------------
+//*           299. Implementing Pagination - Part 1
+//*  ---------------------------------------------------------
+
+//*  ---------------------------------------------------------
+//*           300. Implementing Pagination - Part 2
+//*  ---------------------------------------------------------
+
+
+

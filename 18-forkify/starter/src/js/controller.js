@@ -3,9 +3,11 @@ import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultView.js';
 import paginationView from './views/paginationView.js';
+import bookmarksView from './views/bookmarksView.js';
 
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
+import { async } from 'regenerator-runtime';
 
 if (module.hot) {
     module.hot.accept();
@@ -18,10 +20,13 @@ const controlRecipes = async function () {
     if(!id) return; // if not id then return 
     recipeView.renderSpinner(); 
 
-    //1 Loading recipe
+    // 0 Update result view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
+
+    // 1 Loading recipe
      await model.loadRecipe(id);
 
-    //2 Rendering recipe
+    // 2 Rendering recipe
      recipeView.render(model.state.recipe);      // rendering all results
     
     } catch (err) {
@@ -67,13 +72,25 @@ const controlServings = function(newServings){
   // Update the recipe servings (in state)
   model.updateSerrvings(newServings);
   // Update the recipe view
-  recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
+}
+
+const controlAddBookmark = function () {
+  // 1) Add/ remove bookmark
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id)
+  // 2) Update recipe view
+  recipeView.update(model.state.recipe);
+
+  // 3) Render bookmarks
+  bookmarksView.render(model.state.bookmarks);
 }
 ////////////////////////////////////////////fl flowchart part 2
 
 const init = function (){
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings); // flowchart part 2
+  recipeView.addHandlerAddBookmark(controlAddBookmark); //fw chart 2
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 }

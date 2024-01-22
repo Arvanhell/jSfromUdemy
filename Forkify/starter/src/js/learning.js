@@ -1,7 +1,14 @@
-import icons from 'url:../img/icons.svg';
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
+//* 
+//  * Setting project by npm init 
+//  * adding parcel by instal into project by npm i parcel -D
+//  * 
+//  * CREATING path to icons adding markup for recipe and setting  igredients in proper container
+//*
+        //recipeContainer.innerHTML = '';                           
+        //recipeContainer.insertAdjacentHTML('afterbegin', markup )
+/*
 
+import icons from 'url:../img/icons.svg';
 console.log(icons);
 const recipeContainer = document.querySelector('.recipe');
 
@@ -17,24 +24,10 @@ const timeout = function (s) {
 
 ///////////////////////////////////////
 
-const renderSpinner =  function(parentEl) {
-  const markup = `
-    <div class="spinner">
-      <svg>
-        <use href="${icons}#icon-loader"></use>
-      </svg>
-    </div>
-  `;
-  parentEl.innerHTML = '';
-  parentEl.insertAdjacentHTML('afterbegin', markup);
-};
-
 const showRecipe = async function () {
   try {
-    const id = window.location.hash.slice(1);
     // 1 Loading recipe
-    renderSpinner(recipeContainer);
-    const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
+    const res = await fetch('https://forkify-api.herokuapp.com/api/v2/recipes/5ed6604591c37cdc054bc886');
     const data = await res.json();
 
     if (!res.ok) throw new Error (`${data.message} (${res.status})`)
@@ -151,8 +144,46 @@ const showRecipe = async function () {
     alert (err)
   }
 };
+showRecipe();
+ 
 
-['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe))  
+*/
+//* importing icons  
+// * rendering spinner in controler file
+/*
+const renderSpinner =  function(parentEl) {
+  const markup = `
+    <div class="spinner">
+      <svg>
+        <use href="${icons}#icon-loader"></use>
+      </svg>
+    </div>
+  `;
+  parentEl.innerHTML = '';
+  parentEl.insertAdjacentHTML('afterbegin', markup);
+}
+*/
 
-// window.addEventListener('hashchange', showRecipe)
+//* adding regenerator-runtime and core-js and importing them in file controler.js
+// i got FAULTY  msg segmentation fault npm start
+/*
+npm i core-js regenerator-runtime
+
+import 'core-js/stable';
+import 'regenerator-runtime';
+*/
+
+//* listening for  hashchange events
+// window.addEventListener('hashchange', showRecipe) 
+// showRecipe is our function wherre hashchange is 
+// when we changing our search object into another but we actualy need to get the recipe ID from rthe hash
+// by adding 
+// const id = window.location.hash.slice(1);
+// now we can simply add into our url where our id matching the adress when hash change
+// const res = await fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${id}`);
+
+//* listening for the load events
 // window.addEventListener('load', showRecipe)
+
+//* instead of both separately we can create loop forEach
+// ['hashchange', 'load'].forEach(ev => window.addEventListener(ev, showRecipe)) 

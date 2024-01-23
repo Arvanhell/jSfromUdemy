@@ -666,7 +666,7 @@ export default class View {
 
 
 //* changing clausule within resultView
-'''
+```
 import View from './View.js';
 
 import icons from 'url:../../img/icons.svg';
@@ -675,9 +675,220 @@ import {Fraction} from "fractional";
 class recipeView  extends View {
     _parentElement = document.querySelector('.recipe');
     _errorMessage = `We could not find that recipe. Please try another one!`;
-    _message = ``;
+    _message = '';
 
 
-'''
+```
 
 */
+//* continue adiing functionality to searching and renderign the searched object 
+// inthe resultView.js 
+/*   ```
+   _generateMarkupPreview(result) {
+    return `
+        <li class="preview">
+        <a class="preview__link " href="#${result.id}">
+        <figure class="preview__fig">
+            <img src="${result.image}" alt="${result.title}" />
+        </figure>
+        <div class="preview__data">
+            <h4 class="preview__title">${result.title}</h4>
+            <p class="preview__publisher">${result.publisher}</p>
+          
+        </a>
+        </li>
+     `
+   }
+}
+```     */
+//* adding within control module 
+// if(module.hot) {
+//    module.hot.accept();
+// }
+//* adding error for search if there is no recipe found
+// set in searchViev 
+/*
+```
+class ResultsView extends View {
+   _parentElement = document.querySelector('.results');
+   _errorMessage = `No recipes found for your query. Please try another one!`;
+   _message = '';
+   ```
+*/
+// and in View 
+/*
+```
+export default class View {
+    _data;
+
+   render (data) {
+        if (!data || (Array.isArray(data) && data.length === 0)) 
+        return this.renderError();
+
+        this._data = data;
+        const markup = this._generateMarkup();
+        this._clear();                         
+        this._parentElement.insertAdjacentHTML('afterbegin', markup )
+    }
+```
+*/
+
+//*-------------------------------------------------------------
+//       Pagination :)
+//*-------------------------------------------------------------
+// adding into model.js 
+/*
+```
+import { API_URL, RES_PER_PAGE } from './config.js';
+```
+```
+
+export const state = {
+    recipe: {},
+    search: {
+        query: '',
+        results: [],
+        page: 1,
+        resultsPerPage: RES_PER_PAGE,
+    },
+};
+```
+```
+
+export const getSearchResultsPage = function (page = state.search.page) {
+    state.search.page = page
+
+    const start = (page -1) * state.search.resultsPerPage;  //0;
+    const end = page * state.search.resultsPerPage;         //9;
+
+    return state.search.results.slice(start, end);
+}
+```
+//*
+
+and into config.js
+```
+export const RES_PER_PAGE = 10;
+```
+*/
+
+//*-------------------------------------------------------------
+//       Pagination :) part 2
+//*-------------------------------------------------------------
+// 
+
+/*
+import View from "./View.js";
+import icons from 'url:../../img/icons.svg';
+
+class PaginationView extends View {
+   _parentElement = document.querySelector('.pagination');
+
+   addHandlerClick(handler) {
+    // event delegation 
+    this._parentElement.addEventListener('click', function (e) {
+        const btn = e.target.closest('.btn--inline');
+        if(!btn) return
+        //console.log(btn);
+        const goToPage = +btn.dataset.goto;
+        //console.log(goToPage);
+
+        handler(goToPage);
+    });
+   }
+
+   _generateMarkup() {
+        const curPage = this._data.page;
+        const numPages = Math.ceil(
+            this._data.results.length / this._data.resultsPerPage
+            );
+            console.log(numPages);
+        // we will need entire search object now to working with this 
+        // page 1, and there are other pages
+        if(curPage === 1 && numPages > 1){
+            return `
+            <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
+              <span>Page ${curPage + 1}</span>
+                <svg class="search__icon">
+                 <use href="${icons}#icon-arrow-right"></use>
+                </svg>
+            </button>
+            `;     
+        }
+        // Last page
+        if(curPage === numPages && numPages > 1) {
+            return `
+            <button data-goto="${curPage - 1}" class="btn--inline pagination__btn--prev">
+              <svg class="search__icon"
+                <use href="${icons}#icon-arrow-left"></use>
+              </svg>
+            <span>Page ${curPage - 1}</span>
+            </button>
+            `;
+        }
+        // Other page
+        if(curPage < numPages) {
+             
+                return `
+                <button data-goto="${curPage - 1}" class="btn--inline pagination__btn--prev">
+              <svg class="search__icon"
+                <use href="${icons}#icon-arrow-left"></use>
+              </svg>
+            <span>Page ${curPage - 1}</span>
+            </button>
+                <button data-goto="${curPage + 1}" class="btn--inline pagination__btn--next">
+                <span>Page ${curPage + 1}</span>
+                    <svg class="search__icon">
+                        <use href="${icons}#icon-arrow-right"></use>
+                    </svg>
+                </button> 
+            `
+        }
+        //page 1, and there No other pages
+        return '';
+      
+          
+        };
+};
+
+export default new PaginationView();
+
+
+*/  
+/*
+*/
+//* import into controller 
+    // import paginationView from './views/paginationView.js';
+        // and adding 
+        /*
+        ```
+     // 4) Render initial pagination button
+    paginationView.render(model.state.search);
+
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const controlPagination = function (goToPage) {
+  // Render NEW result
+  resultsView.render(model.getSearchResultsPage(goToPage));
+
+  // ) Render NEW pagination button
+  paginationView.render(model.state.search);
+}
+
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+  searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
+};
+init();h);
+        ```
+        */
+       //adding 
+       /*
+      adding classes to button 
+       data-goto
+       */
+ 

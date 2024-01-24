@@ -892,3 +892,211 @@ init();h);
        data-goto
        */
  
+//*-------------------------------------------------------------
+//       Update Servings
+//*-------------------------------------------------------------
+// adding functions into control and model 
+// controller.js
+/*
+const controlServings = function(newServings) {
+  // Update the recipe servings ( in state)
+    model.updateServings(newServings)
+
+  // Update the recipe view
+    recipeView.render(model.state.recipe);
+}
+'''
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
+
+  searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
+  
+};
+init();
+
+'''
+//*----------------------------------------------
+*/
+//model.js
+/*
+export const updateServings = function (newServings) {
+state.recipe.ingredients.forEach(ing => {
+    ing.quantity = (ing.quantity * newServings) / state.recipe.servings;
+    //newQt = OldQt * newServings / oldServings // 2* 8 / 4 = 4
+});
+
+state.recipe.servings = newServings;
+}
+*/
+//*----------------------------------------------
+// recipeView.js 
+/*
+'''
+  addHandlerUpdateServings(handler) {
+      this._parentElement.addEventListener('click', function(e) {
+        const btn = e.target.closest('.btn--update-servings')
+        if (!btn) return
+        console.log(btn);
+        const { updateTo } = +btn.dataset; //*   <{======={{{
+        //* in rendered markup we have 
+        //* data-update-to="${ this._data.serving + 1}
+        //* updateTo is within dataset so it will be converted into camelcase in btn.dataset.updateTo :) simply reminder
+
+        if (+updateTo > 0 ) handler(+updateTo);
+      })
+    }
+'''
+
+'''
+  <div class="recipe__info-buttons">
+              <button class="btn--tiny btn--update-servings" data-update-to="${
+                this._data.servings - 1
+              }">
+                <svg>
+                  <use href="${icons}#icon-minus-circle"></use>
+                </svg>
+              </button>
+              <button class="btn--tiny btn--update-servings" data-update-to="${
+                this._data.servings + 1
+              }>
+                <svg>
+                  <use href="${icons}#icon-plus-circle"></use>
+                </svg>
+              </button>
+            </div>
+          </div>
+'''
+*/
+
+//*-------------------------------------------------------------
+//  Devoloping A DOM Updating Agorithm !!!
+//*-------------------------------------------------------------
+
+// When we updating our page with some elements without re-render the entire view and we not wat to rerendering anything is not changed we should go for ...
+
+//*first we adding in the controller update 
+/*
+'''
+    const controlServings = function(newServings) {
+      // Update the recipe servings ( in state)
+        model.updateServings(newServings)
+
+      // Update the recipe view
+        // recipeView.render(model.state.recipe);
+        recipeView.update(model.state.recipe);
+}
+'''
+*/
+
+// we going  to compare markup from living DOM and virtual DOM and 
+// render only this what is changed 
+//* view.js
+/*
+'''
+ update (data) {
+       if (!data || (Array.isArray(data) && data.length === 0)) 
+         return this.renderError();
+
+         this._data = data;
+         const newMarkup = this._generateMarkup();
+         //console.log(newMarkup); 
+         //* construct virtual DOM to compare with live DOM
+          const newDom = document.createRange().createContextualFragment(newMarkup)
+
+          const newElements = Array.from(newDom.querySelectorAll('*'));
+          const curElements = Array.from(this._parentElement.querySelectorAll('*'));
+         
+         newElements.forEach((newEl, i) => {
+             const curEl = curElements[i];
+            //console.log(curEl, newEl.isEqualNode(curEl));
+
+            //*) UPDATE changed TEXT only 
+            if( !newEl.isEqualNode(curEl) && 
+               newEl.firstChild?.nodeValue.trim() !== ''
+            ) {  
+              //console.log(newEl.firstChild.nodeValue.trim());
+              curEl.textContent = newEl.textContent;
+            }
+
+
+            
+            //* UPDATE changed ATRIBUTE only 
+            if(!newEl.isEqualNode(curEl))
+            //console.log(newEl.attributes);
+            Array.from(newEl.attributes).forEach(attr => 
+              curEl.setAttribute(attr.name, attr.value))
+        });
+        } 
+        '''
+*/
+//*-------------------------------------------------------------
+//*-------------------------------------------------------------
+// marking selected item aside where searched objects are rendered and selected
+// resultsView.js
+/*
+'''
+   _generateMarkupPreview(result) {
+    const id = window.location.hash.slice(1);
+    return `
+        <li class="preview">
+        <a class="preview__link ${
+            result.id === id ? 'preview__link--active' : ''
+        }" href="#${result.id}">
+        <figure class="preview__fig">
+            <img src="${result.image}" alt="${result.title}" />
+        </figure>
+        <div class="preview__data">
+            <h4 class="preview__title">${result.title}</h4>
+            <p class="preview__publisher">${result.publisher}</p>
+        </div>
+        </a>
+        </li>
+     `
+   }
+}
+
+export default new ResultsView();
+'''
+*/
+//*----------------------------
+//controller.js
+/*
+'''
+const controlRecipes = async function () {
+  try {
+    const id = window.location.hash.slice(1);
+
+    if (!id) return;
+    recipeView.renderSpinner();
+
+    //* 0 Update results view to mark selected search result
+      resultsView.update(model.getSearchResultsPage());
+//*----------------------------
+     // 1 Loading recipe
+    await model.loadRecipe(id);
+  
+
+    // 2 Rendering recipe
+    recipeView.render(model.state.recipe);
+    
+  
+   } catch (err) {
+     recipeView.renderError();
+  }
+};
+'''
+
+and update View.js by removing this part 
+
+'''
+update (data) {
+       //*if (!data || (Array.isArray(data) && data.length === 0)) 
+        //* return this.renderError();
+         '''
+*/
+
+//*-------------------------------------------------------------
+                 //* Implementing Bookmark
+//*-------------------------------------------------------------

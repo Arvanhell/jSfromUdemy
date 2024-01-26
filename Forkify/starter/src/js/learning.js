@@ -1100,3 +1100,110 @@ update (data) {
 //*-------------------------------------------------------------
                  //* Implementing Bookmark
 //*-------------------------------------------------------------
+// before everything implementing  change within //* model.js by adding line of code 
+// to help reseting page to first after loading new search recipies marked green color
+/*
+'''
+    state.search.results = data.data.recipes.map(rec => {
+        return {
+            id: rec.id,
+            title: rec.title,
+            publisher: rec.publisher,
+            image: rec.image_url,
+        };
+    }); 
+    //* state.search.page = 1;
+  } catch (err) {
+    console.log(`${err}💥💥💥💥`);
+    throw err;
+  }
+};
+ */
+
+
+//* adding in the model.js 
+/* 
+'''
+import { getJSON } from './helpers.js';
+
+export const state = {
+    recipe: {},
+    search: {
+        query: '',
+        results: [],
+        page: 1,
+        resultsPerPage: RES_PER_PAGE,
+        
+    },
+    //*bookmarks: [],
+};
+'''
+          ingredients: recipe.ingredients,
+        };
+       //* setting for bookmark if we  click next object we will not 
+       //* losing bookmark on previous object it will be remain on it 
+       //* if (state.bookmarks.some(bookmark => bookmark.id === id))
+          //*  state.recipe.bookmarked = true;
+          //*     else state.recipe.bookmarked = false;
+
+    } catch (err) {
+        console.error(`${err}💥💥💥💥`);
+        throw err;
+    }
+};
+'''
+*/
+
+
+
+// adding new controler into contorller.js 
+/*
+'''
+ //*addHandlerAddBookmark(handler) {
+      this._parentElement.addEventListener('click', function(e){
+        //event delegation
+        const btn = e.target.closest('.btn--bookmark');
+        if(!btn) return;
+        handler();
+      })
+    }
+    '''
+*/
+
+/*
+'''
+const init = function () {
+  recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
+  //* recipeView.addHandlerAddBookmark(controlAddbookmark)
+
+  searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
+  
+};
+init();
+'''*/
+
+// recipeView.js <== and now to let this working we need to update the entire recipe
+/* 
+'''
+         </div>
+          <button class="btn--round btn--bookmark">
+            <svg class="">
+              <use href="${icons}#icon-bookmark//* ${this._data.bookmarked ? '-fill' : ''}"></use>
+            </svg>
+          </button>
+        </div>
+
+*/
+
+// controller.js <===
+/*
+'''
+const controlAddbookmark = function() {
+  model.addBookmark(model.state.recipe);
+  console.log(model.state.recipe);
+  //* recipeView.update(model.state.recipe); 
+}
+'''
+*/

@@ -1156,7 +1156,7 @@ export const state = {
 
 
 
-// adding new controler into contorller.js 
+//* adding new controler into contorller.js 
 /*
 '''
  //*addHandlerAddBookmark(handler) {
@@ -1184,7 +1184,7 @@ const init = function () {
 init();
 '''*/
 
-// recipeView.js <== and now to let this working we need to update the entire recipe
+//* recipeView.js <== and now to let this working we need to update the entire recipe
 /* 
 '''
          </div>
@@ -1197,26 +1197,323 @@ init();
 
 */
 
-// controller.js <===
+//* controller.js <===
 /*
 '''
 const controlAddbookmark = function() {
-  model.addBookmark(model.state.recipe);
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else  model.deleteBookmark(model.state.recipe);
+
   console.log(model.state.recipe);
-  //* recipeView.update(model.state.recipe); 
+  recipeView.update(model.state.recipe);
 }
 '''
 */
 
 //* Creating method function to delete / remove bookmark icon / object
-// model.js <--
+//* model.js <--
 /*
 '''
 export const deleteBookmark = function (id) {
-  const index = state.bookmarks.finfIndex(el => el.id === id);
+    //* Delete bookmark
+  const index = state.bookmarks.findIndex(el => el.id === id);
   state.bookmarks.splice(index, 1);
-  
-    // Delete current recipe as bookmark
-    if (recipe.id === state.recipe.id) state.recipe.bookmarked = false;
+
+    //* Mark current recipe as NOT bookmarked
+    if (id === state.recipe.id) state.recipe.bookmarked = false;
 }
 */
+
+//*********  bookmark part 2 rendering bookmarked recipes */
+//* creating new file bookmarkView.js in view/bookmarkView.js
+//* adding code as follow 
+/*
+import View from "./View.js";
+import icons from 'url:../../img/icons.svg';
+
+class BookmarkView extends View {
+   _parentElement = document.querySelector('.bookmarks__list');
+   _errorMessage = `No bookmarks in the list :). Find a nice recipe and bookmmark it`;
+   _message = '';
+
+   _generateMarkup() {
+    return this._data.map(this._generateMarkupPreview).join('');
+   }
+
+   _generateBookmarkPreview(result) {
+    const id = window.location.hash.slice(1);
+    return `
+        <li class="preview">
+        <a class="preview__link ${
+            result.id === id ? 'preview__link--active' : ''
+        }" href="#${result.id}">
+        <figure class="preview__fig">
+            <img src="${result.image}" alt="${result.title}" />
+        </figure>
+        <div class="preview__data">
+            <h4 class="preview__title">${result.title}</h4>
+            <p class="preview__publisher">${result.publisher}</p>
+        </div>
+        </a>
+        </li>
+     `
+   }
+}
+
+export default new BookmarkView();
+*/
+
+//* importing into controler 
+
+/*
+import * as model from './model.js'
+import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
+  //*  import bookmarksView from './views/bookmarksView.js';
+  '''
+const controlRecipes = async function () {
+  try {
+    const id = window.location.hash.slice(1);
+
+    if (!id) return;
+    recipeView.renderSpinner();
+
+    // 0 Update results view to mark selected search result
+      resultsView.update(model.getSearchResultsPage());
+      //*bookmarksView.update(model.state.bookmarks);
+
+  */
+
+  //* Creatimg new file previewVIew.js in view/previewView.js */
+
+  /*
+  import View from "./View.js";
+  import icons from 'url:../../img/icons.svg';
+
+class PreviewView extends View {
+   _parentElement = '';
+  
+   _generateMarkup() {
+    const id = window.location.hash.slice(1);
+    
+    return `
+         <li class="preview">
+        <a class="preview__link ${
+            this._data.id === id ? 'preview__link--active' : ''
+        }" href="#${this._data.id}">
+        <figure class="preview__fig">
+            <img src="${this._data.image}" alt="${this._data.title}" />
+        </figure>
+        <div class="preview__data">
+            <h4 class="preview__title">${this._data.title}</h4>
+            <p class="preview__publisher">${this._data.publisher}</p>
+        </div>
+        </a>
+        </li>
+     `
+   }
+}
+
+export default new PreviewView();
+  */
+// changing by adding one attribut into view.js
+/*
+'''
+ render (data, render = true) {
+        if (!data || (Array.isArray(data) && data.length === 0)) 
+        return this.renderError();
+
+
+        this._data = data;
+        const markup = this._generateMarkup();
+
+        if (!render) return markup;
+        
+        this._clear();                         
+        this._parentElement.insertAdjacentHTML('afterbegin', markup )
+    }
+'''
+*/
+ //* in bookmarks.js // because it was repeating the code  so we making some changes 
+ /*
+ '''
+import View from "./View.js";
+import previewView from "./previewView.js";
+import icons from 'url:../../img/icons.svg';
+
+class BookmarksView extends View {
+   _parentElement = document.querySelector('.bookmarks__list');
+   _errorMessage = `No bookmarks in the list :). Find a nice recipe and bookmmark it`;
+   _message = '';
+
+   _generateMarkup() {
+    return this._data
+    .map(bookmark => previewView.render(bookmark, false))
+    .join('');
+   } 
+}
+export default new BookmarksView();
+ '''
+ */
+
+ //* editing resultsView.js by  replacing the code and importing previewView
+ /* 
+ import View from "./View.js";
+import previewView from "./previewView.js";
+import icons from 'url:../../img/icons.svg';
+
+class ResultsView extends View {
+   _parentElement = document.querySelector('.results');
+   _errorMessage = `No recipes found for your query! Please try another one!`;
+   _message = '';
+ 
+    _generateMarkup() {
+        return this._data
+        .map(result => previewView.render(result, false))
+        .join('');
+       }
+   }
+}
+
+export default new ResultsView();
+ */
+
+//*
+
+//*-------------------------------------------------------------
+                 //* Storing Bookmark in local storage
+//*-------------------------------------------------------------
+
+//* model.js
+/*
+'''
+//*   const persistBookmarks = function () {
+//*      localStorage.setItem('bookmarks', JSON.stringify(state.bookmarks));
+//*      }
+
+export const addBookmark = function (recipe) {
+  //* Add bookmark
+  state.bookmarks.push(recipe);
+
+  //* Mark current recipe as bookmark
+  if (recipe.id === state.recipe.id) state.recipe.bookmarked = true;
+
+  //*   persistBookmarks();
+};
+
+export const deleteBookmark = function (id) {
+    //* Delete bookmark
+  const index = state.bookmarks.findIndex(el => el.id === id);
+  state.bookmarks.splice(index, 1);
+
+    //* Mark current recipe as NOT bookmarked
+    if (id === state.recipe.id) state.recipe.bookmarked = false;
+
+//*  persistBookmarks();
+}
+'''
+*/
+// persisitng method / fumction is for storing bookmarks in 
+// Now we have our bookmarks added to localstorage if we mark them but.. 
+// now we need them to render if web page will be refreshed 
+
+//*-------------------------------------
+// now lets take them out 
+//*  add into model.js
+/*
+'''
+const init = function () {
+  const storage = localStorage.getItem('bookmarks');
+  if (storage) state.bookmarks = JSON.parse(storage)
+  // convert the string back to an object
+};
+init();
+console.log(state.bookmarks);
+''' 
+*/
+//* ========= it apppear some bug needed to pput new handler in bookMarkView.js 
+/* 
+'''
+ addHandlerRender(handler) {
+      window.addEventListener('load', handler);
+   }
+   '''
+   */
+//* add to controller.js  
+/*
+'''
+const controlBookmarks = function() {
+  bookmarksView.render(model.state.bookmarks)
+}
+
+const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
+  recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddbookmark)
+
+  searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
+  
+};
+init();
+
+const clearBookmarks = function() {
+  localStorage.clear('bookmarks');
+}
+clearBookmarks()
+
+*/
+  
+//* updated controler 
+/*
+'''
+const controlRecipes = async function () {
+  try {
+    const id = window.location.hash.slice(1);
+
+    if (!id) return;
+    recipeView.renderSpinner();
+
+    // 1 Update results view to mark selected search result
+      resultsView.update(model.getSearchResultsPage());
+
+      // 2 Updating bookmark view 
+      bookmarksView.update(model.state.bookmarks);
+      
+      // 3 Loading recipe
+      await model.loadRecipe(id);
+      
+      // 4 Rendering recipe
+      recipeView.render(model.state.recipe);
+      
+   } catch (err) {
+    '''
+*/
+
+//* in the modal.j not active function for resetin glocal storage 
+/*
+const clearBookmarks = function() {
+  localStorage.clear('bookmarks');
+}
+// clearBookmarks()
+*/
+
+/*
+At this point, we need 
+Own recipe upload
+- to upload their own recipe
+whenever the user clicks the ad recipe button, all WE WANT is to display a recipe editor
+Modal window will popo up which will contains a form
+
+Own recipes automaticaly bookmarked
+
+User can only see own recipes, not from others
+*/
+//*-------------------------------------------------------------
+                 //* Uploading a new recipe Part 1
+//*-------------------------------------------------------------
+
+//* creating new file addRecipeView.js

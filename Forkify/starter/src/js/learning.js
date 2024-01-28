@@ -1533,7 +1533,6 @@ class AddRecipeView extends View {
    _btnOpen = document.querySelector('.nav__btn--add-recipe')
    _btnClose = document.querySelector('.btn--close-modal')
 
-
    constructor () {
     super();
     this._addHandlerShowWindow();
@@ -1553,6 +1552,17 @@ class AddRecipeView extends View {
     this._btnClose.addEventListener('click', this.toggleWindow.bind(this))
     this._overlay.addEventListener('click', this.toggleWindow.bind(this))
     };
+   //------
+    addHandlerUpload(handler) {
+     this._parentElement.addEventListener('submit', function(e){
+     e.preventDefault();
+     // creating data for setting form to uplaod, contain all value we need to add
+     // we neeed to add this process in to model
+     const dataArr = [...new FormData(this)]; 
+     const data = Object.fromEntries(dataArr);
+     handler(data);
+     });   
+    }
 
    _generateMarkup() {}
   
@@ -1561,9 +1571,271 @@ class AddRecipeView extends View {
 export default new AddRecipeView();
 '''
 */
-// Add handler for Upload new recipies 
+// Add handler for Upload new recipies in //* controller.js
+
 /*
 '''
+// publisher subscriber pattern
+const controlAddRecipe = function (newRecipe) {
+  console.log(newRecipe);
+  // Upload the new recipe data
+}
 
+const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
+  recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddbookmark)
+
+  searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
+  
+  addRecipeView.addHandlerUpload(controlAddRecipe);
+};
+init();
+'''
+*/
+
+//*-------------------------------------------------------------
+                 //* Uploading a new recipe Part 2
+//*-------------------------------------------------------------
+// add into //* model.js  <====
+/*
+'''
+//* it will makinng request API and is goin to be an async function
+export const uploadRecipe = async function (newRecipe) {
+  //* now we need to make this data look same as we received from API 
+  //* format needs to be quantoty, unit, description
+  //* We want to create an array of ingredients. We will create new array 
+  //* based on existing data. We will convert object 
+   const ingredients = Object.entries(newRecipe).filter(entry => 
+      entry[0].startsWith('ingredient') && entry[1] !== '' 
+   ).map( ing =>
+    //* return an array of three elements
+     const [quantity, unit, description] = ingArr; 
+
+     const ingArr  = ing[1].replaceAll(' ', '').split(',');
+        if(ingArr.length !== 3) throw new Error(
+      'Wrong ingredient format! Please use corect fotmat :)'
+    );
+    //* conversion from string into number or if empty null
+     return {quantity: quantity ? +quantity : null, unit, description };
+  });
+   console.log(ingredients);
+};
+'''
+*/
+
+//*  controller.js <===
+/*
+'''
+// publisher subscriber pattern
+const controlAddRecipe = async function (newRecipe) {
+  try {
+  // Upload the new recipe data
+   await model.uploadRecipe(newRecipe);
+  } catch (err) {
+  console.log('💥', err);
+   addRecipeView.renderError(err.message);
+  }
+};
+
+const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
+  recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddbookmark)
+
+  searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
+  
+  addRecipeView.addHandlerUpload(controlAddRecipe);
+};
+init();
+
+'''
+*/
+
+//* requesting and storing api key from api base 
+// adding into config file 
+/*
+export const API_URL = 'https://forkify-api.herokuapp.com/api/v2/recipes/';
+export const TIMEOUT_SEC = 10;
+export const RES_PER_PAGE = 10;
+export const KEY = 'b05b18cb-8a5c-42c5-a907-6bd6bf48bcbe';
+*/
+
+//* adding render error and succes msg to upload within helpers,
+//* controller, and config and of course addrecieview
+// export const MODAL_CLOSE_SEC = 2.5;  //* config <==
+
+// upload JSON  //* helpers <==
+/*
+// Upload JSON
+export const sendJSON = async function(url, uplaodData) {
+  try {
+      const fetchPro = fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(uplaodData),
+      });
+
+  const res = await Promise.race ([fetchPro, timeout(TIMEOUT_SEC)]);
+  const data = await res.json();
+
+  if (!res.ok) throw new Error (`${data.message} (${res.status})`)
+  return data;
+} catch (err) {    
+  throw err;
+*/
+
+//* addrecipe.js <==
+/*
+// publisher subscriber pattern
+const controlAddRecipe = async function (newRecipe) {
+  try {
+    // Render spinner
+    addRecipeView.renderSpinner();
+  // Upload the new recipe data
+   await model.uploadRecipe(newRecipe);
+   //console.log(model.state.recipe);
+
+   // Render recipe
+   recipeView.render(model.state.recipe);
+
+   // Success message
+   addRecipeView.renderMessage();
+
+   // Closin form window
+   setTimeout(function() {
+    addRecipeView.toggleWindow();
+   }, MODAL_CLOSE_SEC * 1000);
+  } catch (err) {
+  console.log('💥', err);
+   addRecipeView.renderError(err.message);
+  }
+};
+*/
+
+//*-------------------------------------------------------------
+                 //* Uploading a new recipe Part 3
+//*-------------------------------------------------------------
+
+// now we need to rerender bookmarks view for new added recipies 
+// and change the id after hash in url
+//* controller.js
+//* 
+/*
+'''
+// Render bookmark view
+   bookmarksView.render(model.state.bookmarks);
+
+   // Change ID in URL
+   window.history.pushState(null, '', `#${model.state.recipe.id}`);
+'''
+*/
+
+//* refactoring helpers.js
+/*
+
+import { async } from 'regenerator-runtime';
+import { TIMEOUT_SEC } from "./config";
+
+const timeout = function (s) {
+    return new Promise(function (_, reject) {
+      setTimeout(function () {
+        reject(new Error(`Request took too long! Timeout after ${s} second`));
+      }, s * 1000);
+    });
+  };
+
+  export const AJAX = async function(url, uploadData = undefined) {
+    try {
+        const fetchPro = uploadData 
+          ? fetch(url, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(uploadData),
+          }) 
+        : fetch(url);
+     
+
+      const res = await Promise.race ([fetchPro, timeout(TIMEOUT_SEC)]);
+      const data = await res.json();
+        
+      if (!res.ok) throw new Error (`${data.message} (${res.status})`)
+      return data;
+    } catch (err) {    
+      throw err;
+    }
+  };
+*/
+
+// import AJAX instead getJSON , sendJSON from //* model.js <=== 
+/*
+import { async } from 'regenerator-runtime';
+import { API_URL, RES_PER_PAGE, KEY } from './config.js';
+//import { getJSON, sendJSON } from './helpers.js';
+import { AJAX } from './helpers.js';\
+'''
+//* changing lines of code by repolacing getJSON and sendJSON into AJAX 
+ const data = await AJAX(`${API_URL}${id}`);
+ '''
+ const data = await AJAX(`${API_URL}?search=${query}`)
+ '''
+ const data = await AJAX(`${API_URL}?key=${KEY}`, recipe);
+ '''
+*/
+
+//* use key in order to mark recipe as our own recipe in 
+ //* model.js <===
+ /*
+ '''
+ export const loadRecipe = async function(id) {
+try{
+    const data = await AJAX(`${API_URL}${id}?key=${KEY}`); //* ?key=${KEY}
+      state.recipe = createRecipeObject(data);  
+
+        if (state.bookmarks.some(bookmark => bookmark.id === id))
+        state.recipe.bookmarked = true;
+      else state.recipe.bookmarked = false;
+
+    } catch (err) {
+        console.error(`${err}💥💥💥💥`);
+        throw err;
+    }
+};
+
+export const loadSearchResults = async function (query) {
+  try {
+    state.search.query = query;
+
+const data = await AJAX(`${API_URL}?search=${query}&key=${KEY}`) 
+//* &key=${KEY}
+  '''
+ */
+
+  //* ---------------------------------
+  //*   finalization and final consideration 
+  //* ---------------------------------
+/*
+/**
+ * Render the received objexc to the DOM
+ * @param {Object | Object[]} data the data to be rendered (e.g recipe)
+ * @param {boolean} [ render=true ] If false, create markup string insead of rendering top the DOM
+ * @returns {undefined | string} a markup string is returned if render=false
+ * @this {Object} View instance
+ * @author ARV
+ * @todo Finish implementation
+ */
+/*
+'''
+render (data, render = true) {
+  if (!data || (Array.isArray(data) && data.length === 0)) 
+  return this.renderError();
 '''
 */

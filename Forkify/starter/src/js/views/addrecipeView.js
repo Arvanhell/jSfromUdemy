@@ -3,6 +3,7 @@ import icons from 'url:../../img/icons.svg';
 
 class AddRecipeView extends View {
    _parentElement = document.querySelector('.upload');
+   _message = 'Recipe was successfully uploaded :)';
 
    _window = document.querySelector('.add-recipe-window')
    _overlay = document.querySelector('.overlay')
@@ -29,13 +30,14 @@ class AddRecipeView extends View {
     this._overlay.addEventListener('click', this.toggleWindow.bind(this))
     };
    //------
-    addHandlerUpload() {
+    addHandlerUpload(handler) {
      this._parentElement.addEventListener('submit', function(e){
      e.preventDefault();
      // creating data for setting form to uplaod, contain all value we need to add
      // we neeed to add this process in to model
-     const data = [...new FormData(this)]; 
-     console.log(data);
+     const dataArr = [...new FormData(this)]; 
+     const data = Object.fromEntries(dataArr);
+     handler(data);
      });   
     }
 

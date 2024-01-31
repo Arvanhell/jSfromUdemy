@@ -1,3 +1,4 @@
+import 'core-js/actual';
 import * as model from './model.js'
 import { MODAL_CLOSE_SEC } from './config.js'
 import recipeView from './views/recipeView.js';
@@ -8,7 +9,7 @@ import bookmarksView from './views/bookmarksView.js';
 import addRecipeView from './views/addRecipeView.js';
 
 
-import 'core-js/stable';
+//import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import recipeView from './views/recipeView.js';
 
